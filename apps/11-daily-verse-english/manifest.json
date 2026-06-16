@@ -1,0 +1,19 @@
+{
+  "id": "/daily-verse/",
+  "name": "Daily Verse English",
+  "short_name": "말씀영어",
+  "description": "매일 개역한글 말씀과 American English 표현을 함께 보는 작은 루틴 앱",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f3ef",
+  "theme_color": "#19766e",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

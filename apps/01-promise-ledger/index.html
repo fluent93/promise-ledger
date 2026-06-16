@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise Ledger</title>
+    <link rel="stylesheet" href="./styles.css?v=0.6" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="앱 요약">
+        <header class="app-header">
+          <div class="logo-lockup">
+            <div class="logo-mark">PL</div>
+            <div>
+              <p>Promise Ledger</p>
+              <strong data-i18n="productTag">챙김노트</strong>
+            </div>
+          </div>
+          <div class="language-switch" role="group" aria-label="Language">
+            <button type="button" class="lang-button active" data-lang="ko">KR</button>
+            <button type="button" class="lang-button" data-lang="en">EN</button>
+          </div>
+        </header>
+
+        <section class="summary-copy">
+          <p class="eyebrow" data-i18n="eyebrow">personal follow-up</p>
+          <h1 data-i18n="headline">챙길 사람을 먼저 보여주는 약속 노트</h1>
+          <p data-i18n="subhead">대화에서 흘린 작은 약속을 사람별로 정리하고, 오늘 다시 볼 것만 가볍게 남깁니다.</p>
+        </section>
+
+        <div class="metric-row" aria-label="약속 요약">
+          <div>
+            <strong id="dueTodayCount">0</strong>
+            <span data-i18n="todayMetric">오늘</span>
+          </div>
+          <div>
+            <strong id="waitingCount">0</strong>
+            <span data-i18n="waitingMetric">받을 것</span>
+          </div>
+          <div>
+            <strong id="openCount">0</strong>
+            <span data-i18n="openMetric">미완료</span>
+          </div>
+        </div>
+      </aside>
+
+      <section class="workbench" aria-label="약속 작업 영역">
+        <section class="capture-strip" aria-label="약속 입력">
+          <form id="promiseForm" class="composer">
+            <div class="composer-head">
+              <div>
+                <label for="rawText" data-i18n="inputLabel">대화나 메모</label>
+                <p data-i18n="inputHint">복붙하면 사람, 할 일, 기한을 임시로 정리합니다.</p>
+              </div>
+              <span id="todayLabel"></span>
+            </div>
+            <textarea id="rawText" name="rawText" rows="7"></textarea>
+            <div class="composer-footer">
+              <p id="formMessage" class="form-message" role="status"></p>
+              <div class="composer-actions">
+                <button class="ghost-button" type="button" id="loadSampleButton" data-i18n="sampleButton">샘플</button>
+                <button class="primary-button" type="submit" data-i18n="extractButton">추출</button>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <section class="feed-panel" aria-label="약속 목록">
+          <header class="feed-header">
+            <div>
+              <p class="eyebrow" data-i18n="feedEyebrow">follow-up feed</p>
+              <h2 data-i18n="feedTitle">오늘의 챙김</h2>
+            </div>
+            <button type="button" class="icon-button" id="clearDoneButton" title="완료 항목 정리" aria-label="완료 항목 정리">✓</button>
+          </header>
+
+          <div class="view-tabs" role="tablist" aria-label="필터">
+            <button type="button" class="tab active" data-filter="all" data-i18n="filterAll">전체</button>
+            <button type="button" class="tab" data-filter="mine" data-i18n="filterMine">내가 할 일</button>
+            <button type="button" class="tab" data-filter="theirs" data-i18n="filterTheirs">상대가 할 일</button>
+            <button type="button" class="tab" data-filter="today" data-i18n="filterToday">오늘</button>
+          </div>
+
+          <div id="peopleBoard" class="people-feed"></div>
+          <div id="emptyState" class="empty-state">
+            <strong data-i18n="emptyTitle">아직 기록된 약속이 없습니다.</strong>
+            <span data-i18n="emptyBody">샘플로 흐름을 먼저 확인하거나 실제 대화를 붙여넣어보세요.</span>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <template id="personTemplate">
+      <article class="person-card">
+        <header>
+          <div class="avatar"></div>
+          <div class="person-title">
+            <h3></h3>
+            <p></p>
+          </div>
+          <span class="count-badge"></span>
+        </header>
+        <div class="promise-list"></div>
+      </article>
+    </template>
+
+    <template id="promiseTemplate">
+      <div class="promise-item">
+        <div class="promise-main">
+          <div class="promise-topline">
+            <span class="direction-badge"></span>
+            <span class="due-chip"></span>
+          </div>
+          <p class="promise-text"></p>
+          <p class="promise-source"></p>
+        </div>
+        <div class="promise-actions">
+          <select aria-label="Status"></select>
+          <button type="button" class="text-button edit-button" title="수정" aria-label="수정">수정</button>
+          <button type="button" class="icon-button delete-button" title="삭제" aria-label="삭제">×</button>
+        </div>
+      </div>
+    </template>
+
+    <script src="./src/app.js?v=0.6" type="module"></script>
+  </body>
+</html>

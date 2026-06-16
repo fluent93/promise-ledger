@@ -1,0 +1,46 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/daily-verse/",
+      "destination": "/apps/11-daily-verse-english/index.html"
+    },
+    {
+      "source": "/daily-verse/(.*)",
+      "destination": "/apps/11-daily-verse-english/$1"
+    },
+    {
+      "source": "/",
+      "destination": "/apps/01-promise-ledger/index.html"
+    },
+    {
+      "source": "/styles.css",
+      "destination": "/apps/01-promise-ledger/styles.css"
+    },
+    {
+      "source": "/src/(.*)",
+      "destination": "/apps/01-promise-ledger/src/$1"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/send-daily-verse-morning",
+      "schedule": "30 22 * * *"
+    },
+    {
+      "path": "/api/send-daily-verse-lunch",
+      "schedule": "30 3 * * *"
+    },
+    {
+      "path": "/api/send-daily-verse-evening",
+      "schedule": "30 12 * * *"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/daily-verse",
+      "destination": "/daily-verse/",
+      "permanent": false
+    }
+  ]
+}

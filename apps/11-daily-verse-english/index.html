@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#19766e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="말씀영어" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>Daily Verse English</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/icon.svg" />
+    <link rel="stylesheet" href="./styles.css?v=0.12" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="서비스 요약">
+        <header class="app-header">
+          <div class="logo-lockup">
+            <div class="logo-mark">DV</div>
+            <div>
+              <p>Daily Verse English</p>
+              <strong>말씀영어</strong>
+            </div>
+          </div>
+          <button type="button" class="icon-button" id="copyButton" title="오늘 카드 복사" aria-label="오늘 카드 복사">↗</button>
+        </header>
+
+        <section class="summary-copy">
+          <p class="eyebrow">daily practice</p>
+          <h1>말씀 하나, 영어 표현 하나.</h1>
+          <p>매일 아침 볼 수 있는 작은 루틴으로 개역한글 성경 본문과 American English 표현을 함께 추천합니다.</p>
+        </section>
+
+        <section class="calendar-panel" aria-label="날짜 선택">
+          <button type="button" class="date-button" id="previousDayButton" aria-label="이전 날짜">‹</button>
+          <div>
+            <span id="weekdayLabel"></span>
+            <strong id="dateLabel"></strong>
+          </div>
+          <button type="button" class="date-button" id="nextDayButton" aria-label="다음 날짜">›</button>
+        </section>
+
+        <section class="install-panel" id="installPanel" aria-label="휴대폰 설치 안내">
+          <div>
+            <p class="eyebrow">home screen</p>
+            <strong>휴대폰에 설치하기</strong>
+          </div>
+          <p id="installHint">iPhone은 Safari 공유 버튼에서 홈 화면에 추가를 누르세요. Android는 Chrome 메뉴에서 앱 설치를 선택하세요.</p>
+          <div class="install-actions">
+            <button type="button" class="ghost-button" id="shareInstallButton">공유</button>
+            <button type="button" class="ghost-button" id="installButton" hidden>설치</button>
+          </div>
+        </section>
+
+        <section class="source-note" aria-label="성경 본문 출처 안내">
+          <strong>본문 표시 안내</strong>
+          <p>개역한글 본문을 기본으로 표시합니다. 개역개정과 흠정역은 나중에 허가나 공식 연결 방식이 정리되면 옵션으로 붙입니다.</p>
+        </section>
+      </aside>
+
+      <section class="workbench" aria-label="오늘의 추천">
+        <section class="top-strip">
+          <div>
+            <p class="eyebrow">today's pair</p>
+            <h2>오늘의 조합</h2>
+          </div>
+          <div class="version-switch" role="group" aria-label="성경 번역본">
+            <button type="button" class="version-button active" data-version="krv">개역한글</button>
+          </div>
+        </section>
+
+        <section class="setup-panel" id="setupPanel" aria-label="시작 준비">
+          <header>
+            <div>
+              <p class="eyebrow">setup</p>
+              <h2>시작 준비</h2>
+            </div>
+            <button type="button" class="ghost-button" id="setupDismissButton">접기</button>
+          </header>
+          <div class="setup-steps">
+            <article class="setup-step" data-setup-step="install">
+              <span class="setup-number">1</span>
+              <div>
+                <strong>홈 화면</strong>
+                <p data-setup-copy="install"></p>
+              </div>
+              <button type="button" class="ghost-button" id="setupInstallAction">공유</button>
+              <span class="setup-badge" data-setup-status="install"></span>
+            </article>
+            <article class="setup-step" data-setup-step="notify">
+              <span class="setup-number">2</span>
+              <div>
+                <strong>알림</strong>
+                <p data-setup-copy="notify"></p>
+              </div>
+              <button type="button" class="ghost-button" id="setupNotifyAction">허용</button>
+              <span class="setup-badge" data-setup-status="notify"></span>
+            </article>
+            <article class="setup-step" data-setup-step="time">
+              <span class="setup-number">3</span>
+              <div>
+                <strong>시간</strong>
+                <p data-setup-copy="time"></p>
+              </div>
+              <button type="button" class="ghost-button" id="setupTimeAction">선택</button>
+              <span class="setup-badge" data-setup-status="time"></span>
+            </article>
+            <article class="setup-step" data-setup-step="test">
+              <span class="setup-number">4</span>
+              <div>
+                <strong>테스트</strong>
+                <p data-setup-copy="test"></p>
+              </div>
+              <button type="button" class="ghost-button" id="setupTestAction">테스트</button>
+              <span class="setup-badge" data-setup-status="test"></span>
+            </article>
+          </div>
+        </section>
+
+        <section class="daily-grid">
+          <article class="feature-card scripture-card">
+            <div class="card-head">
+              <span class="card-icon">✦</span>
+              <div>
+                <p class="eyebrow">scripture</p>
+                <h3 id="verseReference"></h3>
+              </div>
+            </div>
+            <blockquote id="verseFocus"></blockquote>
+            <p id="versePrompt" class="card-body"></p>
+            <div class="action-row">
+              <a id="primaryBibleLink" class="primary-button" href="#" target="_blank" rel="noreferrer">출처/저작권 안내 보기</a>
+              <span id="versionLabel" class="quiet-chip"></span>
+            </div>
+          </article>
+
+          <article class="feature-card english-card">
+            <div class="card-head">
+              <span class="card-icon">Aa</span>
+              <div>
+                <p class="eyebrow">american english</p>
+                <h3 id="expressionPhrase"></h3>
+              </div>
+            </div>
+            <p id="expressionMeaning" class="meaning"></p>
+            <div class="example-box">
+              <span>Example</span>
+              <div id="expressionExample" class="dialogue-lines"></div>
+            </div>
+            <p id="expressionTip" class="card-body"></p>
+          </article>
+        </section>
+
+        <section class="reminder-panel" aria-label="알림 설정">
+          <header>
+            <div>
+              <p class="eyebrow">reminders</p>
+              <h2>알림 시간</h2>
+            </div>
+            <button type="button" class="ghost-button" id="notificationButton">알림 허용</button>
+          </header>
+          <div class="reminder-options" role="group" aria-label="알림 받을 시간">
+            <label><input type="checkbox" value="morning" /> 아침 <span>07:30</span></label>
+            <label><input type="checkbox" value="lunch" /> 점심 <span>12:30</span></label>
+            <label><input type="checkbox" value="evening" /> 저녁 <span>21:30</span></label>
+          </div>
+          <div class="reminder-actions">
+            <button type="button" class="ghost-button" id="screenTestButton">화면 테스트</button>
+            <button type="button" class="ghost-button" id="localNotificationButton">브라우저 테스트</button>
+            <button type="button" class="ghost-button" id="testNotificationButton">서버 테스트</button>
+            <button type="button" class="ghost-button" id="unsubscribeButton">알림 끄기</button>
+            <p id="notificationStatus" role="status"></p>
+          </div>
+          <div class="diagnostic-panel" id="notificationDiagnostics"></div>
+          <div class="screen-toast" id="screenToast" hidden></div>
+        </section>
+
+        <section class="practice-panel" aria-label="개인 연습">
+          <header>
+            <div>
+              <p class="eyebrow">practice</p>
+              <h2>오늘 남길 한 줄</h2>
+            </div>
+            <button type="button" class="ghost-button" id="favoriteButton">저장</button>
+          </header>
+          <textarea id="noteInput" rows="5" placeholder="오늘 구절이나 표현으로 떠오른 문장을 적어보세요."></textarea>
+          <p id="saveMessage" role="status"></p>
+        </section>
+      </section>
+    </main>
+
+    <script src="./src/app.js?v=0.12" type="module"></script>
+  </body>
+</html>

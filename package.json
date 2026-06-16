@@ -1,0 +1,21 @@
+{
+  "name": "small-painpoint-solvers",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev:01": "node apps/01-promise-ledger/server/server.js",
+    "dev:01:static": "python3 -m http.server 5173 --directory apps/01-promise-ledger",
+    "dev:11": "node apps/11-daily-verse-english/server.js",
+    "check:01": "node --check apps/01-promise-ledger/src/app.js && node --check apps/01-promise-ledger/src/parser.js && node --check apps/01-promise-ledger/src/parser.test.js && node --check apps/01-promise-ledger/server/server.js && node --check apps/01-promise-ledger/server/extract-request.js && node --check apps/01-promise-ledger/src/extractors/index.js && node --check apps/01-promise-ledger/src/extractors/rule-based.js && node --check apps/01-promise-ledger/src/extractors/ollama.js && node --check apps/01-promise-ledger/src/extractors/groq.js && node --check api/extract-promises.js",
+    "test:01": "node apps/01-promise-ledger/src/parser.test.js",
+    "test:01:api": "node apps/01-promise-ledger/server/api.test.js && node api/extract-promises.test.js",
+    "push:keys": "node --input-type=module -e \"import webpush from 'web-push'; console.log(webpush.generateVAPIDKeys())\"",
+    "check:11": "node --check apps/11-daily-verse-english/src/app.js && node --check apps/11-daily-verse-english/sw.js && node --check api/push-health.js && node --check api/push-public-key.js && node --check api/push-subscriptions.js && node --check api/push-test.js && node --check api/send-daily-verse.js && node --check api/send-daily-verse-morning.js && node --check api/send-daily-verse-lunch.js && node --check api/send-daily-verse-evening.js && node --check api/daily-verse-data.js && node --check api/push-store.js && node --check apps/11-daily-verse-english/server.js && node --check scripts/check-daily-verse-env.js",
+    "push:env-check": "node scripts/check-daily-verse-env.js",
+    "push:secret": "node -e \"console.log(require('crypto').randomBytes(32).toString('base64url'))\""
+  },
+  "dependencies": {
+    "web-push": "^3.6.7"
+  }
+}

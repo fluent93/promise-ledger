@@ -1,0 +1,19 @@
+# Local secrets and development state
+.env
+.env.*
+!.env.example
+.tmp/
+
+# Dependency/cache directories
+node_modules/
+.vercel/cache/
+
+# Git/editor/system files
+.git/
+.gitignore
+.DS_Store
+*.log
+
+# Local-only notes or generated artifacts
+.agents/
+.codex/
