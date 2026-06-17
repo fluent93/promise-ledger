@@ -57,17 +57,21 @@ const expressions = [
   { phrase: "No rush.", meaning: "급하지 않아." },
 ];
 
-export function getDailyVersePayload(date = new Date()) {
+export function getDailyVersePayload(date = new Date(), options = {}) {
   const index = Math.floor((Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - START_DAY) / DAY_IN_MS);
   const scripture = scriptures[index % scriptures.length];
   const expression = expressions[(index * 7) % expressions.length];
+  const slotPrefix = options.slotLabel ? `${options.slotLabel} ` : "";
+  const scheduledSuffix = options.scheduledTime ? ` (${options.scheduledTime})` : "";
   return {
-    title: `오늘의 말씀 · ${scripture.reference}`,
+    title: `${slotPrefix}말씀${scheduledSuffix} · ${scripture.reference}`,
     body: `${scripture.text}
 
 ${expression.phrase} — ${expression.meaning}`,
     url: process.env.DAILY_VERSE_APP_URL || "/daily-verse/",
     scripture,
     expression,
+    slotLabel: options.slotLabel || "",
+    scheduledTime: options.scheduledTime || "",
   };
 }

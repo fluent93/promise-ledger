@@ -1,8 +1,20 @@
 import webpush from "web-push";
 import { getDailyVersePayload } from "./daily-verse-data.js";
-import { deleteSubscription, isStorageConfigured, listSubscriptions } from "./push-store.js";
+import {
+  createSendLock,
+  deleteSubscription,
+  isStorageConfigured,
+  listSubscriptions,
+  recordSendLog,
+} from "./push-store.js";
 
-const VALID_SLOTS = new Set(["morning", "lunch", "evening"]);
+const SLOT_INFO = {
+  morning: { label: "아침", time: "07:30" },
+  lunch: { label: "점심", time: "12:30" },
+  evening: { label: "저녁", time: "21:30" },
+};
+const VALID_SLOTS = new Set(Object.keys(SLOT_INFO));
+const SERVICE_TIME_ZONE = "Asia/Seoul";
 
 export default async function handler(request, response) {
   response.setHeader("content-type", "application/json; charset=utf-8");
@@ -33,7 +45,27 @@ export default async function handler(request, response) {
     return;
   }
 
+  const now = new Date();
+  const dateKey = formatDateInTimeZone(now, SERVICE_TIME_ZONE);
+  const triggeredAt = now.toISOString();
+  const triggeredAtLocal = formatDateTimeInTimeZone(now, SERVICE_TIME_ZONE);
+  const slotInfo = SLOT_INFO[slot];
+
   try {
+    const shouldSend = await createSendLock({ slot, dateKey, triggeredAt });
+    if (!shouldSend) {
+      const duplicateSummary = {
+        event: "daily-verse-send-duplicate-skipped",
+        slot,
+        dateKey,
+        triggeredAt,
+        triggeredAtLocal,
+      };
+      console.log(JSON.stringify(duplicateSummary));
+      response.status(200).json({ ok: true, duplicate: true, skipped: true, slot, dateKey, triggeredAtLocal });
+      return;
+    }
+
     webpush.setVapidDetails(
       process.env.VAPID_SUBJECT || "mailto:hello@example.com",
       process.env.VAPID_PUBLIC_KEY,
@@ -42,11 +74,25 @@ export default async function handler(request, response) {
 
     const records = await listSubscriptions();
     const targets = records.filter((record) => record.preferences?.[slot]);
-    const payload = getDailyVersePayload(new Date());
+    const payload = getDailyVersePayload(now, { slotLabel: slotInfo.label, scheduledTime: slotInfo.time });
     const results = await Promise.allSettled(targets.map((record) => sendToRecord(record, payload)));
     const summary = summarize(results);
+    const logEntry = {
+      event: "daily-verse-send",
+      slot,
+      slotLabel: slotInfo.label,
+      scheduledTime: slotInfo.time,
+      dateKey,
+      triggeredAt,
+      triggeredAtLocal,
+      total: records.length,
+      targeted: targets.length,
+      ...summary,
+    };
 
-    response.status(200).json({ ok: true, slot, total: records.length, targeted: targets.length, ...summary });
+    await recordSendLog(logEntry);
+    console.log(JSON.stringify(logEntry));
+    response.status(200).json({ ok: true, ...logEntry });
   } catch (error) {
     response.status(500).json({ error: error.message || "Failed to send push notifications" });
   }
@@ -93,7 +139,6 @@ function isPushConfigured() {
   return Boolean(process.env.VAPID_PUBLIC_KEY && process.env.VAPID_PRIVATE_KEY);
 }
 
-
 function assertCronAuthorized(request) {
   if (!process.env.CRON_SECRET) return true;
   const authorization = getHeader(request, "authorization");
@@ -104,4 +149,28 @@ function getHeader(request, name) {
   if (!request.headers) return "";
   if (typeof request.headers.get === "function") return request.headers.get(name) || "";
   return request.headers[name] || request.headers[name.toLowerCase()] || "";
+}
+
+function formatDateInTimeZone(date, timeZone) {
+  const parts = getDateTimeParts(date, timeZone);
+  return `${parts.year}-${parts.month}-${parts.day}`;
+}
+
+function formatDateTimeInTimeZone(date, timeZone) {
+  const parts = getDateTimeParts(date, timeZone);
+  return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute}:${parts.second}`;
+}
+
+function getDateTimeParts(date, timeZone) {
+  const formatter = new Intl.DateTimeFormat("en-CA", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+  return Object.fromEntries(formatter.formatToParts(date).map((part) => [part.type, part.value]));
 }

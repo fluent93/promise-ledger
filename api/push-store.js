@@ -3,6 +3,9 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const SUBSCRIPTIONS_KEY = "daily-verse-english:subscriptions";
+const SEND_LOG_KEY = "daily-verse-english:send-log";
+const SEND_LOCK_PREFIX = "daily-verse-english:sent";
+const SEND_LOCK_TTL_SECONDS = 60 * 60 * 48;
 
 export function subscriptionId(subscription) {
   return crypto.createHash("sha256").update(subscription.endpoint).digest("hex");
@@ -67,6 +70,43 @@ export async function listSubscriptions() {
   return records;
 }
 
+export async function createSendLock({ slot, dateKey, triggeredAt }) {
+  if (useLocalStore()) return true;
+  const key = `${SEND_LOCK_PREFIX}:${dateKey}:${slot}`;
+  const result = await upstashCommand([
+    "SET",
+    key,
+    JSON.stringify({ slot, dateKey, triggeredAt }),
+    "NX",
+    "EX",
+    String(SEND_LOCK_TTL_SECONDS),
+  ]);
+  return result === "OK";
+}
+
+export async function recordSendLog(entry) {
+  if (useLocalStore()) return;
+  const id = `${entry.dateKey}:${entry.slot}:${entry.triggeredAt}`;
+  await upstashCommand(["HSET", SEND_LOG_KEY, id, JSON.stringify({ ...entry, id })]);
+}
+
+export async function listSendLogs(limit = 10) {
+  if (!isStorageConfigured() || useLocalStore()) return [];
+  const result = await upstashCommand(["HGETALL", SEND_LOG_KEY]);
+  const pairs = Array.isArray(result) ? result : [];
+  const logs = [];
+  for (let index = 0; index < pairs.length; index += 2) {
+    try {
+      logs.push(JSON.parse(pairs[index + 1]));
+    } catch {
+      // Ignore malformed log entries.
+    }
+  }
+  return logs
+    .sort((a, b) => String(b.triggeredAt || "").localeCompare(String(a.triggeredAt || "")))
+    .slice(0, limit);
+}
+
 async function upstashCommand(command) {
   if (!isStorageConfigured()) throw new Error("Upstash Redis is not configured");
   const response = await fetch(process.env.UPSTASH_REDIS_REST_URL, {
@@ -81,7 +121,6 @@ async function upstashCommand(command) {
   if (!response.ok || data.error) throw new Error(data.error || `Upstash request failed: ${response.status}`);
   return data.result;
 }
-
 
 function useLocalStore() {
   return Boolean(process.env.LOCAL_PUSH_STORE_FILE);

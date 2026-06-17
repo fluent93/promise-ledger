@@ -130,6 +130,11 @@ Vercel Cron은 UTC 기준입니다. 현재 `vercel.json`은 한국 시간 기준
 21:30 KST -> 12:30 UTC -> /api/send-daily-verse-evening
 ```
 
+
+### Cron Timing Note
+
+Vercel Hobby Cron is not minute-precise. Vercel documents Hobby cron precision as hourly, up to +/-59 minutes. The app records recent send logs in `/api/push-health` and prevents duplicate sends for the same slot/date. For exact minute-level delivery, use Vercel Pro or a dedicated scheduler.
+
 ## 10. 참고 문서
 
 - Vercel Cron Jobs: https://vercel.com/docs/cron-jobs

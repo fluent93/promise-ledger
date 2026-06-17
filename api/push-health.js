@@ -1,4 +1,4 @@
-import { storageHealth } from "./push-store.js";
+import { listSendLogs, storageHealth } from "./push-store.js";
 
 export default async function handler(request, response) {
   response.setHeader("content-type", "application/json; charset=utf-8");
@@ -22,6 +22,13 @@ export default async function handler(request, response) {
     storage = { configured: true, ok: false, error: error.message || "Storage health check failed" };
   }
 
+  let recentSends = [];
+  try {
+    recentSends = await listSendLogs(10);
+  } catch {
+    recentSends = [];
+  }
+
   const appUrl = process.env.DAILY_VERSE_APP_URL || "/daily-verse/";
   const cron = {
     secretConfigured: Boolean(process.env.CRON_SECRET),
@@ -34,5 +41,6 @@ export default async function handler(request, response) {
     vapid,
     storage,
     cron,
+    recentSends,
   });
 }

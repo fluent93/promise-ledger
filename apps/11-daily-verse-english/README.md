@@ -97,3 +97,8 @@ Expected shape:
 ```
 
 For the full launch sequence, including Vercel, Upstash, phone testing, and a family sharing message, see `../../docs/daily-verse-deploy.md`.
+
+### Cron Timing Note
+
+Vercel Hobby Cron is not minute-precise. Vercel documents Hobby cron precision as hourly, up to +/-59 minutes. The app records recent send logs in `/api/push-health` and prevents duplicate sends for the same slot/date. For exact minute-level delivery, use Vercel Pro or a dedicated scheduler.
+
