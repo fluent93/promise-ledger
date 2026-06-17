@@ -45,16 +45,22 @@ const scriptures = [
 ];
 
 const expressions = [
-  { phrase: "I'm rooting for you.", meaning: "응원하고 있어." },
-  { phrase: "Let me sleep on it.", meaning: "하룻밤 생각해볼게." },
-  { phrase: "That makes sense.", meaning: "말이 되네, 이해돼." },
-  { phrase: "I'll take care of it.", meaning: "내가 처리할게." },
-  { phrase: "It's not a big deal.", meaning: "별일 아니야." },
-  { phrase: "Can I take a rain check?", meaning: "다음으로 미뤄도 될까?" },
-  { phrase: "I'm on the same page.", meaning: "나도 같은 생각이야." },
-  { phrase: "Let's keep it simple.", meaning: "간단하게 하자." },
-  { phrase: "I appreciate the heads-up.", meaning: "미리 알려줘서 고마워." },
-  { phrase: "No rush.", meaning: "급하지 않아." },
+  { phrase: "That tracks.", meaning: "말이 되네, 앞뒤가 맞네." },
+  { phrase: "I wouldn't read too much into it.", meaning: "거기에 너무 큰 의미를 두지는 않을 것 같아." },
+  { phrase: "Let's not get ahead of ourselves.", meaning: "너무 앞서가지는 말자." },
+  { phrase: "I'm still trying to wrap my head around it.", meaning: "아직 이해하려고 정리 중이야." },
+  { phrase: "There's a bit of a disconnect.", meaning: "서로 어긋나는 부분이 좀 있어." },
+  { phrase: "We may be talking past each other.", meaning: "우리 서로 다른 얘기를 하고 있는 것 같아." },
+  { phrase: "I don't want to overcommit.", meaning: "무리하게 약속하고 싶지는 않아." },
+  { phrase: "The timing is less than ideal.", meaning: "타이밍이 썩 좋지는 않아." },
+  { phrase: "It depends on what we're optimizing for.", meaning: "우리가 뭘 우선하느냐에 달려 있어." },
+  { phrase: "I'm not convinced that's the right trade-off.", meaning: "그 절충이 맞는지는 아직 확신이 안 서." },
+  { phrase: "Let's pressure-test the idea.", meaning: "그 아이디어를 한번 빡세게 검증해보자." },
+  { phrase: "That's a fair point, but...", meaning: "그 말도 일리는 있는데..." },
+  { phrase: "I see where you're coming from.", meaning: "네가 왜 그렇게 생각하는지는 알겠어." },
+  { phrase: "Can we take a step back?", meaning: "잠깐 한 발 물러서서 볼 수 있을까?" },
+  { phrase: "That feels like a stretch.", meaning: "그건 좀 무리한 해석/주장 같아." },
+  { phrase: "I'm inclined to agree.", meaning: "나도 대체로 동의하는 쪽이야." },
 ];
 
 export function getDailyVersePayload(date = new Date(), options = {}) {

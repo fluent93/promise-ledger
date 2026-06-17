@@ -1,9 +1,9 @@
-const CACHE_NAME = "daily-verse-english:v12";
+const CACHE_NAME = "daily-verse-english:v13";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=0.12",
-  "./src/app.js?v=0.12",
+  "./styles.css?v=0.13",
+  "./src/app.js?v=0.13",
   "./manifest.json",
   "./icons/icon.svg",
 ];

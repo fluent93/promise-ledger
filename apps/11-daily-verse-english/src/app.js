@@ -3,7 +3,7 @@ const START_DAY = Date.UTC(2026, 0, 1);
 const STORAGE_KEY = "daily-verse-english:v1";
 const REMINDER_STORAGE_KEY = "daily-verse-english:reminders:v1";
 const SETUP_DISMISSED_KEY = "daily-verse-english:setup-dismissed:v1";
-const APP_VERSION = "0.12";
+const APP_VERSION = "0.13";
 
 let deferredInstallPrompt = null;
 let pushPublicKey = null;
@@ -81,94 +81,148 @@ const scriptures = [
 
 const expressions = [
   {
-    phrase: "I'm rooting for you.",
-    meaning: "응원하고 있어.",
+    phrase: "That tracks.",
+    meaning: "말이 되네, 앞뒤가 맞네.",
     example: [
-      { speaker: "A", text: "I have the interview tomorrow." },
-      { speaker: "B", text: "You've got this. I'm rooting for you." },
+      { speaker: "A", text: "She pushed the deadline because the client changed the scope." },
+      { speaker: "B", text: "That tracks. The original timeline was already tight." },
     ],
-    tip: "가볍고 따뜻한 미국식 응원 표현입니다. 가족, 친구, 동료에게 모두 자연스럽습니다.",
+    tip: "That makes sense보다 더 담백하고 구어적인 표현입니다. 설명을 듣고 논리적으로 납득될 때 씁니다.",
   },
   {
-    phrase: "Let me sleep on it.",
-    meaning: "하룻밤 생각해볼게.",
+    phrase: "I wouldn't read too much into it.",
+    meaning: "거기에 너무 큰 의미를 두지는 않을 것 같아.",
     example: [
-      { speaker: "A", text: "Can you decide today?" },
-      { speaker: "B", text: "That's a big decision. Let me sleep on it." },
+      { speaker: "A", text: "He sounded a little short in his reply." },
+      { speaker: "B", text: "I wouldn't read too much into it. He may just be busy." },
     ],
-    tip: "즉답을 피하면서도 성의 있게 고민하겠다는 뉘앙스가 있습니다.",
+    tip: "상대가 과해석하는 흐름을 부드럽게 낮출 때 좋습니다. 이유를 붙이면 더 자연스럽습니다.",
   },
   {
-    phrase: "That makes sense.",
-    meaning: "말이 되네, 이해돼.",
+    phrase: "Let's not get ahead of ourselves.",
+    meaning: "너무 앞서가지는 말자.",
     example: [
-      { speaker: "A", text: "Traffic might be bad, so we should leave earlier." },
-      { speaker: "B", text: "That makes sense." },
+      { speaker: "A", text: "If this works, we could turn it into a full product." },
+      { speaker: "B", text: "Maybe, but let's not get ahead of ourselves. We need a working pilot first." },
     ],
-    tip: "상대 의견에 동의하거나 흐름을 이해했다는 반응으로 자주 씁니다.",
+    tip: "기대감은 인정하되 아직 검증이 필요하다고 말할 때 쓰는 표현입니다.",
   },
   {
-    phrase: "I'll take care of it.",
-    meaning: "내가 처리할게.",
+    phrase: "I'm still trying to wrap my head around it.",
+    meaning: "아직 이해하려고 정리 중이야.",
     example: [
-      { speaker: "A", text: "Should I call the restaurant?" },
-      { speaker: "B", text: "Don't worry. I'll take care of it." },
+      { speaker: "A", text: "Do you have an opinion on the new pricing model?" },
+      { speaker: "B", text: "Not yet. I'm still trying to wrap my head around it." },
     ],
-    tip: "책임지고 맡겠다는 느낌이라 업무와 일상 모두에 잘 맞습니다.",
+    tip: "모른다고 딱 자르기보다 복잡한 내용을 소화 중이라는 뉘앙스를 줍니다.",
   },
   {
-    phrase: "It's not a big deal.",
-    meaning: "별일 아니야.",
+    phrase: "There's a bit of a disconnect.",
+    meaning: "서로 어긋나는 부분이 좀 있어.",
     example: [
-      { speaker: "A", text: "Sorry I'm late." },
-      { speaker: "B", text: "It's not a big deal. Thanks for letting me know." },
+      { speaker: "A", text: "The team says quality matters, but the deadline keeps moving up." },
+      { speaker: "B", text: "Right. There's a bit of a disconnect between the goal and the timeline." },
     ],
-    tip: "상대의 미안함을 덜어줄 때 유용하지만, 심각한 일에는 가볍게 들릴 수 있습니다.",
+    tip: "문제 제기 표현이지만 공격적이지 않습니다. expectations, messaging, priorities와 자주 어울립니다.",
   },
   {
-    phrase: "Can I take a rain check?",
-    meaning: "다음으로 미뤄도 될까?",
+    phrase: "We may be talking past each other.",
+    meaning: "우리 서로 다른 얘기를 하고 있는 것 같아.",
     example: [
-      { speaker: "A", text: "Do you want to grab dinner tonight?" },
-      { speaker: "B", text: "I'd love to, but I'm exhausted. Can I take a rain check?" },
+      { speaker: "A", text: "I'm talking about the user experience, not the backend implementation." },
+      { speaker: "B", text: "Got it. We may be talking past each other." },
     ],
-    tip: "거절하되 관계를 열어두는 표현입니다.",
+    tip: "논쟁이 꼬일 때 대화를 재정렬하는 고급 표현입니다.",
   },
   {
-    phrase: "I'm on the same page.",
-    meaning: "나도 같은 생각이야.",
+    phrase: "I don't want to overcommit.",
+    meaning: "무리하게 약속하고 싶지는 않아.",
     example: [
-      { speaker: "A", text: "Let's launch the beta first and polish later." },
-      { speaker: "B", text: "I'm on the same page." },
+      { speaker: "A", text: "Can you finish both versions by Friday?" },
+      { speaker: "B", text: "I can try, but I don't want to overcommit." },
     ],
-    tip: "회의에서 방향이 맞춰졌다는 신호로 특히 자주 쓰입니다.",
+    tip: "거절은 아니지만 책임 있게 기대치를 조정하는 표현입니다.",
   },
   {
-    phrase: "Let's keep it simple.",
-    meaning: "간단하게 하자.",
+    phrase: "The timing is less than ideal.",
+    meaning: "타이밍이 썩 좋지는 않아.",
     example: [
-      { speaker: "A", text: "Should we prepare a long agenda?" },
-      { speaker: "B", text: "No, let's keep it simple." },
+      { speaker: "A", text: "They want feedback by tomorrow morning." },
+      { speaker: "B", text: "The timing is less than ideal, but we can send a short version." },
     ],
-    tip: "복잡해지는 흐름을 부드럽게 정리할 때 좋습니다.",
+    tip: "bad timing보다 완곡하고 직장/공식 상황에서도 쓰기 좋습니다.",
   },
   {
-    phrase: "I appreciate the heads-up.",
-    meaning: "미리 알려줘서 고마워.",
+    phrase: "It depends on what we're optimizing for.",
+    meaning: "우리가 뭘 우선하느냐에 달려 있어.",
     example: [
-      { speaker: "A", text: "Just so you know, the meeting moved to 3." },
-      { speaker: "B", text: "I appreciate the heads-up." },
+      { speaker: "A", text: "Should we make it simpler or more powerful?" },
+      { speaker: "B", text: "It depends on what we're optimizing for: adoption or depth." },
     ],
-    tip: "heads-up은 사전 알림이라는 뜻입니다.",
+    tip: "단순 찬반보다 기준을 먼저 세울 때 쓰는 표현입니다. 전략 대화에 자주 어울립니다.",
   },
   {
-    phrase: "No rush.",
-    meaning: "급하지 않아.",
+    phrase: "I'm not convinced that's the right trade-off.",
+    meaning: "그 절충이 맞는지는 아직 확신이 안 서.",
     example: [
-      { speaker: "A", text: "I can send the file later today." },
-      { speaker: "B", text: "Sounds good. No rush." },
+      { speaker: "A", text: "We can save time by cutting the onboarding steps." },
+      { speaker: "B", text: "I'm not convinced that's the right trade-off." },
     ],
-    tip: "상대에게 부담을 줄이고 싶을 때 짧고 자연스럽습니다.",
+    tip: "반대 의견을 단정적으로 밀어붙이지 않고 판단 기준을 다시 보자는 느낌을 줍니다.",
+  },
+  {
+    phrase: "Let's pressure-test the idea.",
+    meaning: "그 아이디어를 한번 빡세게 검증해보자.",
+    example: [
+      { speaker: "A", text: "I think families would actually use this every morning." },
+      { speaker: "B", text: "Let's pressure-test the idea with three real users first." },
+    ],
+    tip: "아이디어를 비판하자는 뜻이 아니라 약점을 찾아 더 탄탄하게 만들자는 표현입니다.",
+  },
+  {
+    phrase: "That's a fair point, but...",
+    meaning: "그 말도 일리는 있는데...",
+    example: [
+      { speaker: "A", text: "We should keep the interface simple for older users." },
+      { speaker: "B", text: "That's a fair point, but we still need a clear way to manage reminders." },
+    ],
+    tip: "상대 의견을 인정한 뒤 다른 관점을 제시할 때 유용합니다. but 뒤에는 구체적인 우려를 붙이세요.",
+  },
+  {
+    phrase: "I see where you're coming from.",
+    meaning: "네가 왜 그렇게 생각하는지는 알겠어.",
+    example: [
+      { speaker: "A", text: "I don't think we should add more features yet." },
+      { speaker: "B", text: "I see where you're coming from. My concern is retention." },
+    ],
+    tip: "동의한다는 뜻은 아닙니다. 상대의 관점을 이해한다는 신호라 갈등을 낮춰줍니다.",
+  },
+  {
+    phrase: "Can we take a step back?",
+    meaning: "잠깐 한 발 물러서서 볼 수 있을까?",
+    example: [
+      { speaker: "A", text: "We're stuck on the button text again." },
+      { speaker: "B", text: "Can we take a step back? What problem are we trying to solve?" },
+    ],
+    tip: "세부 논쟁에서 목적/맥락으로 돌아가고 싶을 때 자연스럽습니다.",
+  },
+  {
+    phrase: "That feels like a stretch.",
+    meaning: "그건 좀 무리한 해석/주장 같아.",
+    example: [
+      { speaker: "A", text: "One user complained, so the whole concept is broken." },
+      { speaker: "B", text: "That feels like a stretch. We need more data." },
+    ],
+    tip: "상대 주장을 직접 틀렸다고 하기보다 과장된 느낌을 지적하는 표현입니다.",
+  },
+  {
+    phrase: "I'm inclined to agree.",
+    meaning: "나도 대체로 동의하는 쪽이야.",
+    example: [
+      { speaker: "A", text: "We should keep the first version focused." },
+      { speaker: "B", text: "I'm inclined to agree, especially for a family audience." },
+    ],
+    tip: "완전한 확신보다는 동의 쪽으로 기울어 있다는 미묘한 표현입니다.",
   },
 ];
 
