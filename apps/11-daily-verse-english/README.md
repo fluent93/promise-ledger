@@ -102,3 +102,6 @@ For the full launch sequence, including Vercel, Upstash, phone testing, and a fa
 
 Vercel Hobby Cron is not minute-precise. Vercel documents Hobby cron precision as hourly, up to +/-59 minutes. The app records recent send logs in `/api/push-health` and prevents duplicate sends for the same slot/date. For exact minute-level delivery, use Vercel Pro or a dedicated scheduler.
 
+## Scheduler
+
+Production reminders use Google Cloud Scheduler instead of Vercel Hobby Cron for more accurate KST delivery. See `../../docs/google-cloud-scheduler.md`.

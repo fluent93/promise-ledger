@@ -122,18 +122,19 @@ https://YOUR-PROJECT.vercel.app/daily-verse/
 
 ## 9. 현재 알림 시간
 
-Vercel Cron은 UTC 기준입니다. 현재 `vercel.json`은 한국 시간 기준으로 아래처럼 맞춰져 있습니다.
+정기 알림은 Vercel Hobby Cron 대신 Google Cloud Scheduler가 호출합니다. `vercel.json`의 Vercel Cron은 꺼져 있습니다.
 
 ```text
-07:30 KST -> 22:30 UTC -> /api/send-daily-verse-morning
-12:30 KST -> 03:30 UTC -> /api/send-daily-verse-lunch
-21:30 KST -> 12:30 UTC -> /api/send-daily-verse-evening
+07:30 KST -> /api/send-daily-verse-morning
+12:30 KST -> /api/send-daily-verse-lunch
+21:30 KST -> /api/send-daily-verse-evening
 ```
 
+Google Cloud Scheduler 설정은 `docs/google-cloud-scheduler.md`를 따릅니다.
 
 ### Cron Timing Note
 
-Vercel Hobby Cron is not minute-precise. Vercel documents Hobby cron precision as hourly, up to +/-59 minutes. The app records recent send logs in `/api/push-health` and prevents duplicate sends for the same slot/date. For exact minute-level delivery, use Vercel Pro or a dedicated scheduler.
+Vercel Hobby Cron is not minute-precise. Vercel documents Hobby cron precision as hourly, up to +/-59 minutes. The app records recent send logs in `/api/push-health` and prevents duplicate sends for the same slot/date. For exact minute-level delivery without Vercel Pro, use Google Cloud Scheduler.
 
 ## 10. 참고 문서
 
