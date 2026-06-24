@@ -11,7 +11,7 @@
     <link rel="manifest" href="./manifest.json" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="./icons/icon.svg" />
-    <link rel="stylesheet" href="./styles.css?v=0.15" />
+    <link rel="stylesheet" href="./styles.css?v=0.16" />
   </head>
   <body>
     <main class="app-shell">
@@ -186,11 +186,20 @@
             <button type="button" class="ghost-button" id="favoriteButton">저장</button>
           </header>
           <textarea id="noteInput" rows="5" placeholder="오늘 구절이나 표현으로 떠오른 문장을 적어보세요."></textarea>
+          <div class="note-actions">
+            <button type="button" class="ghost-button" id="noteRefreshButton">기록 보기</button>
+            <button type="button" class="ghost-button" id="noteCodeButton">기록 코드 복사</button>
+          </div>
+          <div class="note-search-row">
+            <input type="search" id="noteSearchInput" placeholder="단어, 구절, 표현 검색" autocomplete="off" />
+            <button type="button" class="ghost-button" id="noteSearchButton">검색</button>
+          </div>
+          <div class="note-list" id="noteList" aria-live="polite"></div>
           <p id="saveMessage" role="status"></p>
         </section>
       </section>
     </main>
 
-    <script src="./src/app.js?v=0.15" type="module"></script>
+    <script src="./src/app.js?v=0.16" type="module"></script>
   </body>
 </html>

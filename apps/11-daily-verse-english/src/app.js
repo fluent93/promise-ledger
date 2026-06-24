@@ -3,7 +3,8 @@ const START_DAY = Date.UTC(2026, 0, 1);
 const STORAGE_KEY = "daily-verse-english:v1";
 const REMINDER_STORAGE_KEY = "daily-verse-english:reminders:v1";
 const SETUP_DISMISSED_KEY = "daily-verse-english:setup-dismissed:v1";
-const APP_VERSION = "0.15";
+const NOTE_OWNER_STORAGE_KEY = "daily-verse-english:note-owner:v1";
+const APP_VERSION = "0.16";
 
 let deferredInstallPrompt = null;
 let pushPublicKey = null;
@@ -302,6 +303,9 @@ const state = {
   selectedDate: startOfLocalDay(new Date()),
   version: "krv",
   notes: loadNotes(),
+  noteOwnerId: loadNoteOwnerId(),
+  noteRecords: [],
+  noteSearch: "",
   reminders: loadReminders(),
   setupDismissed: loadSetupDismissed(),
 };
@@ -324,6 +328,11 @@ const elements = {
   expressionTip: document.querySelector("#expressionTip"),
   noteInput: document.querySelector("#noteInput"),
   favoriteButton: document.querySelector("#favoriteButton"),
+  noteRefreshButton: document.querySelector("#noteRefreshButton"),
+  noteCodeButton: document.querySelector("#noteCodeButton"),
+  noteSearchInput: document.querySelector("#noteSearchInput"),
+  noteSearchButton: document.querySelector("#noteSearchButton"),
+  noteList: document.querySelector("#noteList"),
   installButton: document.querySelector("#installButton"),
   shareInstallButton: document.querySelector("#shareInstallButton"),
   installHint: document.querySelector("#installHint"),
@@ -366,15 +375,62 @@ elements.versionButtons.forEach((button) => {
   });
 });
 
-elements.favoriteButton.addEventListener("click", () => {
+elements.favoriteButton.addEventListener("click", async () => {
   const key = dateKey(state.selectedDate);
+  const pair = getDailyPair();
+  const note = elements.noteInput.value.trim();
+  const savedAt = new Date().toISOString();
   state.notes[key] = {
-    note: elements.noteInput.value.trim(),
-    savedAt: new Date().toISOString(),
+    note,
+    savedAt,
     version: state.version,
   };
+  if (!note) delete state.notes[key];
   persistNotes();
-  setMessage("저장했습니다.");
+  setMessage("저장 중입니다...");
+
+  try {
+    await saveRemoteNote({ key, note, pair, savedAt });
+    setMessage(note ? "DB에 저장했습니다." : "DB에서 삭제했습니다.");
+    await loadRemoteNotes();
+  } catch (error) {
+    console.warn(error);
+    setMessage("이 기기에는 저장했습니다. 서버 저장은 잠시 후 다시 시도해주세요.");
+    renderNoteList();
+  }
+});
+
+elements.noteRefreshButton?.addEventListener("click", () => {
+  loadRemoteNotes().catch((error) => {
+    console.warn(error);
+    setMessage("기록을 불러오지 못했습니다.");
+  });
+});
+
+elements.noteCodeButton?.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(state.noteOwnerId);
+    setMessage("기록 코드를 복사했습니다.");
+  } catch {
+    setMessage(`기록 코드: ${state.noteOwnerId}`);
+  }
+});
+
+elements.noteSearchButton?.addEventListener("click", () => {
+  state.noteSearch = elements.noteSearchInput.value.trim();
+  loadRemoteNotes().catch((error) => {
+    console.warn(error);
+    setMessage("검색하지 못했습니다.");
+  });
+});
+
+elements.noteSearchInput?.addEventListener("keydown", (event) => {
+  if (event.key !== "Enter") return;
+  state.noteSearch = elements.noteSearchInput.value.trim();
+  loadRemoteNotes().catch((error) => {
+    console.warn(error);
+    setMessage("검색하지 못했습니다.");
+  });
 });
 
 
@@ -540,6 +596,7 @@ elements.copyButton.addEventListener("click", async () => {
 
 registerServiceWorker();
 render();
+initializeRemoteNotes();
 
 function render() {
   const pair = getDailyPair();
@@ -563,6 +620,7 @@ function render() {
   setMessage("");
   renderReminderStatus();
   renderSetupStatus();
+  renderNoteList();
 }
 
 function renderExpressionExample(example) {
@@ -603,7 +661,11 @@ function formatExpressionExample(expression) {
 }
 
 function getDailyPair() {
-  const index = dayIndex(state.selectedDate);
+  return getDailyPairForDate(state.selectedDate);
+}
+
+function getDailyPairForDate(date) {
+  const index = dayIndex(date);
   return {
     scripture: scriptures[index % scriptures.length],
     expression: expressions[(index * 7) % expressions.length],
@@ -650,6 +712,151 @@ function loadNotes() {
 
 function persistNotes() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state.notes));
+}
+
+function loadNoteOwnerId() {
+  const existing = localStorage.getItem(NOTE_OWNER_STORAGE_KEY);
+  if (existing) return existing;
+  const ownerId = createNoteOwnerId();
+  localStorage.setItem(NOTE_OWNER_STORAGE_KEY, ownerId);
+  return ownerId;
+}
+
+function createNoteOwnerId() {
+  if (crypto.randomUUID) return crypto.randomUUID().replace(/-/g, "");
+  const bytes = new Uint8Array(24);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+async function initializeRemoteNotes() {
+  try {
+    await syncLocalNotesToRemote();
+    await loadRemoteNotes();
+  } catch (error) {
+    console.warn(error);
+    renderNoteList();
+  }
+}
+
+async function syncLocalNotesToRemote() {
+  const entries = Object.entries(state.notes).filter(([, value]) => value?.note);
+  for (const [key, value] of entries) {
+    const pair = getDailyPairForDate(parseDateKey(key));
+    await saveRemoteNote({ key, note: value.note, pair, savedAt: value.savedAt || new Date().toISOString() });
+  }
+}
+
+async function loadRemoteNotes() {
+  const url = new URL("/api/notes", window.location.origin);
+  if (state.noteSearch) url.searchParams.set("q", state.noteSearch);
+  url.searchParams.set("limit", "100");
+  const response = await fetch(url, { headers: { "x-note-owner": state.noteOwnerId } });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.error || "Failed to load notes");
+  state.noteRecords = Array.isArray(data.notes) ? data.notes : [];
+  for (const record of state.noteRecords) {
+    if (!record?.dateKey || !record.note) continue;
+    state.notes[record.dateKey] = {
+      note: record.note,
+      savedAt: record.savedAt || record.updatedAt,
+      version: record.version || state.version,
+    };
+  }
+  persistNotes();
+  renderNoteList();
+}
+
+async function saveRemoteNote({ key, note, pair, savedAt }) {
+  const response = await fetch("/api/notes", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "x-note-owner": state.noteOwnerId,
+    },
+    body: JSON.stringify({
+      dateKey: key,
+      note,
+      savedAt,
+      version: state.version,
+      scripture: {
+        reference: pair.scripture.reference,
+        text: pair.scripture.text,
+      },
+      expression: {
+        phrase: pair.expression.phrase,
+        meaning: pair.expression.meaning,
+      },
+    }),
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.error || "Failed to save note");
+  return data;
+}
+
+function renderNoteList() {
+  if (!elements.noteList) return;
+  elements.noteList.innerHTML = "";
+  const records = state.noteRecords.length ? state.noteRecords : localNoteRecords();
+  if (!records.length) {
+    const empty = document.createElement("p");
+    empty.className = "note-empty";
+    empty.textContent = "저장된 기록이 없습니다.";
+    elements.noteList.append(empty);
+    return;
+  }
+
+  for (const record of records) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "note-record";
+    button.addEventListener("click", () => {
+      state.selectedDate = parseDateKey(record.dateKey);
+      render();
+      document.querySelector(".practice-panel")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      setMessage(`${record.dateKey} 기록을 열었습니다.`);
+    });
+
+    const meta = document.createElement("span");
+    meta.className = "note-record-meta";
+    meta.textContent = [record.dateKey, record.scripture?.reference, record.expression?.phrase].filter(Boolean).join(" · ");
+
+    const body = document.createElement("span");
+    body.className = "note-record-body";
+    body.textContent = record.note;
+
+    button.append(meta, body);
+    elements.noteList.append(button);
+  }
+}
+
+function localNoteRecords() {
+  const query = state.noteSearch.toLocaleLowerCase("ko-KR");
+  return Object.entries(state.notes)
+    .filter(([, value]) => value?.note)
+    .map(([key, value]) => {
+      const pair = getDailyPairForDate(parseDateKey(key));
+      return {
+        dateKey: key,
+        note: value.note,
+        savedAt: value.savedAt,
+        scripture: { reference: pair.scripture.reference, text: pair.scripture.text },
+        expression: { phrase: pair.expression.phrase, meaning: pair.expression.meaning },
+      };
+    })
+    .filter((record) => {
+      if (!query) return true;
+      return [record.dateKey, record.note, record.scripture.reference, record.scripture.text, record.expression.phrase, record.expression.meaning]
+        .join(" ")
+        .toLocaleLowerCase("ko-KR")
+        .includes(query);
+    })
+    .sort((a, b) => b.dateKey.localeCompare(a.dateKey));
+}
+
+function parseDateKey(key) {
+  const [year, month, day] = key.split("-").map(Number);
+  return startOfLocalDay(new Date(year, month - 1, day));
 }
 
 function setMessage(message) {

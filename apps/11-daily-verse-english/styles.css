@@ -517,6 +517,64 @@ a:focus-visible {
   outline-offset: 2px;
 }
 #saveMessage { min-height: 20px; margin: 0; color: var(--accent); font-size: 13px; font-weight: 750; }
+.note-actions,
+.note-search-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.note-search-row input {
+  flex: 1 1 240px;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-subtle);
+  color: var(--ink);
+  font: inherit;
+  outline: none;
+}
+.note-search-row input:focus {
+  outline: 3px solid rgba(25, 118, 110, 0.18);
+  outline-offset: 2px;
+}
+.note-list {
+  display: grid;
+  gap: 8px;
+}
+.note-record {
+  display: grid;
+  gap: 5px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-subtle);
+  color: var(--ink);
+  text-align: left;
+}
+.note-record:hover { border-color: var(--accent); }
+.note-record-meta {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+.note-record-body {
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.note-empty {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
 
 @media (max-width: 860px) {
   .app-shell { grid-template-columns: 1fr; }
