@@ -89,3 +89,23 @@ ${expression.phrase} — ${expression.meaning}`,
     scheduledTime: options.scheduledTime || "",
   };
 }
+
+export default function handler(request, response) {
+  response.setHeader("content-type", "application/json; charset=utf-8");
+
+  if (request.method !== "GET") {
+    response.status(405).json({ error: "Method not allowed" });
+    return;
+  }
+
+  const url = new URL(request.url || "/", "https://local.invalid");
+  const date = parseDate(url.searchParams.get("date"));
+  response.status(200).json(getDailyVersePayload(date));
+}
+
+function parseDate(value) {
+  if (!value) return new Date();
+  const date = new Date(`${value}T00:00:00`);
+  return Number.isNaN(date.getTime()) ? new Date() : date;
+}
+
