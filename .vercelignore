@@ -17,3 +17,5 @@ node_modules/
 # Local-only notes or generated artifacts
 .agents/
 .codex/
+# Test files are checked locally but should not deploy as functions
+api/*.test.js

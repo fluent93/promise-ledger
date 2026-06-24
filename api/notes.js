@@ -1,4 +1,4 @@
-import { deleteNote, isNoteStorageConfigured, listNotes, saveNote } from "./note-store.js";
+import { deleteNote, isNoteStorageConfigured, listNotes, saveNote } from "../lib/note-store.js";
 
 const OWNER_ID_PATTERN = /^[A-Za-z0-9_-]{24,96}$/;
 const DATE_KEY_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
