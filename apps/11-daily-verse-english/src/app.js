@@ -3,7 +3,7 @@ const START_DAY = Date.UTC(2026, 0, 1);
 const STORAGE_KEY = "daily-verse-english:v1";
 const REMINDER_STORAGE_KEY = "daily-verse-english:reminders:v1";
 const SETUP_DISMISSED_KEY = "daily-verse-english:setup-dismissed:v1";
-const APP_VERSION = "0.14";
+const APP_VERSION = "0.15";
 
 let deferredInstallPrompt = null;
 let pushPublicKey = null;
@@ -81,166 +81,220 @@ const scriptures = [
 
 const expressions = [
   {
-    phrase: "Let's circle back.",
-    meaning: "나중에 다시 얘기하자, 다시 짚고 넘어가자.",
+    phrase: "Can you give me a quick rundown?",
+    meaning: "짧게 요약해서 설명해줄래?",
     example: [
-      { speaker: "A", text: "Should we decide the pricing today?" },
-      { speaker: "B", text: "Not yet. Let's circle back after we see the first week of data." },
+      { speaker: "A", text: "I missed the first part of the meeting.", translation: "회의 앞부분을 놓쳤어." },
+      { speaker: "B", text: "Sure. I can give you a quick rundown.", translation: "물론이지. 짧게 요약해줄게." },
     ],
-    tip: "비즈니스 미팅에서 정말 자주 나오는 표현입니다. 지금 결론 내리지 않고 나중에 다시 다루자는 뜻입니다.",
+    tip: "회의, 상황 설명, 미드 속 사건 정리 장면에서 자연스럽습니다. summary보다 말맛이 더 구어적입니다.",
   },
   {
-    phrase: "Can you walk me through it?",
-    meaning: "그거 차근차근 설명해줄래?",
+    phrase: "Let's take this offline.",
+    meaning: "이건 따로 얘기하자.",
     example: [
-      { speaker: "A", text: "The setup is pretty simple once you see the flow." },
-      { speaker: "B", text: "Can you walk me through it? I want to make sure I don't miss anything." },
+      { speaker: "A", text: "I have a few concerns about the timeline.", translation: "일정에 대해 우려가 좀 있어요." },
+      { speaker: "B", text: "Good point. Let's take this offline after the call.", translation: "좋은 지적이에요. 통화 끝나고 따로 얘기해요." },
     ],
-    tip: "업무, 앱 사용법, 상황 설명을 단계별로 듣고 싶을 때 자연스럽습니다.",
+    tip: "회의 중 모두 앞에서 길게 다루기 어려운 주제를 따로 빼자는 비즈니스 표현입니다.",
   },
   {
     phrase: "I'm not following.",
     meaning: "잘 못 따라가겠어, 이해가 안 돼.",
     example: [
-      { speaker: "A", text: "So the endpoint stores the subscription, but the scheduler triggers the send." },
-      { speaker: "B", text: "I'm not following. Which part runs on Vercel?" },
+      { speaker: "A", text: "The client changed the scope, so the launch date moved.", translation: "고객이 범위를 바꿔서 출시일이 밀렸어요." },
+      { speaker: "B", text: "I'm not following. Which part changed?", translation: "잘 이해가 안 돼요. 어느 부분이 바뀐 거예요?" },
     ],
-    tip: "I don't understand보다 덜 딱딱하고 대화 중에 끼어들기 좋은 표현입니다.",
+    tip: "I don't understand보다 대화 중에 훨씬 자연스럽게 끼어드는 표현입니다.",
   },
   {
     phrase: "I'll keep you posted.",
     meaning: "진행 상황 계속 알려줄게.",
     example: [
-      { speaker: "A", text: "Let me know if the notification timing improves." },
-      { speaker: "B", text: "Will do. I'll keep you posted." },
+      { speaker: "A", text: "Let me know what happens with the scheduler.", translation: "스케줄러 어떻게 되는지 알려줘." },
+      { speaker: "B", text: "Will do. I'll keep you posted.", translation: "그럴게. 계속 업데이트해줄게." },
     ],
-    tip: "회사와 일상 모두에서 매우 유용합니다. 짧게 `Keep me posted`라고도 자주 말합니다.",
-  },
-  {
-    phrase: "That's above my pay grade.",
-    meaning: "그건 내가 결정할 급은 아니야.",
-    example: [
-      { speaker: "A", text: "Do you think they'll approve the budget?" },
-      { speaker: "B", text: "That's above my pay grade, but I can ask." },
-    ],
-    tip: "영화나 미드에서도 자주 나오는 농담 섞인 표현입니다. 책임 범위를 벗어난다는 뜻입니다.",
+    tip: "회사, 병원 예약, 가족 일정 등 거의 모든 상황에서 쓸 수 있는 실용 표현입니다.",
   },
   {
     phrase: "Let's play it by ear.",
     meaning: "상황 봐가면서 하자.",
     example: [
-      { speaker: "A", text: "Should we plan dinner before or after the movie?" },
-      { speaker: "B", text: "Let's play it by ear. It depends on when we get out." },
+      { speaker: "A", text: "Should we book dinner now?", translation: "저녁 예약 지금 할까?" },
+      { speaker: "B", text: "Let's play it by ear. We may get out late.", translation: "상황 봐가며 하자. 늦게 끝날 수도 있어." },
     ],
-    tip: "계획을 딱 정하지 않고 상황에 맞춰 결정하자는 일상 표현입니다.",
-  },
-  {
-    phrase: "I can live with that.",
-    meaning: "그 정도면 괜찮아, 받아들일 수 있어.",
-    example: [
-      { speaker: "A", text: "It won't be perfect, but it'll be stable enough for family use." },
-      { speaker: "B", text: "I can live with that." },
-    ],
-    tip: "완전 만족은 아니지만 수용 가능하다는 현실적인 뉘앙스입니다.",
+    tip: "정확한 계획을 세우기 애매할 때 미국 일상 대화에서 매우 자주 씁니다.",
   },
   {
     phrase: "You lost me.",
     meaning: "나 놓쳤어, 무슨 말인지 모르겠어.",
     example: [
-      { speaker: "A", text: "After the token refresh, the scheduler hits the protected endpoint." },
-      { speaker: "B", text: "You lost me at token refresh." },
+      { speaker: "A", text: "After the token refresh, the endpoint checks the bearer header.", translation: "토큰 갱신 후 엔드포인트가 bearer 헤더를 확인해요." },
+      { speaker: "B", text: "You lost me at token refresh.", translation: "토큰 갱신 얘기부터 못 따라갔어." },
     ],
-    tip: "미드식으로도 많이 들리는 캐주얼한 표현입니다. `You lost me at...` 패턴이 특히 흔합니다.",
+    tip: "미드에서 자주 들리는 캐주얼한 표현입니다. `You lost me at...` 패턴도 좋습니다.",
   },
   {
-    phrase: "No hard feelings.",
-    meaning: "악감정은 없어, 기분 나쁘게 생각하지 마.",
+    phrase: "That's above my pay grade.",
+    meaning: "그건 내가 결정할 급은 아니야.",
     example: [
-      { speaker: "A", text: "I went with a different approach." },
-      { speaker: "B", text: "No hard feelings. I get why you did it." },
+      { speaker: "A", text: "Do you know if leadership approved the budget?", translation: "윗선에서 예산 승인했는지 알아?" },
+      { speaker: "B", text: "That's above my pay grade, but I can ask.", translation: "그건 내가 결정할 급은 아닌데 물어볼 수는 있어." },
     ],
-    tip: "거절, 의견 차이, 작은 갈등 후에 관계를 부드럽게 정리할 때 씁니다.",
+    tip: "책임 범위를 벗어난다는 뜻을 약간 농담처럼 말할 때 씁니다. 영화/드라마에서도 흔합니다.",
   },
   {
     phrase: "That came out wrong.",
     meaning: "방금 말이 좀 이상하게 나왔네.",
     example: [
-      { speaker: "A", text: "I didn't mean you were the problem. That came out wrong." },
-      { speaker: "B", text: "Got it. Thanks for clarifying." },
+      { speaker: "A", text: "I didn't mean you were careless. That came out wrong.", translation: "네가 부주의했다는 뜻은 아니었어. 말이 좀 이상하게 나왔네." },
+      { speaker: "B", text: "No worries. I know what you meant.", translation: "괜찮아. 무슨 뜻인지 알아." },
     ],
-    tip: "말실수했을 때 바로 수습하는 표현입니다. 실제 대화에서 꽤 유용합니다.",
+    tip: "말실수했을 때 바로 분위기를 수습하는 매우 유용한 표현입니다.",
   },
   {
-    phrase: "Let's not make a big thing out of it.",
-    meaning: "그걸 너무 크게 만들지는 말자.",
+    phrase: "No hard feelings.",
+    meaning: "악감정은 없어, 기분 나쁘게 생각하지 마.",
     example: [
-      { speaker: "A", text: "Should we send a long apology?" },
-      { speaker: "B", text: "Let's not make a big thing out of it. A quick note is enough." },
+      { speaker: "A", text: "We decided to go with another vendor.", translation: "다른 업체로 가기로 했어요." },
+      { speaker: "B", text: "No hard feelings. Thanks for letting me know.", translation: "악감정은 없어요. 알려줘서 고마워요." },
     ],
-    tip: "문제를 인정하되 과하게 키우지 말자는 뉘앙스입니다.",
+    tip: "거절, 의견 차이, 어색한 상황 뒤에 관계를 부드럽게 정리할 때 좋습니다.",
   },
   {
-    phrase: "We need to get ahead of this.",
-    meaning: "이거 더 커지기 전에 선제적으로 대응해야 해.",
+    phrase: "I'll take your word for it.",
+    meaning: "네 말 믿을게, 그렇다고 칠게.",
     example: [
-      { speaker: "A", text: "A few users are confused by the install steps." },
-      { speaker: "B", text: "We need to get ahead of this and simplify the guide." },
+      { speaker: "A", text: "Trust me, the book is better than the movie.", translation: "진짜야, 책이 영화보다 훨씬 나아." },
+      { speaker: "B", text: "I'll take your word for it.", translation: "네 말 믿을게." },
     ],
-    tip: "문제가 커지기 전에 먼저 움직이자는 비즈니스 표현입니다.",
+    tip: "직접 확인하진 않았지만 상대 말을 믿겠다는 표현입니다. 약간 장난스럽게도 씁니다.",
+  },
+  {
+    phrase: "It slipped my mind.",
+    meaning: "깜빡했어.",
+    example: [
+      { speaker: "A", text: "Did you send the link to your family?", translation: "가족에게 링크 보냈어?" },
+      { speaker: "B", text: "Not yet. It slipped my mind.", translation: "아직. 깜빡했어." },
+    ],
+    tip: "I forgot보다 조금 더 부드럽고 자연스럽습니다.",
+  },
+  {
+    phrase: "I didn't catch that.",
+    meaning: "방금 못 들었어, 못 알아들었어.",
+    example: [
+      { speaker: "A", text: "The job runs at seven-thirty Korea time.", translation: "그 작업은 한국 시간 7시 30분에 돌아요." },
+      { speaker: "B", text: "Sorry, I didn't catch that. What time?", translation: "미안, 못 들었어. 몇 시라고?" },
+    ],
+    tip: "상대 말을 놓쳤을 때 정중하고 자연스럽게 다시 물을 수 있습니다.",
+  },
+  {
+    phrase: "Let's not make a scene.",
+    meaning: "괜히 소란 피우지 말자.",
+    example: [
+      { speaker: "A", text: "Should I confront him right now?", translation: "지금 바로 따질까?" },
+      { speaker: "B", text: "No. Let's not make a scene.", translation: "아니. 괜히 소란 피우지 말자." },
+    ],
+    tip: "영화/드라마에서 자주 나오는 표현입니다. 공공장소나 감정적인 상황에 잘 맞습니다.",
+  },
+  {
+    phrase: "I owe you one.",
+    meaning: "신세 졌어, 내가 하나 빚졌네.",
+    example: [
+      { speaker: "A", text: "I fixed the notification settings for you.", translation: "알림 설정 고쳐놨어." },
+      { speaker: "B", text: "Thanks. I owe you one.", translation: "고마워. 신세 졌네." },
+    ],
+    tip: "감사를 짧고 미국식으로 표현할 때 좋습니다. 꼭 돈을 빚졌다는 뜻은 아닙니다.",
+  },
+  {
+    phrase: "That sounds about right.",
+    meaning: "대충 맞는 것 같아.",
+    example: [
+      { speaker: "A", text: "The scheduler should send three notifications a day.", translation: "스케줄러가 하루 세 번 알림을 보내야 해." },
+      { speaker: "B", text: "That sounds about right.", translation: "대충 맞는 것 같아." },
+    ],
+    tip: "완전한 확신은 아니지만 들은 내용이 타당해 보일 때 씁니다.",
+  },
+  {
+    phrase: "Don't get me wrong.",
+    meaning: "오해하진 마.",
+    example: [
+      { speaker: "A", text: "Don't get me wrong. I like the idea, but the timing is tricky.", translation: "오해하진 마. 아이디어는 좋은데 타이밍이 좀 까다로워." },
+      { speaker: "B", text: "That makes sense.", translation: "그 말 이해돼." },
+    ],
+    tip: "비판이나 반대 의견을 말하기 전에 완충하는 표현입니다.",
   },
   {
     phrase: "I'm on the fence.",
     meaning: "아직 결정 못 했어, 반반이야.",
     example: [
-      { speaker: "A", text: "Do you want to upgrade to the paid plan?" },
-      { speaker: "B", text: "I'm on the fence. The timing matters, but the cost adds up." },
+      { speaker: "A", text: "Are you going to the dinner tonight?", translation: "오늘 저녁 모임 갈 거야?" },
+      { speaker: "B", text: "I'm on the fence. I'm pretty tired.", translation: "아직 고민 중이야. 좀 피곤해서." },
     ],
-    tip: "찬반 사이에서 고민 중이라는 아주 자연스러운 표현입니다.",
+    tip: "결정을 못 내렸을 때 일상과 업무 모두에서 자주 씁니다.",
+  },
+  {
+    phrase: "I'll figure it out.",
+    meaning: "내가 어떻게든 알아서 해볼게.",
+    example: [
+      { speaker: "A", text: "Do you need help setting that up?", translation: "그거 설정하는 데 도움 필요해?" },
+      { speaker: "B", text: "I might, but I'll figure it out first.", translation: "그럴 수도 있는데 일단 내가 해볼게." },
+    ],
+    tip: "해결책을 아직 몰라도 스스로 찾아보겠다는 미국식 표현입니다.",
+  },
+  {
+    phrase: "It's not worth it.",
+    meaning: "그럴 가치 없어, 괜히 하지 마.",
+    example: [
+      { speaker: "A", text: "Should I argue with customer support again?", translation: "고객센터랑 다시 따져볼까?" },
+      { speaker: "B", text: "Honestly, it's not worth it.", translation: "솔직히 그럴 가치 없어." },
+    ],
+    tip: "시간, 감정, 돈을 들일 만큼 가치가 없을 때 씁니다.",
   },
   {
     phrase: "Let's call it a day.",
     meaning: "오늘은 여기까지 하자.",
     example: [
-      { speaker: "A", text: "We've tested the phone install and push flow." },
-      { speaker: "B", text: "Great. Let's call it a day." },
+      { speaker: "A", text: "We tested the install and the scheduler.", translation: "설치랑 스케줄러 테스트했어." },
+      { speaker: "B", text: "Great. Let's call it a day.", translation: "좋아. 오늘은 여기까지 하자." },
     ],
-    tip: "일이나 작업을 마무리할 때 자주 씁니다. 퇴근/종료 느낌이 있습니다.",
+    tip: "업무나 작업을 마무리할 때 아주 자연스럽습니다.",
+  },
+  {
+    phrase: "That doesn't sit right with me.",
+    meaning: "그게 좀 마음에 걸려, 찜찜해.",
+    example: [
+      { speaker: "A", text: "We could skip the privacy note for now.", translation: "개인정보 안내는 일단 빼도 될 것 같아." },
+      { speaker: "B", text: "That doesn't sit right with me.", translation: "그건 좀 마음에 걸려." },
+    ],
+    tip: "논리보다 감각적으로 찜찜함을 표현할 때 좋습니다. 드라마에서도 자주 들립니다.",
   },
   {
     phrase: "I'm just thinking out loud.",
     meaning: "그냥 생각나는 대로 말해보는 거야.",
     example: [
-      { speaker: "A", text: "What if we made the evening reminder more reflective?" },
-      { speaker: "B", text: "Maybe. I'm just thinking out loud." },
+      { speaker: "A", text: "What if we made the reminder more personal?", translation: "알림을 좀 더 개인적으로 만들면 어떨까?" },
+      { speaker: "B", text: "Maybe. I'm just thinking out loud.", translation: "그럴 수도. 그냥 생각나는 대로 말해보는 거야." },
     ],
-    tip: "확정된 의견이 아니라 아이디어를 던지는 중임을 밝힐 때 좋습니다.",
+    tip: "확정 의견이 아니라 아이디어를 던지는 중임을 밝힐 때 씁니다.",
   },
   {
-    phrase: "Don't quote me on that.",
-    meaning: "정확하다고 단정하진 마, 내 말 인용하지는 마.",
+    phrase: "I don't buy it.",
+    meaning: "난 그 말 안 믿겨, 납득이 안 돼.",
     example: [
-      { speaker: "A", text: "I think the free tier covers three scheduler jobs, but don't quote me on that." },
-      { speaker: "B", text: "I'll check the docs." },
+      { speaker: "A", text: "They said the delay was only because of traffic.", translation: "지연된 게 순전히 교통 때문이래." },
+      { speaker: "B", text: "I don't buy it. Something else must have happened.", translation: "난 그 말 안 믿겨. 다른 일이 있었을 거야." },
     ],
-    tip: "확실하지 않은 정보를 말할 때 쓰는 미국식 완충 표현입니다.",
+    tip: "상대 설명이나 변명이 설득력 없을 때 쓰는 강한 구어 표현입니다.",
   },
   {
-    phrase: "That's not a dealbreaker.",
-    meaning: "그게 결정적인 문제는 아니야.",
+    phrase: "Let's sleep on it.",
+    meaning: "하룻밤 생각해보자.",
     example: [
-      { speaker: "A", text: "The setup takes one extra step on iPhone." },
-      { speaker: "B", text: "That's not a dealbreaker if the guide is clear." },
+      { speaker: "A", text: "Should we change the whole notification system?", translation: "알림 시스템 전체를 바꿀까?" },
+      { speaker: "B", text: "Let's sleep on it and decide tomorrow.", translation: "하룻밤 생각해보고 내일 결정하자." },
     ],
-    tip: "문제는 있지만 전체 결정을 뒤집을 정도는 아니라는 뜻입니다.",
-  },
-  {
-    phrase: "Let's keep our options open.",
-    meaning: "선택지를 열어두자.",
-    example: [
-      { speaker: "A", text: "Should we commit to one scheduler now?" },
-      { speaker: "B", text: "Let's keep our options open until we test Google Cloud." },
-    ],
-    tip: "지금 하나로 못 박지 않고 유연성을 유지하자는 표현입니다.",
+    tip: "즉시 결정하지 않고 시간을 두고 판단하자는 실생활 표현입니다.",
   },
 ];
 
@@ -512,23 +566,40 @@ function render() {
 }
 
 function renderExpressionExample(example) {
-  const lines = Array.isArray(example) ? example : [{ speaker: "", text: example }];
+  const lines = Array.isArray(example) ? example : [{ speaker: "", text: example, translation: "" }];
   elements.expressionExample.innerHTML = "";
   for (const line of lines) {
     const row = document.createElement("p");
     row.className = "dialogue-line";
     const speaker = document.createElement("strong");
     speaker.textContent = line.speaker || "•";
-    const text = document.createElement("span");
-    text.textContent = line.text;
-    row.append(speaker, text);
+    const textGroup = document.createElement("span");
+    textGroup.className = "dialogue-text";
+    const english = document.createElement("span");
+    english.className = "dialogue-english";
+    english.textContent = line.text;
+    textGroup.append(english);
+    if (line.translation) {
+      const translation = document.createElement("span");
+      translation.className = "dialogue-translation";
+      translation.textContent = line.translation;
+      textGroup.append(translation);
+    }
+    row.append(speaker, textGroup);
     elements.expressionExample.append(row);
   }
 }
 
 function formatExpressionExample(expression) {
   const lines = Array.isArray(expression.example) ? expression.example : [{ speaker: "", text: expression.example }];
-  return [`예문:`, ...lines.map((line) => `${line.speaker ? `${line.speaker}: ` : ""}${line.text}`)].join("\n");
+  return [
+    `예문:`,
+    ...lines.map((line) => {
+      const speaker = line.speaker ? `${line.speaker}: ` : "";
+      const translation = line.translation ? ` (${line.translation})` : "";
+      return `${speaker}${line.text}${translation}`;
+    }),
+  ].join("\n");
 }
 
 function getDailyPair() {

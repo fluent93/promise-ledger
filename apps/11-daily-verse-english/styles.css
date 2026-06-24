@@ -349,7 +349,7 @@ blockquote {
   border-radius: 8px;
   background: var(--surface-subtle);
 }
-.example-box span {
+.example-box > span {
   display: block;
   margin-bottom: 6px;
   color: var(--blue);
@@ -381,7 +381,21 @@ blockquote {
   font-size: 12px;
   font-weight: 900;
 }
-.dialogue-line span { min-width: 0; }
+.dialogue-text {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.dialogue-english {
+  min-width: 0;
+  color: var(--ink);
+}
+.dialogue-translation {
+  min-width: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
 
 .action-row { justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 .primary-button,
