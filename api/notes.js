@@ -18,7 +18,7 @@ export default async function handler(request, response) {
       const url = new URL(request.url || "/", "https://local.invalid");
       const query = String(url.searchParams.get("q") || "").trim();
       const limit = clampLimit(url.searchParams.get("limit"));
-      const notes = searchNotes(await listNotes(ownerId), query).slice(0, limit);
+      const notes = searchNotes(await listNotes(ownerId), query).slice(0, limit).map(publicNote);
       response.status(200).json({ ok: true, notes });
       return;
     }
@@ -31,7 +31,7 @@ export default async function handler(request, response) {
         return;
       }
       const saved = await saveNote(ownerId, record);
-      response.status(200).json({ ok: true, note: saved });
+      response.status(200).json({ ok: true, note: publicNote(saved) });
       return;
     }
 
@@ -39,6 +39,11 @@ export default async function handler(request, response) {
   } catch (error) {
     response.status(400).json({ error: error.message || "Bad request" });
   }
+}
+
+function publicNote(note) {
+  const { ownerId, ...publicFields } = note;
+  return publicFields;
 }
 
 function normalizeRecord(body) {
