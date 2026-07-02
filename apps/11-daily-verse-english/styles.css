@@ -343,19 +343,47 @@ blockquote {
   line-height: 1.45;
   font-weight: 780;
 }
-.example-box {
+.example-box,
+.usage-box,
+.pattern-box,
+.practice-box {
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface-subtle);
 }
-.example-box > span {
+.example-box > span,
+.usage-box > span,
+.pattern-box > span,
+.practice-box > span {
   display: block;
   margin-bottom: 6px;
   color: var(--blue);
   font-size: 11px;
   font-weight: 900;
   text-transform: uppercase;
+}
+.usage-box p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.pattern-box ul,
+.practice-box ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0 0 0 18px;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.practice-box {
+  background: var(--clay-soft);
+}
+.practice-box > span {
+  color: var(--clay);
 }
 .dialogue-lines {
   display: grid;

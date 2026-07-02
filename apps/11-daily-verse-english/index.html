@@ -11,7 +11,7 @@
     <link rel="manifest" href="./manifest.json" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="./icons/icon.svg" />
-    <link rel="stylesheet" href="./styles.css?v=0.16" />
+    <link rel="stylesheet" href="./styles.css?v=0.17" />
   </head>
   <body>
     <main class="app-shell">
@@ -56,7 +56,7 @@
 
         <section class="source-note" aria-label="성경 본문 출처 안내">
           <strong>본문 표시 안내</strong>
-          <p>개역한글 본문을 기본으로 표시합니다. 개역개정과 흠정역은 나중에 허가나 공식 연결 방식이 정리되면 옵션으로 붙입니다.</p>
+          <p>OpenAI 키가 설정되면 매일 새 추천을 생성하고, 같은 날짜 결과는 저장해 반복을 줄입니다. 성경 본문은 개역한글 기준으로 표시하되 중요한 확인은 출처 링크에서 점검하세요.</p>
         </section>
       </aside>
 
@@ -150,6 +150,18 @@
               <div id="expressionExample" class="dialogue-lines"></div>
             </div>
             <p id="expressionTip" class="card-body"></p>
+            <div class="usage-box">
+              <span>Where it fits</span>
+              <p id="expressionScene"></p>
+            </div>
+            <div class="pattern-box">
+              <span>Useful patterns</span>
+              <ul id="expressionPatterns"></ul>
+            </div>
+            <div class="practice-box">
+              <span>Practice lines</span>
+              <ul id="expressionDrills"></ul>
+            </div>
           </article>
         </section>
 
@@ -200,6 +212,6 @@
       </section>
     </main>
 
-    <script src="./src/app.js?v=0.16" type="module"></script>
+    <script src="./src/app.js?v=0.17" type="module"></script>
   </body>
 </html>

@@ -4,7 +4,7 @@ const STORAGE_KEY = "daily-verse-english:v1";
 const REMINDER_STORAGE_KEY = "daily-verse-english:reminders:v1";
 const SETUP_DISMISSED_KEY = "daily-verse-english:setup-dismissed:v1";
 const NOTE_OWNER_STORAGE_KEY = "daily-verse-english:note-owner:v1";
-const APP_VERSION = "0.16";
+const APP_VERSION = "0.17";
 
 let deferredInstallPrompt = null;
 let pushPublicKey = null;
@@ -308,6 +308,9 @@ const state = {
   noteSearch: "",
   reminders: loadReminders(),
   setupDismissed: loadSetupDismissed(),
+  currentPair: null,
+  currentPairKey: "",
+  currentPairRequestId: 0,
 };
 
 const elements = {
@@ -326,6 +329,9 @@ const elements = {
   expressionMeaning: document.querySelector("#expressionMeaning"),
   expressionExample: document.querySelector("#expressionExample"),
   expressionTip: document.querySelector("#expressionTip"),
+  expressionScene: document.querySelector("#expressionScene"),
+  expressionPatterns: document.querySelector("#expressionPatterns"),
+  expressionDrills: document.querySelector("#expressionDrills"),
   noteInput: document.querySelector("#noteInput"),
   favoriteButton: document.querySelector("#favoriteButton"),
   noteRefreshButton: document.querySelector("#noteRefreshButton"),
@@ -583,6 +589,7 @@ elements.copyButton.addEventListener("click", async () => {
     `초점: ${pair.scripture.focus}`,
     `영어: ${pair.expression.phrase} - ${pair.expression.meaning}`,
     formatExpressionExample(pair.expression),
+    formatExpressionSupport(pair.expression),
   ].join("\n");
 
   try {
@@ -615,12 +622,30 @@ function render() {
   elements.expressionMeaning.textContent = pair.expression.meaning;
   renderExpressionExample(pair.expression.example);
   elements.expressionTip.textContent = pair.expression.tip;
+  renderExpressionSupport(pair.expression);
   elements.noteInput.value = note;
   elements.versionButtons.forEach((button) => button.classList.toggle("active", button.dataset.version === state.version));
   setMessage("");
   renderReminderStatus();
   renderSetupStatus();
   renderNoteList();
+  loadDynamicPairForSelectedDate().catch((error) => console.warn(error));
+}
+
+async function loadDynamicPairForSelectedDate() {
+  const key = dateKey(state.selectedDate);
+  if (state.currentPairKey === key && state.currentPair) return;
+
+  const requestId = state.currentPairRequestId + 1;
+  state.currentPairRequestId = requestId;
+  const response = await fetch("/api/daily-verse-data?date=" + encodeURIComponent(key));
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok || !payload.scripture || !payload.expression) throw new Error(payload.error || "Failed to load daily lesson");
+  if (requestId !== state.currentPairRequestId || dateKey(state.selectedDate) !== key) return;
+
+  state.currentPair = { scripture: payload.scripture, expression: payload.expression, generated: payload.generated, cached: payload.cached };
+  state.currentPairKey = key;
+  render();
 }
 
 function renderExpressionExample(example) {
@@ -648,6 +673,40 @@ function renderExpressionExample(example) {
   }
 }
 
+function renderExpressionSupport(expression) {
+  if (!elements.expressionScene || !elements.expressionPatterns || !elements.expressionDrills) return;
+  elements.expressionScene.textContent = expression.scene || "미드나 영화의 친구, 가족, 직장 대화처럼 바로 반응해야 하는 장면에 잘 맞습니다.";
+  renderExpressionList(elements.expressionPatterns, expression.patterns || buildExpressionPatterns(expression));
+  renderExpressionList(elements.expressionDrills, expression.drills || buildExpressionDrills(expression));
+}
+
+function renderExpressionList(element, items) {
+  element.innerHTML = "";
+  for (const item of items) {
+    const li = document.createElement("li");
+    li.textContent = item;
+    element.append(li);
+  }
+}
+
+function buildExpressionPatterns(expression) {
+  return [
+    expression.phrase,
+    expression.phrase + " What do you think?",
+    "I mean, " + expression.phrase,
+  ];
+}
+
+function buildExpressionDrills(expression) {
+  return [
+    "A: What happened? B: " + expression.phrase,
+    expression.phrase + " + 이유 한 문장 붙이기",
+    "오늘 실제 대화에 맞춰 " + expression.phrase + "로 시작해보기",
+    "같은 뜻을 더 부드럽게 한 번 바꿔 말해보기",
+  ];
+}
+
+
 function formatExpressionExample(expression) {
   const lines = Array.isArray(expression.example) ? expression.example : [{ speaker: "", text: expression.example }];
   return [
@@ -660,7 +719,22 @@ function formatExpressionExample(expression) {
   ].join("\n");
 }
 
+function formatExpressionSupport(expression) {
+  const scene = expression.scene || "짧게 주고받는 대화 장면에서 자연스럽게 쓸 수 있습니다.";
+  const patterns = expression.patterns || buildExpressionPatterns(expression);
+  const drills = expression.drills || buildExpressionDrills(expression);
+  return [
+    "사용 장면: " + scene,
+    "응용:",
+    ...patterns.map((item) => "- " + item),
+    "연습:",
+    ...drills.map((item) => "- " + item),
+  ].join("\n");
+}
+
 function getDailyPair() {
+  const key = dateKey(state.selectedDate);
+  if (state.currentPairKey === key && state.currentPair) return state.currentPair;
   return getDailyPairForDate(state.selectedDate);
 }
 

@@ -37,6 +37,19 @@ npm run dev:11
 Then open `http://localhost:5174`. In production, share `/daily-verse/`. The local dev server serves both the static app and `/api/*` push endpoints. If `.env.local` has no VAPID keys, development keys are generated automatically and kept out of git.
 
 
+## Dynamic Recommendations
+
+The app now requests /api/daily-verse-data for each selected date. If OPENAI_API_KEY is configured, the API generates a fresh Bible-and-English lesson, caches it by date in Upstash Redis or the local dev store, and sends the same cached lesson through push notifications. If generation or storage is unavailable, it falls back to the bundled deterministic lessons so the app still works offline or in local setup.
+
+Set these environment variables to enable dynamic generation:
+
+```text
+OPENAI_API_KEY=...
+DAILY_VERSE_OPENAI_MODEL=gpt-5.4-mini
+```
+
+The generator avoids recent cached Bible references and English phrases, and asks for richer expression support: scene note, reusable patterns, and practice lines.
+
 ## Web Push Setup
 
 정기 알림은 Vercel Functions, Vercel Cron, Upstash Redis REST, Web Push VAPID 키를 사용합니다. Local development uses `LOCAL_PUSH_STORE_FILE` so you can test subscriptions without Upstash.

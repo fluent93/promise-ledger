@@ -10,6 +10,7 @@ import pushPublicKeyHandler from "../../api/push-public-key.js";
 import pushSubscriptionsHandler from "../../api/push-subscriptions.js";
 import pushTestHandler from "../../api/push-test.js";
 import sendDailyVerseHandler from "../../api/send-daily-verse.js";
+import dailyVerseDataHandler from "../../api/daily-verse-data.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../..");
@@ -20,6 +21,7 @@ await loadEnvFile(path.join(rootDir, ".env.local"));
 await ensureLocalPushEnv();
 
 const apiRoutes = new Map([
+  ["/api/daily-verse-data", dailyVerseDataHandler],
   ["/api/push-health", pushHealthHandler],
   ["/api/push-public-key", pushPublicKeyHandler],
   ["/api/push-subscriptions", pushSubscriptionsHandler],

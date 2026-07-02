@@ -74,7 +74,7 @@ export default async function handler(request, response) {
 
     const records = await listSubscriptions();
     const targets = records.filter((record) => record.preferences?.[slot]);
-    const payload = getDailyVersePayload(now, { slotLabel: slotInfo.label, scheduledTime: slotInfo.time });
+    const payload = await getDailyVersePayload(now, { slot, slotLabel: slotInfo.label, scheduledTime: slotInfo.time });
     const results = await Promise.allSettled(targets.map((record) => sendToRecord(record, payload)));
     const summary = summarize(results);
     const logEntry = {
