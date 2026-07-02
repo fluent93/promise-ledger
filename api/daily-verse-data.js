@@ -212,8 +212,9 @@ const fallbackExpressions = [
 export async function getDailyVersePayload(date = new Date(), options = {}) {
   const dateKey = formatDateKey(date);
   const cached = await getCachedLesson(dateKey);
-  const lesson = cached || await createDailyLesson(date, dateKey, options);
-  return buildPayload(lesson, options, Boolean(cached));
+  const useCache = shouldUseCachedLesson(cached, options);
+  const lesson = useCache ? cached : await createDailyLesson(date, dateKey, options);
+  return buildPayload(lesson, options, useCache);
 }
 
 export default async function handler(request, response) {
@@ -270,7 +271,15 @@ function buildPayload(lesson, options = {}, cached = false) {
     cached,
     fallback: Boolean(lesson.fallback),
     model: lesson.model || "fallback",
+    fallbackReason: lesson.fallbackReason || "",
   };
+}
+
+function shouldUseCachedLesson(cached, options = {}) {
+  if (!cached) return false;
+  if (options.refresh) return false;
+  if (cached.fallback && process.env.OPENAI_API_KEY) return false;
+  return true;
 }
 
 async function generateLessonWithOpenAI({ dateKey, slotLabel, recent }) {
