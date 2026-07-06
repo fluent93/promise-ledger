@@ -1,11 +1,12 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { EXPRESSION_POLICY_VERSION, advancedExpressions } from "../apps/11-daily-verse-english/src/expression-data.js";
 
-const DAY_IN_MS = 86_400_000;
-const START_DAY = Date.UTC(2026, 0, 1);
 const DAILY_LESSON_KEY = "daily-verse-english:daily-lessons";
 const HISTORY_LIMIT = 45;
 const OPENAI_MODEL = process.env.DAILY_VERSE_OPENAI_MODEL || "gpt-5.4-mini";
+const SCRIPTURE_POLICY_VERSION = 3;
+const DISALLOWED_BEGINNER_PHRASES = ["figure out", "keep you posted", "play it by ear"];
 
 const fallbackScriptures = [
   {
@@ -67,153 +68,139 @@ const fallbackScriptures = [
     "text": "이르시기를 너희는 가만히 있어 내가 하나님 됨을 알지어다 내가 열방과 세계 중에서 높임을 받으리라 하시도다",
     "focus": "멈춤도 믿음의 행동이 될 수 있습니다.",
     "prompt": "오늘 알림을 끄고 조용히 있을 5분을 정해보세요."
+  },
+  {
+    "reference": "여호수아 1:9",
+    "text": "내가 네게 명한 것이 아니냐 마음을 강하게 하고 담대히 하라 두려워 말며 놀라지 말라 네가 어디로 가든지 네 하나님 여호와가 너와 함께 하느니라 하시니라",
+    "focus": "담대함은 상황이 쉬워서가 아니라 함께하심을 믿어서 나옵니다.",
+    "prompt": "오늘 피하고 싶은 일 하나를 적고, 첫 행동을 작게 정해보세요."
+  },
+  {
+    "reference": "시편 121:1-2",
+    "text": "내가 산을 향하여 눈을 들리라 나의 도움이 어디서 올꼬 나의 도움이 천지를 지으신 여호와에게서로다",
+    "focus": "도움을 찾는 시선을 다시 하나님께 돌리는 하루.",
+    "prompt": "도움이 필요한 일을 하나 정하고, 사람에게 말하기 전에 짧게 기도해보세요."
+  },
+  {
+    "reference": "이사야 40:31",
+    "text": "오직 여호와를 앙망하는 자는 새 힘을 얻으리니 독수리의 날개치며 올라감 같을 것이요 달음박질하여도 곤비치 아니하겠고 걸어가도 피곤치 아니하리로다",
+    "focus": "속도를 내기 전에 새 힘을 받는 방향을 선택하기.",
+    "prompt": "오늘 무리해서 밀어붙이는 일 하나에 쉼표를 찍어보세요."
+  },
+  {
+    "reference": "미가 6:8",
+    "text": "사람아 주께서 선한 것이 무엇임을 네게 보이셨나니 여호와께서 네게 구하시는 것이 오직 공의를 행하며 인자를 사랑하며 겸손히 네 하나님과 함께 행하는 것이 아니냐",
+    "focus": "크게 보이는 성취보다 바르게 걷는 태도를 붙들기.",
+    "prompt": "오늘 공의, 인자, 겸손 중 하나를 실제 행동으로 옮길 장면을 정해보세요."
+  },
+  {
+    "reference": "마태복음 5:16",
+    "text": "이같이 너희 빛을 사람 앞에 비취게 하여 저희로 너희 착한 행실을 보고 하늘에 계신 너희 아버지께 영광을 돌리게 하라",
+    "focus": "보이기 위한 선행이 아니라 하나님께 향하게 하는 빛으로 살기.",
+    "prompt": "오늘 누군가에게 조용히 도움이 되는 행동 하나를 해보세요."
+  },
+  {
+    "reference": "마태복음 11:28",
+    "text": "수고하고 무거운 짐진 자들아 다 내게로 오라 내가 너희를 쉬게 하리라",
+    "focus": "무거움을 혼자 들고 버티는 대신 주님께 가지고 가기.",
+    "prompt": "오늘 마음에 남은 피로를 한 문장으로 쓰고 기도로 내려놓아보세요."
+  },
+  {
+    "reference": "누가복음 6:31",
+    "text": "남에게 대접을 받고자 하는대로 너희도 남을 대접하라",
+    "focus": "내가 받고 싶은 존중을 먼저 건네는 연습.",
+    "prompt": "오늘 대화 하나에서 내가 원하는 말투를 먼저 사용해보세요."
+  },
+  {
+    "reference": "요한복음 14:27",
+    "text": "평안을 너희에게 끼치노니 곧 나의 평안을 너희에게 주노라 내가 너희에게 주는 것은 세상이 주는 것 같지 아니하니라 너희는 마음에 근심도 말고 두려워하지도 말라",
+    "focus": "상황이 주는 안정과 주님이 주시는 평안을 구분하기.",
+    "prompt": "오늘 불안을 키우는 정보를 하나 줄이고 평안을 선택할 시간을 만들어보세요."
+  },
+  {
+    "reference": "로마서 8:28",
+    "text": "우리가 알거니와 하나님을 사랑하는 자 곧 그 뜻대로 부르심을 입은 자들에게는 모든 것이 합력하여 선을 이루느니라",
+    "focus": "아직 이해되지 않는 일도 선으로 엮으시는 하나님을 신뢰하기.",
+    "prompt": "최근 마음에 걸리는 일을 하나 적고, 지금 보이는 작은 선한 조각을 찾아보세요."
+  },
+  {
+    "reference": "로마서 12:12",
+    "text": "소망 중에 즐거워하며 환난 중에 참으며 기도에 항상 힘쓰며",
+    "focus": "소망, 인내, 기도를 하루의 리듬으로 삼기.",
+    "prompt": "오늘 힘든 순간에 반복할 짧은 기도문을 하나 만들어보세요."
+  },
+  {
+    "reference": "갈라디아서 6:9",
+    "text": "우리가 선을 행하되 낙심하지 말지니 피곤하지 아니하면 때가 이르매 거두리라",
+    "focus": "당장 보상받지 못해도 선한 일을 멈추지 않기.",
+    "prompt": "최근 지친 선한 습관 하나를 오늘만 다시 해보세요."
+  },
+  {
+    "reference": "에베소서 4:32",
+    "text": "서로 인자하게 하며 불쌍히 여기며 서로 용서하기를 하나님이 그리스도 안에서 너희를 용서하심과 같이 하라",
+    "focus": "용서는 감정을 무시하는 일이 아니라 받은 은혜를 기억하는 일.",
+    "prompt": "오늘 마음이 딱딱해지는 사람을 떠올리고, 그를 위한 짧은 기도를 해보세요."
+  },
+  {
+    "reference": "빌립보서 2:3-4",
+    "text": "아무 일에든지 다툼이나 허영으로 하지 말고 오직 겸손한 마음으로 각각 자기보다 남을 낫게 여기고 각각 자기 일을 돌아볼뿐더러 또한 각각 다른 사람들의 일을 돌아보아",
+    "focus": "내 입장만 크게 만드는 마음에서 한 걸음 물러서기.",
+    "prompt": "오늘 회의나 대화에서 다른 사람의 필요를 먼저 묻는 질문을 해보세요."
+  },
+  {
+    "reference": "골로새서 3:15",
+    "text": "그리스도의 평강이 너희 마음을 주장하게 하라 평강을 위하여 너희가 한 몸으로 부르심을 받았나니 또한 너희는 감사하는 자가 되라",
+    "focus": "마음의 주도권을 불안이 아니라 그리스도의 평강에 맡기기.",
+    "prompt": "오늘 마음을 흔드는 생각이 오면 감사 세 가지를 적어보세요."
+  },
+  {
+    "reference": "데살로니가전서 5:16-18",
+    "text": "항상 기뻐하라 쉬지 말고 기도하라 범사에 감사하라 이는 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라",
+    "focus": "기쁨과 기도와 감사는 기분보다 깊은 선택입니다.",
+    "prompt": "오늘 감사 하나를 바로 메시지나 메모로 남겨보세요."
+  },
+  {
+    "reference": "디모데후서 1:7",
+    "text": "하나님이 우리에게 주신 것은 두려워하는 마음이 아니요 오직 능력과 사랑과 근신하는 마음이니",
+    "focus": "두려움 대신 능력, 사랑, 절제의 마음으로 반응하기.",
+    "prompt": "오늘 두려움이 올라오는 순간에 사랑으로 할 수 있는 행동을 하나 고르세요."
+  },
+  {
+    "reference": "히브리서 4:16",
+    "text": "그러므로 우리가 긍휼하심을 받고 때를 따라 돕는 은혜를 얻기 위하여 은혜의 보좌 앞에 담대히 나아갈 것이니라",
+    "focus": "부족함이 기도를 막는 이유가 아니라 은혜 앞으로 가는 이유가 됩니다.",
+    "prompt": "오늘 미루던 기도 제목 하나를 솔직한 문장으로 꺼내보세요."
+  },
+  {
+    "reference": "히브리서 10:24",
+    "text": "서로 돌아보아 사랑과 선행을 격려하며",
+    "focus": "믿음은 혼자 버티는 힘만이 아니라 서로 격려하는 관계입니다.",
+    "prompt": "오늘 한 사람에게 짧은 격려 메시지를 보내보세요."
+  },
+  {
+    "reference": "베드로전서 5:7",
+    "text": "너희 염려를 다 주께 맡겨 버리라 이는 저가 너희를 권고하심이니라",
+    "focus": "염려를 맡길 수 있는 이유는 하나님이 돌보시기 때문입니다.",
+    "prompt": "오늘 가장 큰 염려를 적고, 그 옆에 맡긴다는 표시를 해보세요."
+  },
+  {
+    "reference": "요한일서 4:18",
+    "text": "사랑 안에 두려움이 없고 온전한 사랑이 두려움을 내어쫓나니 두려움에는 형벌이 있음이라 두려워하는 자는 사랑 안에서 온전히 이루지 못하였느니라",
+    "focus": "두려움을 이기는 힘은 더 큰 통제가 아니라 더 온전한 사랑입니다.",
+    "prompt": "오늘 두려움으로 미루는 말이나 행동을 사랑의 방식으로 바꿔보세요."
   }
 ];
 
-const fallbackExpressions = [
-  {
-    "phrase": "Can you give me a quick rundown?",
-    "meaning": "짧게 요약해서 설명해줄래?",
-    "example": [
-      {
-        "speaker": "A",
-        "text": "I missed the first part of the meeting.",
-        "translation": "회의 앞부분을 놓쳤어."
-      },
-      {
-        "speaker": "B",
-        "text": "Sure. I can give you a quick rundown.",
-        "translation": "물론이지. 짧게 요약해줄게."
-      }
-    ],
-    "tip": "회의, 상황 설명, 미드 속 사건 정리 장면에서 자연스럽습니다. summary보다 말맛이 더 구어적입니다."
-  },
-  {
-    "phrase": "Let's take this offline.",
-    "meaning": "이건 따로 얘기하자.",
-    "example": [
-      {
-        "speaker": "A",
-        "text": "I have a few concerns about the timeline.",
-        "translation": "일정에 대해 우려가 좀 있어요."
-      },
-      {
-        "speaker": "B",
-        "text": "Good point. Let's take this offline after the call.",
-        "translation": "좋은 지적이에요. 통화 끝나고 따로 얘기해요."
-      }
-    ],
-    "tip": "회의 중 모두 앞에서 길게 다루기 어려운 주제를 따로 빼자는 비즈니스 표현입니다."
-  },
-  {
-    "phrase": "I'm not following.",
-    "meaning": "잘 못 따라가겠어, 이해가 안 돼.",
-    "example": [
-      {
-        "speaker": "A",
-        "text": "The client changed the scope, so the launch date moved.",
-        "translation": "고객이 범위를 바꿔서 출시일이 밀렸어요."
-      },
-      {
-        "speaker": "B",
-        "text": "I'm not following. Which part changed?",
-        "translation": "잘 이해가 안 돼요. 어느 부분이 바뀐 거예요?"
-      }
-    ],
-    "tip": "I don't understand보다 대화 중에 훨씬 자연스럽게 끼어드는 표현입니다."
-  },
-  {
-    "phrase": "I'll keep you posted.",
-    "meaning": "진행 상황 계속 알려줄게.",
-    "example": [
-      {
-        "speaker": "A",
-        "text": "Let me know what happens with the scheduler.",
-        "translation": "스케줄러 어떻게 되는지 알려줘."
-      },
-      {
-        "speaker": "B",
-        "text": "Will do. I'll keep you posted.",
-        "translation": "그럴게. 계속 업데이트해줄게."
-      }
-    ],
-    "tip": "회사, 병원 예약, 가족 일정 등 거의 모든 상황에서 쓸 수 있는 실용 표현입니다."
-  },
-  {
-    "phrase": "Let's play it by ear.",
-    "meaning": "상황 봐가면서 하자.",
-    "example": [
-      {
-        "speaker": "A",
-        "text": "Should we book dinner now?",
-        "translation": "저녁 예약 지금 할까?"
-      },
-      {
-        "speaker": "B",
-        "text": "Let's play it by ear. We may get out late.",
-        "translation": "상황 봐가며 하자. 늦게 끝날 수도 있어."
-      }
-    ],
-    "tip": "정확한 계획을 세우기 애매할 때 미국 일상 대화에서 매우 자주 씁니다."
-  },
-  {
-    "phrase": "You lost me.",
-    "meaning": "나 놓쳤어, 무슨 말인지 모르겠어.",
-    "example": [
-      {
-        "speaker": "A",
-        "text": "After the token refresh, the endpoint checks the bearer header.",
-        "translation": "토큰 갱신 후 엔드포인트가 bearer 헤더를 확인해요."
-      },
-      {
-        "speaker": "B",
-        "text": "You lost me at token refresh.",
-        "translation": "토큰 갱신 얘기부터 못 따라갔어."
-      }
-    ],
-    "tip": "미드에서 자주 들리는 캐주얼한 표현입니다. You lost me at... 패턴도 좋습니다."
-  },
-  {
-    "phrase": "No hard feelings.",
-    "meaning": "악감정은 없어, 기분 나쁘게 생각하지 마.",
-    "example": [
-      {
-        "speaker": "A",
-        "text": "We decided to go with another vendor.",
-        "translation": "다른 업체로 가기로 했어요."
-      },
-      {
-        "speaker": "B",
-        "text": "No hard feelings. Thanks for letting me know.",
-        "translation": "악감정은 없어요. 알려줘서 고마워요."
-      }
-    ],
-    "tip": "거절, 의견 차이, 어색한 상황 뒤에 관계를 부드럽게 정리할 때 좋습니다."
-  },
-  {
-    "phrase": "Don't get me wrong.",
-    "meaning": "오해하진 마.",
-    "example": [
-      {
-        "speaker": "A",
-        "text": "Don't get me wrong. I like the idea, but the timing is tricky.",
-        "translation": "오해하진 마. 아이디어는 좋은데 타이밍이 좀 까다로워."
-      },
-      {
-        "speaker": "B",
-        "text": "That makes sense.",
-        "translation": "그 말 이해돼."
-      }
-    ],
-    "tip": "비판이나 반대 의견을 말하기 전에 완충하는 표현입니다."
-  }
-];
+const fallbackExpressions = advancedExpressions;
+const COMMON_SCRIPTURE_REFERENCES = fallbackScriptures.map((item) => item.reference);
 
 export async function getDailyVersePayload(date = new Date(), options = {}) {
   const dateKey = formatDateKey(date);
-  const cached = await getCachedLesson(dateKey);
-  const useCache = shouldUseCachedLesson(cached, options);
-  const lesson = useCache ? cached : await createDailyLesson(date, dateKey, options);
+  const lessonKey = formatLessonKey(dateKey, options);
+  const generationOptions = { ...options, lessonKey };
+  const cached = await getCachedLesson(lessonKey);
+  const useCache = shouldUseCachedLesson(cached, generationOptions);
+  const lesson = useCache ? cached : await createDailyLesson(date, dateKey, generationOptions);
   return buildPayload(lesson, options, useCache);
 }
 
@@ -227,29 +214,45 @@ export default async function handler(request, response) {
 
   const url = new URL(request.url || "/", "https://local.invalid");
   const date = parseDate(url.searchParams.get("date"));
+  const slot = clean(url.searchParams.get("slot"));
+  const refresh = url.searchParams.get("refresh") === "1";
+  const allowFallback = url.searchParams.get("fallback") === "1";
 
   try {
-    response.status(200).json(await getDailyVersePayload(date));
+    response.status(200).json(await getDailyVersePayload(date, { slot, refresh, allowFallback }));
   } catch (error) {
     console.error(error);
-    response.status(200).json(buildPayload(buildFallbackLesson(date, formatDateKey(date), { reason: error.message }), {}, false));
+    response.status(503).json({
+      error: "Daily verse generation failed",
+      message: error.message || "OpenAI generation is unavailable",
+      dateKey: formatDateKey(date),
+      model: OPENAI_MODEL,
+      fallback: false,
+    });
   }
 }
 
 async function createDailyLesson(date, dateKey, options) {
   let lesson = null;
-  if (process.env.OPENAI_API_KEY) {
+  const lessonKey = options.lessonKey || dateKey;
+  const allowFallback = shouldAllowFallback(options);
+
+  if (!process.env.OPENAI_API_KEY) {
+    if (!allowFallback) throw new Error("OPENAI_API_KEY is required for daily generated Bible passages");
+    lesson = buildFallbackLesson(date, dateKey, { reason: "missing_OPENAI_API_KEY", lessonKey });
+  } else {
     try {
       const recent = await listRecentLessons(HISTORY_LIMIT);
-      lesson = await generateLessonWithOpenAI({ dateKey, slotLabel: options.slotLabel || "", recent });
+      lesson = await generateLessonWithOpenAI({ dateKey, lessonKey, slotLabel: options.slotLabel || "", recent });
     } catch (error) {
       console.warn("daily-verse-generation-failed", error.message || error);
+      if (!allowFallback) throw error;
+      lesson = buildFallbackLesson(date, dateKey, { reason: "generation_failed", lessonKey });
     }
   }
 
-  if (!lesson) lesson = buildFallbackLesson(date, dateKey, { reason: process.env.OPENAI_API_KEY ? "generation_failed" : "missing_OPENAI_API_KEY" });
-  lesson = normalizeLesson(lesson, dateKey);
-  await saveCachedLesson(dateKey, lesson);
+  lesson = normalizeLesson({ ...lesson, lessonKey }, dateKey);
+  await saveCachedLesson(lessonKey, lesson);
   return lesson;
 }
 
@@ -267,6 +270,9 @@ function buildPayload(lesson, options = {}, cached = false) {
     slotLabel: options.slotLabel || "",
     scheduledTime: options.scheduledTime || "",
     dateKey: lesson.dateKey,
+    lessonKey: lesson.lessonKey || formatLessonKey(lesson.dateKey, options),
+    scripturePolicyVersion: lesson.scripturePolicyVersion || SCRIPTURE_POLICY_VERSION,
+    expressionPolicyVersion: lesson.expressionPolicyVersion || EXPRESSION_POLICY_VERSION,
     generated: Boolean(lesson.generated),
     cached,
     fallback: Boolean(lesson.fallback),
@@ -278,13 +284,40 @@ function buildPayload(lesson, options = {}, cached = false) {
 function shouldUseCachedLesson(cached, options = {}) {
   if (!cached) return false;
   if (options.refresh) return false;
+  if (cached.scripturePolicyVersion !== SCRIPTURE_POLICY_VERSION) return false;
+  if (cached.expressionPolicyVersion !== EXPRESSION_POLICY_VERSION) return false;
+  if (isDisallowedBeginnerExpression(cached.expression?.phrase)) return false;
+  if (cached.fallback && !shouldAllowFallback(options)) return false;
   if (cached.fallback && process.env.OPENAI_API_KEY) return false;
   return true;
 }
 
-async function generateLessonWithOpenAI({ dateKey, slotLabel, recent }) {
+function isDisallowedBeginnerExpression(phrase) {
+  const normalized = clean(phrase).toLowerCase();
+  return DISALLOWED_BEGINNER_PHRASES.some((item) => normalized.includes(item));
+}
+
+async function generateLessonWithOpenAI({ dateKey, lessonKey, slotLabel, recent }) {
   const recentReferences = recent.map((item) => item.scripture?.reference).filter(Boolean).slice(0, HISTORY_LIMIT);
   const recentPhrases = recent.map((item) => item.expression?.phrase).filter(Boolean).slice(0, HISTORY_LIMIT);
+  const blockedReferences = uniqueStrings([...recentReferences, ...COMMON_SCRIPTURE_REFERENCES]);
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
+    try {
+      const lesson = await requestGeneratedLesson({ dateKey, lessonKey, slotLabel, recentReferences, recentPhrases, blockedReferences, attempt });
+      assertFreshScriptureReference(lesson.scripture?.reference, blockedReferences);
+      return lesson;
+    } catch (error) {
+      lastError = error;
+      if (error.reference) blockedReferences.push(error.reference);
+    }
+  }
+
+  throw lastError || new Error("OpenAI did not return a fresh scripture reference");
+}
+
+async function requestGeneratedLesson({ dateKey, lessonKey, slotLabel, recentReferences, recentPhrases, blockedReferences, attempt }) {
   const response = await fetch("https://api.openai.com/v1/responses", {
     method: "POST",
     headers: {
@@ -296,21 +329,27 @@ async function generateLessonWithOpenAI({ dateKey, slotLabel, recent }) {
       input: [
         {
           role: "developer",
-          content: "You create one Korean Christian daily Bible-and-English learning card. Return only valid JSON matching the schema. Do not quote real movie or TV lines. Create original natural American English examples that feel like scenes common in shows or films. Use Korean explanations. Prefer variety and avoid recent references and phrases.",
+          content: "You create one Korean Christian daily Bible-and-English learning card. Return only valid JSON matching the schema. Do not quote real movie or TV lines. Create original natural American English examples that feel like scenes common in shows, films, YouTube commentary, and modern US workplace conversations. Use Korean explanations for an upper-intermediate to advanced Korean learner who studied in the US and wants to keep that instinct alive. The Bible passage must be freshly selected for this date and slot, not drawn from a fixed devotional list. Prefer less-overused but pastorally useful passages, and avoid recent or common references exactly.",
         },
         {
           role: "user",
           content: JSON.stringify({
             dateKey,
+            lessonKey,
             slotLabel,
+            attempt,
             recentReferences,
+            blockedReferences,
             recentPhrases,
             requirements: [
-              "Recommend a Bible passage reference and Korean KRV text when you are confident. Keep the Bible text concise, usually 1-3 verses.",
+              "Generate a fresh Bible passage recommendation for this exact dateKey and lessonKey. Do not select from a fixed fallback pool.",
+              "Do not use any reference in blockedReferences, and do not repeat recentReferences.",
+              "Recommend a Korean KRV Bible text when you are confident. Keep the Bible text concise, usually 1-3 verses.",
               "Make the scripture focus practical for today and add one concrete reflection prompt.",
-              "Choose a fresh, common American English expression used in everyday conversation, workplace, family, friendship, or dramatic scenes.",
+              "Choose a fresh, practical American English expression at upper-intermediate or advanced level, especially workplace, negotiation, conflict, emotional nuance, YouTube commentary, film, TV, family, or friendship scenes.",
+              "Avoid beginner maintenance phrases such as figure out, keep you posted, play it by ear, I forgot, I understand, or generic textbook idioms unless the nuance is genuinely advanced.",
               "Include meaning, two-line dialogue, nuance tip, where-it-fits scene note, 3 reusable patterns, and 4 practice lines.",
-              "Do not repeat recentReferences or recentPhrases.",
+              "Do not repeat recentPhrases.",
             ],
           }),
         },
@@ -395,11 +434,14 @@ function extractResponseText(data) {
 }
 
 function buildFallbackLesson(date, dateKey, meta = {}) {
-  const index = dayIndex(date);
+  const index = hashString(meta.lessonKey || dateKey || formatDateKey(date));
   return normalizeLesson({
     dateKey,
-    scripture: fallbackScriptures[index % fallbackScriptures.length],
-    expression: fallbackExpressions[(index * 7) % fallbackExpressions.length],
+    lessonKey: meta.lessonKey || dateKey,
+    scripturePolicyVersion: SCRIPTURE_POLICY_VERSION,
+    expressionPolicyVersion: EXPRESSION_POLICY_VERSION,
+    scripture: fallbackScriptures[positiveModulo(index, fallbackScriptures.length)],
+    expression: fallbackExpressions[positiveModulo(index * 7, fallbackExpressions.length)],
     generated: false,
     fallback: true,
     model: "fallback",
@@ -411,6 +453,9 @@ function normalizeLesson(lesson, dateKey) {
   const fallback = fallbackForDateKey(dateKey);
   return {
     dateKey,
+    lessonKey: lesson.lessonKey || dateKey,
+    scripturePolicyVersion: SCRIPTURE_POLICY_VERSION,
+    expressionPolicyVersion: EXPRESSION_POLICY_VERSION,
     scripture: {
       reference: clean(lesson.scripture?.reference) || fallback.scripture.reference,
       text: clean(lesson.scripture?.text) || fallback.scripture.text,
@@ -427,12 +472,20 @@ function normalizeLesson(lesson, dateKey) {
 }
 
 function fallbackForDateKey(dateKey) {
-  const date = parseDate(dateKey);
-  const index = dayIndex(date);
+  const index = hashString(dateKey);
   return {
-    scripture: fallbackScriptures[index % fallbackScriptures.length],
-    expression: fallbackExpressions[(index * 7) % fallbackExpressions.length],
+    scripture: fallbackScriptures[positiveModulo(index, fallbackScriptures.length)],
+    expression: fallbackExpressions[positiveModulo(index * 7, fallbackExpressions.length)],
   };
+}
+
+function assertFreshScriptureReference(reference, blockedReferences) {
+  const normalized = normalizeReference(reference);
+  if (!normalized) throw new Error("OpenAI response did not include a scripture reference");
+  if (!blockedReferences.map(normalizeReference).includes(normalized)) return;
+  const error = new Error("OpenAI returned a repeated or common scripture reference: " + reference);
+  error.reference = reference;
+  throw error;
 }
 
 function enrichExpression(expression) {
@@ -562,6 +615,34 @@ function normalizeStringList(value, fallback) {
   return items.length ? items : fallback;
 }
 
+function shouldAllowFallback(options = {}) {
+  if (options.allowFallback) return true;
+  if (process.env.DAILY_VERSE_ALLOW_FALLBACK === "1") return true;
+  return process.env.NODE_ENV !== "production";
+}
+
+function uniqueStrings(values) {
+  return [...new Set(values.map(clean).filter(Boolean))];
+}
+
+function normalizeReference(value) {
+  return clean(value).replace(/\s+/g, "").replace(/[–—]/g, "-").toLowerCase();
+}
+
+function formatLessonKey(dateKey, options = {}) {
+  const slot = clean(options.slot) || clean(options.lessonSlot) || clean(options.slotLabel).toLowerCase();
+  return dateKey + ":" + (slot || "app");
+}
+
+function hashString(value) {
+  let hash = 0;
+  for (const char of String(value || "")) hash = ((hash * 31) + char.charCodeAt(0)) | 0;
+  return hash;
+}
+
+function positiveModulo(value, divisor) {
+  return ((value % divisor) + divisor) % divisor;
+}
 
 function clean(value) {
   return typeof value === "string" ? value.trim() : "";
@@ -581,6 +662,3 @@ function formatDateKey(date) {
   ].join("-");
 }
 
-function dayIndex(date) {
-  return Math.floor((Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - START_DAY) / DAY_IN_MS);
-}

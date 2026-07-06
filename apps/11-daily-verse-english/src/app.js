@@ -1,10 +1,10 @@
-const DAY_IN_MS = 86_400_000;
-const START_DAY = Date.UTC(2026, 0, 1);
+import { advancedExpressions } from "./expression-data.js?v=0.20";
+
 const STORAGE_KEY = "daily-verse-english:v1";
 const REMINDER_STORAGE_KEY = "daily-verse-english:reminders:v1";
 const SETUP_DISMISSED_KEY = "daily-verse-english:setup-dismissed:v1";
 const NOTE_OWNER_STORAGE_KEY = "daily-verse-english:note-owner:v1";
-const APP_VERSION = "0.17";
+const APP_VERSION = "0.20";
 
 let deferredInstallPrompt = null;
 let pushPublicKey = null;
@@ -78,226 +78,129 @@ const scriptures = [
     focus: "멈춤도 믿음의 행동이 될 수 있습니다.",
     prompt: "오늘 알림을 끄고 조용히 있을 5분을 정해보세요.",
   },
+  {
+    reference: "여호수아 1:9",
+    text: "내가 네게 명한 것이 아니냐 마음을 강하게 하고 담대히 하라 두려워 말며 놀라지 말라 네가 어디로 가든지 네 하나님 여호와가 너와 함께 하느니라 하시니라",
+    focus: "담대함은 상황이 쉬워서가 아니라 함께하심을 믿어서 나옵니다.",
+    prompt: "오늘 피하고 싶은 일 하나를 적고, 첫 행동을 작게 정해보세요.",
+  },
+  {
+    reference: "시편 121:1-2",
+    text: "내가 산을 향하여 눈을 들리라 나의 도움이 어디서 올꼬 나의 도움이 천지를 지으신 여호와에게서로다",
+    focus: "도움을 찾는 시선을 다시 하나님께 돌리는 하루.",
+    prompt: "도움이 필요한 일을 하나 정하고, 사람에게 말하기 전에 짧게 기도해보세요.",
+  },
+  {
+    reference: "이사야 40:31",
+    text: "오직 여호와를 앙망하는 자는 새 힘을 얻으리니 독수리의 날개치며 올라감 같을 것이요 달음박질하여도 곤비치 아니하겠고 걸어가도 피곤치 아니하리로다",
+    focus: "속도를 내기 전에 새 힘을 받는 방향을 선택하기.",
+    prompt: "오늘 무리해서 밀어붙이는 일 하나에 쉼표를 찍어보세요.",
+  },
+  {
+    reference: "미가 6:8",
+    text: "사람아 주께서 선한 것이 무엇임을 네게 보이셨나니 여호와께서 네게 구하시는 것이 오직 공의를 행하며 인자를 사랑하며 겸손히 네 하나님과 함께 행하는 것이 아니냐",
+    focus: "크게 보이는 성취보다 바르게 걷는 태도를 붙들기.",
+    prompt: "오늘 공의, 인자, 겸손 중 하나를 실제 행동으로 옮길 장면을 정해보세요.",
+  },
+  {
+    reference: "마태복음 5:16",
+    text: "이같이 너희 빛을 사람 앞에 비취게 하여 저희로 너희 착한 행실을 보고 하늘에 계신 너희 아버지께 영광을 돌리게 하라",
+    focus: "보이기 위한 선행이 아니라 하나님께 향하게 하는 빛으로 살기.",
+    prompt: "오늘 누군가에게 조용히 도움이 되는 행동 하나를 해보세요.",
+  },
+  {
+    reference: "마태복음 11:28",
+    text: "수고하고 무거운 짐진 자들아 다 내게로 오라 내가 너희를 쉬게 하리라",
+    focus: "무거움을 혼자 들고 버티는 대신 주님께 가지고 가기.",
+    prompt: "오늘 마음에 남은 피로를 한 문장으로 쓰고 기도로 내려놓아보세요.",
+  },
+  {
+    reference: "누가복음 6:31",
+    text: "남에게 대접을 받고자 하는대로 너희도 남을 대접하라",
+    focus: "내가 받고 싶은 존중을 먼저 건네는 연습.",
+    prompt: "오늘 대화 하나에서 내가 원하는 말투를 먼저 사용해보세요.",
+  },
+  {
+    reference: "요한복음 14:27",
+    text: "평안을 너희에게 끼치노니 곧 나의 평안을 너희에게 주노라 내가 너희에게 주는 것은 세상이 주는 것 같지 아니하니라 너희는 마음에 근심도 말고 두려워하지도 말라",
+    focus: "상황이 주는 안정과 주님이 주시는 평안을 구분하기.",
+    prompt: "오늘 불안을 키우는 정보를 하나 줄이고 평안을 선택할 시간을 만들어보세요.",
+  },
+  {
+    reference: "로마서 8:28",
+    text: "우리가 알거니와 하나님을 사랑하는 자 곧 그 뜻대로 부르심을 입은 자들에게는 모든 것이 합력하여 선을 이루느니라",
+    focus: "아직 이해되지 않는 일도 선으로 엮으시는 하나님을 신뢰하기.",
+    prompt: "최근 마음에 걸리는 일을 하나 적고, 지금 보이는 작은 선한 조각을 찾아보세요.",
+  },
+  {
+    reference: "로마서 12:12",
+    text: "소망 중에 즐거워하며 환난 중에 참으며 기도에 항상 힘쓰며",
+    focus: "소망, 인내, 기도를 하루의 리듬으로 삼기.",
+    prompt: "오늘 힘든 순간에 반복할 짧은 기도문을 하나 만들어보세요.",
+  },
+  {
+    reference: "갈라디아서 6:9",
+    text: "우리가 선을 행하되 낙심하지 말지니 피곤하지 아니하면 때가 이르매 거두리라",
+    focus: "당장 보상받지 못해도 선한 일을 멈추지 않기.",
+    prompt: "최근 지친 선한 습관 하나를 오늘만 다시 해보세요.",
+  },
+  {
+    reference: "에베소서 4:32",
+    text: "서로 인자하게 하며 불쌍히 여기며 서로 용서하기를 하나님이 그리스도 안에서 너희를 용서하심과 같이 하라",
+    focus: "용서는 감정을 무시하는 일이 아니라 받은 은혜를 기억하는 일.",
+    prompt: "오늘 마음이 딱딱해지는 사람을 떠올리고, 그를 위한 짧은 기도를 해보세요.",
+  },
+  {
+    reference: "빌립보서 2:3-4",
+    text: "아무 일에든지 다툼이나 허영으로 하지 말고 오직 겸손한 마음으로 각각 자기보다 남을 낫게 여기고 각각 자기 일을 돌아볼뿐더러 또한 각각 다른 사람들의 일을 돌아보아",
+    focus: "내 입장만 크게 만드는 마음에서 한 걸음 물러서기.",
+    prompt: "오늘 회의나 대화에서 다른 사람의 필요를 먼저 묻는 질문을 해보세요.",
+  },
+  {
+    reference: "골로새서 3:15",
+    text: "그리스도의 평강이 너희 마음을 주장하게 하라 평강을 위하여 너희가 한 몸으로 부르심을 받았나니 또한 너희는 감사하는 자가 되라",
+    focus: "마음의 주도권을 불안이 아니라 그리스도의 평강에 맡기기.",
+    prompt: "오늘 마음을 흔드는 생각이 오면 감사 세 가지를 적어보세요.",
+  },
+  {
+    reference: "데살로니가전서 5:16-18",
+    text: "항상 기뻐하라 쉬지 말고 기도하라 범사에 감사하라 이는 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라",
+    focus: "기쁨과 기도와 감사는 기분보다 깊은 선택입니다.",
+    prompt: "오늘 감사 하나를 바로 메시지나 메모로 남겨보세요.",
+  },
+  {
+    reference: "디모데후서 1:7",
+    text: "하나님이 우리에게 주신 것은 두려워하는 마음이 아니요 오직 능력과 사랑과 근신하는 마음이니",
+    focus: "두려움 대신 능력, 사랑, 절제의 마음으로 반응하기.",
+    prompt: "오늘 두려움이 올라오는 순간에 사랑으로 할 수 있는 행동을 하나 고르세요.",
+  },
+  {
+    reference: "히브리서 4:16",
+    text: "그러므로 우리가 긍휼하심을 받고 때를 따라 돕는 은혜를 얻기 위하여 은혜의 보좌 앞에 담대히 나아갈 것이니라",
+    focus: "부족함이 기도를 막는 이유가 아니라 은혜 앞으로 가는 이유가 됩니다.",
+    prompt: "오늘 미루던 기도 제목 하나를 솔직한 문장으로 꺼내보세요.",
+  },
+  {
+    reference: "히브리서 10:24",
+    text: "서로 돌아보아 사랑과 선행을 격려하며",
+    focus: "믿음은 혼자 버티는 힘만이 아니라 서로 격려하는 관계입니다.",
+    prompt: "오늘 한 사람에게 짧은 격려 메시지를 보내보세요.",
+  },
+  {
+    reference: "베드로전서 5:7",
+    text: "너희 염려를 다 주께 맡겨 버리라 이는 저가 너희를 권고하심이니라",
+    focus: "염려를 맡길 수 있는 이유는 하나님이 돌보시기 때문입니다.",
+    prompt: "오늘 가장 큰 염려를 적고, 그 옆에 맡긴다는 표시를 해보세요.",
+  },
+  {
+    reference: "요한일서 4:18",
+    text: "사랑 안에 두려움이 없고 온전한 사랑이 두려움을 내어쫓나니 두려움에는 형벌이 있음이라 두려워하는 자는 사랑 안에서 온전히 이루지 못하였느니라",
+    focus: "두려움을 이기는 힘은 더 큰 통제가 아니라 더 온전한 사랑입니다.",
+    prompt: "오늘 두려움으로 미루는 말이나 행동을 사랑의 방식으로 바꿔보세요.",
+  },
 ];
 
-const expressions = [
-  {
-    phrase: "Can you give me a quick rundown?",
-    meaning: "짧게 요약해서 설명해줄래?",
-    example: [
-      { speaker: "A", text: "I missed the first part of the meeting.", translation: "회의 앞부분을 놓쳤어." },
-      { speaker: "B", text: "Sure. I can give you a quick rundown.", translation: "물론이지. 짧게 요약해줄게." },
-    ],
-    tip: "회의, 상황 설명, 미드 속 사건 정리 장면에서 자연스럽습니다. summary보다 말맛이 더 구어적입니다.",
-  },
-  {
-    phrase: "Let's take this offline.",
-    meaning: "이건 따로 얘기하자.",
-    example: [
-      { speaker: "A", text: "I have a few concerns about the timeline.", translation: "일정에 대해 우려가 좀 있어요." },
-      { speaker: "B", text: "Good point. Let's take this offline after the call.", translation: "좋은 지적이에요. 통화 끝나고 따로 얘기해요." },
-    ],
-    tip: "회의 중 모두 앞에서 길게 다루기 어려운 주제를 따로 빼자는 비즈니스 표현입니다.",
-  },
-  {
-    phrase: "I'm not following.",
-    meaning: "잘 못 따라가겠어, 이해가 안 돼.",
-    example: [
-      { speaker: "A", text: "The client changed the scope, so the launch date moved.", translation: "고객이 범위를 바꿔서 출시일이 밀렸어요." },
-      { speaker: "B", text: "I'm not following. Which part changed?", translation: "잘 이해가 안 돼요. 어느 부분이 바뀐 거예요?" },
-    ],
-    tip: "I don't understand보다 대화 중에 훨씬 자연스럽게 끼어드는 표현입니다.",
-  },
-  {
-    phrase: "I'll keep you posted.",
-    meaning: "진행 상황 계속 알려줄게.",
-    example: [
-      { speaker: "A", text: "Let me know what happens with the scheduler.", translation: "스케줄러 어떻게 되는지 알려줘." },
-      { speaker: "B", text: "Will do. I'll keep you posted.", translation: "그럴게. 계속 업데이트해줄게." },
-    ],
-    tip: "회사, 병원 예약, 가족 일정 등 거의 모든 상황에서 쓸 수 있는 실용 표현입니다.",
-  },
-  {
-    phrase: "Let's play it by ear.",
-    meaning: "상황 봐가면서 하자.",
-    example: [
-      { speaker: "A", text: "Should we book dinner now?", translation: "저녁 예약 지금 할까?" },
-      { speaker: "B", text: "Let's play it by ear. We may get out late.", translation: "상황 봐가며 하자. 늦게 끝날 수도 있어." },
-    ],
-    tip: "정확한 계획을 세우기 애매할 때 미국 일상 대화에서 매우 자주 씁니다.",
-  },
-  {
-    phrase: "You lost me.",
-    meaning: "나 놓쳤어, 무슨 말인지 모르겠어.",
-    example: [
-      { speaker: "A", text: "After the token refresh, the endpoint checks the bearer header.", translation: "토큰 갱신 후 엔드포인트가 bearer 헤더를 확인해요." },
-      { speaker: "B", text: "You lost me at token refresh.", translation: "토큰 갱신 얘기부터 못 따라갔어." },
-    ],
-    tip: "미드에서 자주 들리는 캐주얼한 표현입니다. `You lost me at...` 패턴도 좋습니다.",
-  },
-  {
-    phrase: "That's above my pay grade.",
-    meaning: "그건 내가 결정할 급은 아니야.",
-    example: [
-      { speaker: "A", text: "Do you know if leadership approved the budget?", translation: "윗선에서 예산 승인했는지 알아?" },
-      { speaker: "B", text: "That's above my pay grade, but I can ask.", translation: "그건 내가 결정할 급은 아닌데 물어볼 수는 있어." },
-    ],
-    tip: "책임 범위를 벗어난다는 뜻을 약간 농담처럼 말할 때 씁니다. 영화/드라마에서도 흔합니다.",
-  },
-  {
-    phrase: "That came out wrong.",
-    meaning: "방금 말이 좀 이상하게 나왔네.",
-    example: [
-      { speaker: "A", text: "I didn't mean you were careless. That came out wrong.", translation: "네가 부주의했다는 뜻은 아니었어. 말이 좀 이상하게 나왔네." },
-      { speaker: "B", text: "No worries. I know what you meant.", translation: "괜찮아. 무슨 뜻인지 알아." },
-    ],
-    tip: "말실수했을 때 바로 분위기를 수습하는 매우 유용한 표현입니다.",
-  },
-  {
-    phrase: "No hard feelings.",
-    meaning: "악감정은 없어, 기분 나쁘게 생각하지 마.",
-    example: [
-      { speaker: "A", text: "We decided to go with another vendor.", translation: "다른 업체로 가기로 했어요." },
-      { speaker: "B", text: "No hard feelings. Thanks for letting me know.", translation: "악감정은 없어요. 알려줘서 고마워요." },
-    ],
-    tip: "거절, 의견 차이, 어색한 상황 뒤에 관계를 부드럽게 정리할 때 좋습니다.",
-  },
-  {
-    phrase: "I'll take your word for it.",
-    meaning: "네 말 믿을게, 그렇다고 칠게.",
-    example: [
-      { speaker: "A", text: "Trust me, the book is better than the movie.", translation: "진짜야, 책이 영화보다 훨씬 나아." },
-      { speaker: "B", text: "I'll take your word for it.", translation: "네 말 믿을게." },
-    ],
-    tip: "직접 확인하진 않았지만 상대 말을 믿겠다는 표현입니다. 약간 장난스럽게도 씁니다.",
-  },
-  {
-    phrase: "It slipped my mind.",
-    meaning: "깜빡했어.",
-    example: [
-      { speaker: "A", text: "Did you send the link to your family?", translation: "가족에게 링크 보냈어?" },
-      { speaker: "B", text: "Not yet. It slipped my mind.", translation: "아직. 깜빡했어." },
-    ],
-    tip: "I forgot보다 조금 더 부드럽고 자연스럽습니다.",
-  },
-  {
-    phrase: "I didn't catch that.",
-    meaning: "방금 못 들었어, 못 알아들었어.",
-    example: [
-      { speaker: "A", text: "The job runs at seven-thirty Korea time.", translation: "그 작업은 한국 시간 7시 30분에 돌아요." },
-      { speaker: "B", text: "Sorry, I didn't catch that. What time?", translation: "미안, 못 들었어. 몇 시라고?" },
-    ],
-    tip: "상대 말을 놓쳤을 때 정중하고 자연스럽게 다시 물을 수 있습니다.",
-  },
-  {
-    phrase: "Let's not make a scene.",
-    meaning: "괜히 소란 피우지 말자.",
-    example: [
-      { speaker: "A", text: "Should I confront him right now?", translation: "지금 바로 따질까?" },
-      { speaker: "B", text: "No. Let's not make a scene.", translation: "아니. 괜히 소란 피우지 말자." },
-    ],
-    tip: "영화/드라마에서 자주 나오는 표현입니다. 공공장소나 감정적인 상황에 잘 맞습니다.",
-  },
-  {
-    phrase: "I owe you one.",
-    meaning: "신세 졌어, 내가 하나 빚졌네.",
-    example: [
-      { speaker: "A", text: "I fixed the notification settings for you.", translation: "알림 설정 고쳐놨어." },
-      { speaker: "B", text: "Thanks. I owe you one.", translation: "고마워. 신세 졌네." },
-    ],
-    tip: "감사를 짧고 미국식으로 표현할 때 좋습니다. 꼭 돈을 빚졌다는 뜻은 아닙니다.",
-  },
-  {
-    phrase: "That sounds about right.",
-    meaning: "대충 맞는 것 같아.",
-    example: [
-      { speaker: "A", text: "The scheduler should send three notifications a day.", translation: "스케줄러가 하루 세 번 알림을 보내야 해." },
-      { speaker: "B", text: "That sounds about right.", translation: "대충 맞는 것 같아." },
-    ],
-    tip: "완전한 확신은 아니지만 들은 내용이 타당해 보일 때 씁니다.",
-  },
-  {
-    phrase: "Don't get me wrong.",
-    meaning: "오해하진 마.",
-    example: [
-      { speaker: "A", text: "Don't get me wrong. I like the idea, but the timing is tricky.", translation: "오해하진 마. 아이디어는 좋은데 타이밍이 좀 까다로워." },
-      { speaker: "B", text: "That makes sense.", translation: "그 말 이해돼." },
-    ],
-    tip: "비판이나 반대 의견을 말하기 전에 완충하는 표현입니다.",
-  },
-  {
-    phrase: "I'm on the fence.",
-    meaning: "아직 결정 못 했어, 반반이야.",
-    example: [
-      { speaker: "A", text: "Are you going to the dinner tonight?", translation: "오늘 저녁 모임 갈 거야?" },
-      { speaker: "B", text: "I'm on the fence. I'm pretty tired.", translation: "아직 고민 중이야. 좀 피곤해서." },
-    ],
-    tip: "결정을 못 내렸을 때 일상과 업무 모두에서 자주 씁니다.",
-  },
-  {
-    phrase: "I'll figure it out.",
-    meaning: "내가 어떻게든 알아서 해볼게.",
-    example: [
-      { speaker: "A", text: "Do you need help setting that up?", translation: "그거 설정하는 데 도움 필요해?" },
-      { speaker: "B", text: "I might, but I'll figure it out first.", translation: "그럴 수도 있는데 일단 내가 해볼게." },
-    ],
-    tip: "해결책을 아직 몰라도 스스로 찾아보겠다는 미국식 표현입니다.",
-  },
-  {
-    phrase: "It's not worth it.",
-    meaning: "그럴 가치 없어, 괜히 하지 마.",
-    example: [
-      { speaker: "A", text: "Should I argue with customer support again?", translation: "고객센터랑 다시 따져볼까?" },
-      { speaker: "B", text: "Honestly, it's not worth it.", translation: "솔직히 그럴 가치 없어." },
-    ],
-    tip: "시간, 감정, 돈을 들일 만큼 가치가 없을 때 씁니다.",
-  },
-  {
-    phrase: "Let's call it a day.",
-    meaning: "오늘은 여기까지 하자.",
-    example: [
-      { speaker: "A", text: "We tested the install and the scheduler.", translation: "설치랑 스케줄러 테스트했어." },
-      { speaker: "B", text: "Great. Let's call it a day.", translation: "좋아. 오늘은 여기까지 하자." },
-    ],
-    tip: "업무나 작업을 마무리할 때 아주 자연스럽습니다.",
-  },
-  {
-    phrase: "That doesn't sit right with me.",
-    meaning: "그게 좀 마음에 걸려, 찜찜해.",
-    example: [
-      { speaker: "A", text: "We could skip the privacy note for now.", translation: "개인정보 안내는 일단 빼도 될 것 같아." },
-      { speaker: "B", text: "That doesn't sit right with me.", translation: "그건 좀 마음에 걸려." },
-    ],
-    tip: "논리보다 감각적으로 찜찜함을 표현할 때 좋습니다. 드라마에서도 자주 들립니다.",
-  },
-  {
-    phrase: "I'm just thinking out loud.",
-    meaning: "그냥 생각나는 대로 말해보는 거야.",
-    example: [
-      { speaker: "A", text: "What if we made the reminder more personal?", translation: "알림을 좀 더 개인적으로 만들면 어떨까?" },
-      { speaker: "B", text: "Maybe. I'm just thinking out loud.", translation: "그럴 수도. 그냥 생각나는 대로 말해보는 거야." },
-    ],
-    tip: "확정 의견이 아니라 아이디어를 던지는 중임을 밝힐 때 씁니다.",
-  },
-  {
-    phrase: "I don't buy it.",
-    meaning: "난 그 말 안 믿겨, 납득이 안 돼.",
-    example: [
-      { speaker: "A", text: "They said the delay was only because of traffic.", translation: "지연된 게 순전히 교통 때문이래." },
-      { speaker: "B", text: "I don't buy it. Something else must have happened.", translation: "난 그 말 안 믿겨. 다른 일이 있었을 거야." },
-    ],
-    tip: "상대 설명이나 변명이 설득력 없을 때 쓰는 강한 구어 표현입니다.",
-  },
-  {
-    phrase: "Let's sleep on it.",
-    meaning: "하룻밤 생각해보자.",
-    example: [
-      { speaker: "A", text: "Should we change the whole notification system?", translation: "알림 시스템 전체를 바꿀까?" },
-      { speaker: "B", text: "Let's sleep on it and decide tomorrow.", translation: "하룻밤 생각해보고 내일 결정하자." },
-    ],
-    tip: "즉시 결정하지 않고 시간을 두고 판단하자는 실생활 표현입니다.",
-  },
-];
+const expressions = advancedExpressions;
 
 const state = {
   selectedDate: startOfLocalDay(new Date()),
@@ -310,6 +213,8 @@ const state = {
   setupDismissed: loadSetupDismissed(),
   currentPair: null,
   currentPairKey: "",
+  currentPairError: "",
+  currentPairErrorKey: "",
   currentPairRequestId: 0,
 };
 
@@ -606,15 +511,17 @@ render();
 initializeRemoteNotes();
 
 function render() {
+  const key = dateKey(state.selectedDate);
   const pair = getDailyPair();
   const source = bibleSources[state.version];
-  const note = state.notes[dateKey(state.selectedDate)]?.note || "";
+  const note = state.notes[key]?.note || "";
+  const generationError = state.currentPairErrorKey === key ? state.currentPairError : "";
 
   elements.weekdayLabel.textContent = new Intl.DateTimeFormat("ko-KR", { weekday: "long" }).format(state.selectedDate);
   elements.dateLabel.textContent = formatDate(state.selectedDate);
-  elements.verseReference.textContent = pair.scripture.reference;
-  elements.verseFocus.textContent = pair.scripture.text;
-  elements.versePrompt.textContent = `${pair.scripture.focus} ${pair.scripture.prompt}`;
+  elements.verseReference.textContent = generationError ? "생성 실패" : pair.scripture.reference;
+  elements.verseFocus.textContent = generationError ? "오늘 말씀을 새로 생성하지 못했습니다." : pair.scripture.text;
+  elements.versePrompt.textContent = generationError ? generationError : `${pair.scripture.focus} ${pair.scripture.prompt}`;
   elements.primaryBibleLink.href = source.link;
   elements.primaryBibleLink.textContent = `${source.source} 보기`;
   elements.versionLabel.textContent = source.label;
@@ -629,22 +536,32 @@ function render() {
   renderReminderStatus();
   renderSetupStatus();
   renderNoteList();
-  loadDynamicPairForSelectedDate().catch((error) => console.warn(error));
+  if (!generationError) {
+    loadDynamicPairForSelectedDate().catch((error) => {
+      console.warn(error);
+      state.currentPairErrorKey = dateKey(state.selectedDate);
+      state.currentPairError = error.message || "OpenAI 생성 설정을 확인해주세요.";
+      render();
+    });
+  }
 }
 
 async function loadDynamicPairForSelectedDate() {
   const key = dateKey(state.selectedDate);
   if (state.currentPairKey === key && state.currentPair) return;
+  if (state.currentPairErrorKey === key && state.currentPairError) return;
 
   const requestId = state.currentPairRequestId + 1;
   state.currentPairRequestId = requestId;
   const response = await fetch("/api/daily-verse-data?date=" + encodeURIComponent(key));
   const payload = await response.json().catch(() => ({}));
-  if (!response.ok || !payload.scripture || !payload.expression) throw new Error(payload.error || "Failed to load daily lesson");
+  if (!response.ok || !payload.scripture || !payload.expression) throw new Error(payload.message || payload.error || "Failed to load daily lesson");
   if (requestId !== state.currentPairRequestId || dateKey(state.selectedDate) !== key) return;
 
   state.currentPair = { scripture: payload.scripture, expression: payload.expression, generated: payload.generated, cached: payload.cached };
   state.currentPairKey = key;
+  state.currentPairError = "";
+  state.currentPairErrorKey = "";
   render();
 }
 
@@ -739,16 +656,23 @@ function getDailyPair() {
 }
 
 function getDailyPairForDate(date) {
-  const index = dayIndex(date);
+  const index = hashString(dateKey(date));
   return {
-    scripture: scriptures[index % scriptures.length],
-    expression: expressions[(index * 7) % expressions.length],
+    scripture: scriptures[positiveModulo(index, scriptures.length)],
+    expression: expressions[positiveModulo(index * 7, expressions.length)],
   };
 }
 
-function dayIndex(date) {
-  return Math.floor((Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - START_DAY) / DAY_IN_MS);
+function hashString(value) {
+  let hash = 0;
+  for (const char of String(value || "")) hash = ((hash * 31) + char.charCodeAt(0)) | 0;
+  return hash;
 }
+
+function positiveModulo(value, divisor) {
+  return ((value % divisor) + divisor) % divisor;
+}
+
 
 function startOfLocalDay(date) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());

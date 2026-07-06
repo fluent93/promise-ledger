@@ -39,7 +39,7 @@ Then open `http://localhost:5174`. In production, share `/daily-verse/`. The loc
 
 ## Dynamic Recommendations
 
-The app now requests /api/daily-verse-data for each selected date. If OPENAI_API_KEY is configured, the API generates a fresh Bible-and-English lesson, caches it by date in Upstash Redis or the local dev store, and sends the same cached lesson through push notifications. If generation or storage is unavailable, it falls back to the bundled deterministic lessons so the app still works offline or in local setup.
+The app now requests /api/daily-verse-data for each selected date. In production, OPENAI_API_KEY is required: the API generates a fresh Bible-and-English lesson, caches it by date plus delivery slot, and returns an error if generation fails instead of silently rotating through a bundled verse pool. The bundled deterministic lessons are now only a local/offline fallback, or can be explicitly enabled with DAILY_VERSE_ALLOW_FALLBACK=1.
 
 Set these environment variables to enable dynamic generation:
 
