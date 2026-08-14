@@ -1,10 +1,10 @@
-const CACHE_NAME = "daily-verse-english:v20";
+const CACHE_NAME = "seinfeld-english:v25";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=0.20",
-  "./src/app.js?v=0.20",
-  "./src/expression-data.js?v=0.20",
+  "./styles.css?v=0.25",
+  "./src/app.js?v=0.25",
+  "./src/expression-data.js?v=0.25",
   "./manifest.json",
   "./icons/icon.svg",
 ];
@@ -36,8 +36,8 @@ self.addEventListener("fetch", (event) => {
 
 self.addEventListener("push", (event) => {
   const payload = event.data?.json() || {};
-  const title = payload.title || "오늘의 말씀";
-  const body = payload.body || "말씀영어에서 오늘의 말씀을 확인해보세요.";
+  const title = payload.title || "오늘의 Seinfeld English";
+  const body = payload.body || "오늘의 영어 표현을 확인해보세요.";
   event.waitUntil(
     self.registration.showNotification(title, {
       body,

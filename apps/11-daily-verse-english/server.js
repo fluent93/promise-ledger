@@ -8,9 +8,8 @@ import webpush from "web-push";
 import pushHealthHandler from "../../api/push-health.js";
 import pushPublicKeyHandler from "../../api/push-public-key.js";
 import pushSubscriptionsHandler from "../../api/push-subscriptions.js";
-import pushTestHandler from "../../api/push-test.js";
-import sendDailyVerseHandler from "../../api/send-daily-verse.js";
-import dailyVerseDataHandler from "../../api/daily-verse-data.js";
+import sendDailyExpressionHandler from "../../api/send-daily-expression.js";
+import dailyExpressionDataHandler from "../../api/daily-expression-data.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../..");
@@ -21,15 +20,11 @@ await loadEnvFile(path.join(rootDir, ".env.local"));
 await ensureLocalPushEnv();
 
 const apiRoutes = new Map([
-  ["/api/daily-verse-data", dailyVerseDataHandler],
+  ["/api/daily-expression-data", dailyExpressionDataHandler],
   ["/api/push-health", pushHealthHandler],
   ["/api/push-public-key", pushPublicKeyHandler],
   ["/api/push-subscriptions", pushSubscriptionsHandler],
-  ["/api/push-test", pushTestHandler],
-  ["/api/send-daily-verse", sendDailyVerseHandler],
-  ["/api/send-daily-verse-morning", withSlot("morning")],
-  ["/api/send-daily-verse-lunch", withSlot("lunch")],
-  ["/api/send-daily-verse-evening", withSlot("evening")],
+  ["/api/send-daily-expression", sendDailyExpressionHandler],
 ]);
 
 const server = http.createServer(async (request, response) => {
@@ -52,19 +47,12 @@ const server = http.createServer(async (request, response) => {
 });
 
 server.listen(port, "0.0.0.0", () => {
-  console.log(`Daily Verse English dev server listening on http://localhost:${port}`);
+  console.log(`Seinfeld English dev server listening on http://localhost:${port}`);
 });
 
 function normalizeStaticPath(pathname) {
   if (pathname.startsWith("/daily-verse/")) return pathname.slice("/daily-verse".length) || "/";
   return pathname;
-}
-
-function withSlot(slot) {
-  return (request, response) => {
-    request.query = { ...(request.query || {}), slot };
-    return sendDailyVerseHandler(request, response);
-  };
 }
 
 async function handleApi(handler, request, response, url) {
@@ -157,5 +145,6 @@ function contentType(file) {
   if (file.endsWith(".js")) return "text/javascript; charset=utf-8";
   if (file.endsWith(".json")) return "application/json; charset=utf-8";
   if (file.endsWith(".svg")) return "image/svg+xml";
+  if (file.endsWith(".mp3")) return "audio/mpeg";
   return "application/octet-stream";
 }

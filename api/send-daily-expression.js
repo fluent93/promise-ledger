@@ -1,5 +1,5 @@
 import webpush from "web-push";
-import { getDailyVersePayload } from "./daily-verse-data.js";
+import { getDailyExpressionPayload } from "./daily-expression-data.js";
 import {
   createSendLock,
   deleteSubscription,
@@ -8,13 +8,8 @@ import {
   recordSendLog,
 } from "./push-store.js";
 
-const SLOT_INFO = {
-  morning: { label: "아침", time: "07:30" },
-  lunch: { label: "점심", time: "12:30" },
-  evening: { label: "저녁", time: "21:30" },
-};
-const VALID_SLOTS = new Set(Object.keys(SLOT_INFO));
 const SERVICE_TIME_ZONE = "Asia/Seoul";
+const DELIVERY_TIME = "09:30";
 
 export default async function handler(request, response) {
   response.setHeader("content-type", "application/json; charset=utf-8");
@@ -26,12 +21,6 @@ export default async function handler(request, response) {
 
   if (!assertCronAuthorized(request)) {
     response.status(401).json({ error: "Unauthorized cron request" });
-    return;
-  }
-
-  const slot = getSlot(request);
-  if (!VALID_SLOTS.has(slot)) {
-    response.status(400).json({ error: "slot must be morning, lunch, or evening" });
     return;
   }
 
@@ -49,20 +38,18 @@ export default async function handler(request, response) {
   const dateKey = formatDateInTimeZone(now, SERVICE_TIME_ZONE);
   const triggeredAt = now.toISOString();
   const triggeredAtLocal = formatDateTimeInTimeZone(now, SERVICE_TIME_ZONE);
-  const slotInfo = SLOT_INFO[slot];
-
   try {
-    const shouldSend = await createSendLock({ slot, dateKey, triggeredAt });
+    const shouldSend = await createSendLock({ slot: "daily", dateKey, triggeredAt });
     if (!shouldSend) {
       const duplicateSummary = {
-        event: "daily-verse-send-duplicate-skipped",
-        slot,
+        event: "daily-expression-send-duplicate-skipped",
+        schedule: DELIVERY_TIME,
         dateKey,
         triggeredAt,
         triggeredAtLocal,
       };
       console.log(JSON.stringify(duplicateSummary));
-      response.status(200).json({ ok: true, duplicate: true, skipped: true, slot, dateKey, triggeredAtLocal });
+      response.status(200).json({ ok: true, duplicate: true, skipped: true, dateKey, triggeredAtLocal });
       return;
     }
 
@@ -73,20 +60,18 @@ export default async function handler(request, response) {
     );
 
     const records = await listSubscriptions();
-    const targets = records.filter((record) => record.preferences?.[slot]);
-    const payload = await getDailyVersePayload(now, { slot, slotLabel: slotInfo.label, scheduledTime: slotInfo.time });
-    const results = await Promise.allSettled(targets.map((record) => sendToRecord(record, payload)));
+    const payload = getDailyExpressionPayload(now, { slotLabel: "아침", scheduledTime: DELIVERY_TIME });
+    const results = await Promise.allSettled(records.map((record) => sendToRecord(record, payload)));
     const summary = summarize(results);
     const logEntry = {
-      event: "daily-verse-send",
-      slot,
-      slotLabel: slotInfo.label,
-      scheduledTime: slotInfo.time,
+      event: "daily-expression-send",
+      slot: "daily",
+      scheduledTime: DELIVERY_TIME,
       dateKey,
       triggeredAt,
       triggeredAtLocal,
       total: records.length,
-      targeted: targets.length,
+      targeted: records.length,
       ...summary,
     };
 
@@ -96,13 +81,6 @@ export default async function handler(request, response) {
   } catch (error) {
     response.status(500).json({ error: error.message || "Failed to send push notifications" });
   }
-}
-
-export function createSlotHandler(slot) {
-  return (request, response) => {
-    request.query = { ...(request.query || {}), slot };
-    return handler(request, response);
-  };
 }
 
 async function sendToRecord(record, payload) {
@@ -128,11 +106,6 @@ function summarize(results) {
     },
     { sent: 0, removed: 0, failed: 0 },
   );
-}
-
-function getSlot(request) {
-  const url = new URL(request.url || "/", "https://local.invalid");
-  return request.query?.slot || url.searchParams.get("slot") || "morning";
 }
 
 function isPushConfigured() {

@@ -24,7 +24,7 @@
 | 08 | Family Notice Parser | Idea backlog | `apps/08-family-notice-parser` |
 | 09 | Tone Tuner | Idea backlog | `apps/09-tone-tuner` |
 | 10 | Read Later Recall | Idea backlog | `apps/10-read-later-recall` |
-| 11 | Daily Verse English / 말씀영어 | PWA + Web Push MVP | `apps/11-daily-verse-english` |
+| 11 | Seinfeld English | PWA + Web Push MVP | `apps/11-daily-verse-english` |
 
 ## Run
 
@@ -34,7 +34,7 @@ npm run dev:01
 
 Then open `http://localhost:5173`.
 
-For the daily Bible verse and American English MVP:
+For the Seinfeld-based American English app:
 
 ```bash
 npm run dev:11
@@ -45,7 +45,7 @@ Then open `http://localhost:5174`.
 
 ## Deploy 11 to Vercel
 
-Daily Verse English is served at `/daily-verse/` in production. It uses Web Push, Vercel Cron, and Upstash Redis REST for subscriptions.
+Seinfeld English is served at the legacy `/daily-verse/` route so existing installations keep working. The core app has no OpenAI dependency. Upstash Redis is used only for the single 09:30 KST Web Push.
 
 Required environment variables:
 
@@ -55,7 +55,7 @@ VAPID_PRIVATE_KEY=...
 VAPID_SUBJECT=mailto:you@example.com
 UPSTASH_REDIS_REST_URL=...
 UPSTASH_REDIS_REST_TOKEN=...
-DAILY_VERSE_APP_URL=/daily-verse/
+DAILY_ENGLISH_APP_URL=/daily-verse/
 CRON_SECRET=...
 ```
 
@@ -68,9 +68,9 @@ npm run push:env-check
 npm run check:11
 ```
 
-After deployment, open `/api/push-health` and expect `ok: true` before sharing `/daily-verse/` with family.
+After deployment, open `/api/push-health` and expect `ok: true` before enabling the 09:30 notification.
 
-Detailed launch steps live in `docs/daily-verse-deploy.md`.
+Detailed launch steps live in `docs/seinfeld-english-deploy.md`.
 
 ## Deploy 01 to Vercel
 

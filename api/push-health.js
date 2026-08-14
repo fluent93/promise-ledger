@@ -29,10 +29,10 @@ export default async function handler(request, response) {
     recentSends = [];
   }
 
-  const appUrl = process.env.DAILY_VERSE_APP_URL || "/daily-verse/";
+  const appUrl = process.env.DAILY_ENGLISH_APP_URL || process.env.DAILY_VERSE_APP_URL || "/daily-verse/";
   const cron = {
     secretConfigured: Boolean(process.env.CRON_SECRET),
-    slots: ["morning", "lunch", "evening"],
+    schedule: "09:30 Asia/Seoul",
   };
 
   response.status(200).json({

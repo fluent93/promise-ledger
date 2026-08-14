@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const SUBSCRIPTIONS_KEY = "daily-verse-english:subscriptions";
-const SEND_LOG_KEY = "daily-verse-english:send-log";
+const SEND_LOG_KEY = "seinfeld-english:send-log:v2";
 const SEND_LOCK_PREFIX = "daily-verse-english:sent";
 const SEND_LOCK_TTL_SECONDS = 60 * 60 * 48;
 
@@ -86,25 +86,24 @@ export async function createSendLock({ slot, dateKey, triggeredAt }) {
 
 export async function recordSendLog(entry) {
   if (useLocalStore()) return;
-  const id = `${entry.dateKey}:${entry.slot}:${entry.triggeredAt}`;
-  await upstashCommand(["HSET", SEND_LOG_KEY, id, JSON.stringify({ ...entry, id })]);
+  const record = JSON.stringify({ ...entry, id: `${entry.dateKey}:${entry.slot}:${entry.triggeredAt}` });
+  await upstashCommand(["LPUSH", SEND_LOG_KEY, record]);
+  await upstashCommand(["LTRIM", SEND_LOG_KEY, "0", "29"]);
 }
 
 export async function listSendLogs(limit = 10) {
   if (!isStorageConfigured() || useLocalStore()) return [];
-  const result = await upstashCommand(["HGETALL", SEND_LOG_KEY]);
-  const pairs = Array.isArray(result) ? result : [];
+  const result = await upstashCommand(["LRANGE", SEND_LOG_KEY, "0", String(Math.max(0, limit - 1))]);
+  const records = Array.isArray(result) ? result : [];
   const logs = [];
-  for (let index = 0; index < pairs.length; index += 2) {
+  for (const record of records) {
     try {
-      logs.push(JSON.parse(pairs[index + 1]));
+      logs.push(JSON.parse(record));
     } catch {
       // Ignore malformed log entries.
     }
   }
-  return logs
-    .sort((a, b) => String(b.triggeredAt || "").localeCompare(String(a.triggeredAt || "")))
-    .slice(0, limit);
+  return logs;
 }
 
 async function upstashCommand(command) {

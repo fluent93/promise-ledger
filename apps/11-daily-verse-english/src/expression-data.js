@@ -1,196 +1,500 @@
-export const EXPRESSION_POLICY_VERSION = 2;
+export const EXPRESSION_POLICY_VERSION = 3;
+
+const episodeSources = {
+  "What's the deal with...?": { season: 8, episode: "The Summer of George" },
+  "Yada, yada, yada.": { season: 8, episode: "The Yada Yada" },
+  "Not that there's anything wrong with that.": { season: 4, episode: "The Outing" },
+  "It's not you, it's me.": { season: 5, episode: "The Lip Reader" },
+  "I'm out.": { season: 4, episode: "The Contest" },
+  "Serenity now.": { season: 9, episode: "The Serenity Now" },
+  "That's a shame.": { season: 5, episode: "The Stall" },
+  "Get out!": { season: 2, episode: "The Apartment" },
+  "Giddy up!": { season: 2, episode: "The Baby Shower" },
+  "We're living in a society.": { season: 2, episode: "The Chinese Restaurant" },
+  "Double-dip.": { season: 4, episode: "The Implant" },
+  "I can't spare a square.": { season: 5, episode: "The Stall" },
+  "No soup for you.": { season: 7, episode: "The Soup Nazi" },
+  "These pretzels are making me thirsty.": { season: 3, episode: "The Alternate Side" },
+  "I was in the pool!": { season: 5, episode: "The Hamptons" },
+  "Master of your domain.": { season: 4, episode: "The Contest" },
+  "You are so good-looking.": { season: 3, episode: "The Good Samaritan" },
+  "A Festivus for the rest of us.": { season: 9, episode: "The Strike" },
+  "They're real, and they're spectacular.": { season: 4, episode: "The Implant" },
+  "I don't wanna be a pirate.": { season: 5, episode: "The Puffy Shirt" },
+  "The jerk store called.": { season: 8, episode: "The Comeback" },
+  "Maybe the dingo ate your baby.": { season: 3, episode: "The Stranded" },
+  "You're killing independent George!": { season: 7, episode: "The Pool Guy" },
+  "I choose not to run.": { season: 6, episode: "The Race" },
+  "That's gold.": { season: 8, episode: "The Fatigues" },
+  "They're all Twix!": { season: 9, episode: "The Dealership" },
+  "He's a close talker.": { season: 5, episode: "The Raincoats" },
+  "It's sponge-worthy.": { season: 7, episode: "The Sponge" },
+  "You know how to take it; you just don't know how to hold it.": { season: 3, episode: "The Alternate Side" },
+};
 
 export const advancedExpressions = [
   {
-    phrase: "That tracks.",
-    meaning: "그 말이 앞뒤가 맞아, 흐름상 납득돼.",
-    example: [
-      { speaker: "A", text: "They moved the deadline because legal still hasn't signed off.", translation: "법무팀 승인이 아직 안 나서 마감이 밀렸대." },
-      { speaker: "B", text: "That tracks. They were worried about the wording last week.", translation: "앞뒤가 맞네. 지난주에도 문구 때문에 신경 쓰고 있었잖아." },
-    ],
-    tip: "It makes sense보다 훨씬 미국식이고 짧습니다. 분석, 회의, 유튜브 코멘터리에서 자주 들리는 반응입니다.",
-    scene: "상대의 설명을 듣고 논리적으로 말이 된다고 인정하는 회의, 뉴스 해설, 드라마 속 수사 장면에 잘 맞습니다.",
-    patterns: ["That tracks with what we heard earlier.", "Honestly, that tracks.", "That tracks, but it still leaves one question."],
-    drills: ["A: The numbers dipped after the pricing change. B: That tracks.", "That tracks with + 앞서 들은 정보", "Honestly, that tracks, but + 남는 의문", "It makes sense를 That tracks로 바꿔 말해보기"],
+    "phrase": "What's the deal with...?",
+    "meaning": "도대체 ...은 왜 그런 거야? 일상의 이상한 점을 가볍게 꺼내는 말.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "What's the deal with airline boarding groups?",
+        "translation": "비행기 탑승 그룹은 도대체 왜 저런 거야?"
+      },
+      {
+        "speaker": "George",
+        "text": "Exactly. Six groups, one line.",
+        "translation": "그러게. 그룹은 여섯 개인데 줄은 하나야."
+      }
+    ]
   },
   {
-    phrase: "Let's not get ahead of ourselves.",
-    meaning: "너무 앞서가진 말자, 아직 성급하게 결론 내리지 말자.",
-    example: [
-      { speaker: "A", text: "If this call goes well, we should hire two more people.", translation: "이 통화 잘 되면 사람 두 명 더 뽑아야겠어요." },
-      { speaker: "B", text: "Let's not get ahead of ourselves. We don't have the signed deal yet.", translation: "너무 앞서가진 말죠. 아직 계약서에 서명받은 것도 아니니까요." },
-    ],
-    tip: "흥분한 분위기를 식히되 무례하지 않게 현실감을 되찾게 하는 표현입니다.",
-    scene: "비즈니스 미팅, 투자 이야기, 가족의 큰 결정처럼 기대가 너무 빨리 커지는 장면에 자연스럽습니다.",
-    patterns: ["Let's not get ahead of ourselves here.", "I don't want to get ahead of ourselves.", "Before we get ahead of ourselves, let's confirm the basics."],
-    drills: ["A: This could change everything. B: Let's not get ahead of ourselves.", "Before we get ahead of ourselves, + 확인할 것", "I don't want to get ahead of ourselves, but + 조심스러운 기대", "Don't rush를 더 자연스럽게 바꿔 말하기"],
+    "phrase": "Yada, yada, yada.",
+    "meaning": "이러쿵저러쿵, 중간 과정은 생략하고.",
+    "example": [
+      {
+        "speaker": "Elaine",
+        "text": "We had dinner, yada, yada, yada, and I got home late.",
+        "translation": "저녁을 먹고, 이러쿵저러쿵하다가 집에 늦게 왔어."
+      },
+      {
+        "speaker": "Jerry",
+        "text": "Sounds like you skipped the important part.",
+        "translation": "중요한 부분을 건너뛴 것 같은데."
+      }
+    ]
   },
   {
-    phrase: "I wouldn't read too much into it.",
-    meaning: "거기에 너무 큰 의미를 부여하진 않을 것 같아.",
-    example: [
-      { speaker: "A", text: "She didn't reply with an exclamation point. Is she upset?", translation: "느낌표 없이 답장했어. 화난 걸까?" },
-      { speaker: "B", text: "I wouldn't read too much into it. She's probably just busy.", translation: "너무 의미 부여하진 않을 것 같아. 그냥 바쁜 걸 수도 있어." },
-    ],
-    tip: "상대가 작은 신호를 과해석할 때 부드럽게 균형을 잡아주는 표현입니다.",
-    scene: "연애, 직장 메신저, 가족 단톡방, 미드 속 오해 장면에서 쓰기 좋습니다.",
-    patterns: ["I wouldn't read too much into that email.", "Maybe, but I wouldn't read too much into it.", "Let's not read too much into one comment."],
-    drills: ["A: He sounded short on the call. B: I wouldn't read too much into it.", "I wouldn't read too much into + 작은 신호", "Let's not read too much into + 단서", "You're overthinking it보다 부드럽게 바꿔보기"],
+    "phrase": "Not that there's anything wrong with that.",
+    "meaning": "그게 잘못됐다는 뜻은 아니야.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "He color-codes every shelf. Not that there's anything wrong with that.",
+        "translation": "그 사람은 선반마다 색깔로 구분해 둬. 그게 잘못됐다는 뜻은 아니고."
+      },
+      {
+        "speaker": "George",
+        "text": "At least it's easy to find everything.",
+        "translation": "적어도 물건 찾기는 쉽겠네."
+      }
+    ]
   },
   {
-    phrase: "We need to pressure-test that assumption.",
-    meaning: "그 가정이 버티는지 좀 빡세게 검증해봐야 해.",
-    example: [
-      { speaker: "A", text: "We're assuming users will finish setup in under a minute.", translation: "사용자가 1분 안에 설정을 끝낸다고 가정하고 있어요." },
-      { speaker: "B", text: "We need to pressure-test that assumption before launch.", translation: "출시 전에 그 가정을 제대로 검증해봐야겠네요." },
-    ],
-    tip: "컨설팅, 제품, 전략 회의에서 아주 실전적인 표현입니다. 단순히 test보다 사고 수준이 높게 들립니다.",
-    scene: "사업 계획, 제품 출시, 데이터 해석, 팀 회의에서 취약한 전제를 점검할 때 씁니다.",
-    patterns: ["Let's pressure-test the timeline.", "That assumption needs to be pressure-tested.", "Before we commit, we should pressure-test this."],
-    drills: ["A: Everyone will opt in. B: We need to pressure-test that assumption.", "Let's pressure-test + 일정/가격/가정", "Before we commit, we should + 검증 행동", "test this idea를 비즈니스식으로 바꿔보기"],
+    "phrase": "It's not you, it's me.",
+    "meaning": "네 문제가 아니라 내 문제야.",
+    "example": [
+      {
+        "speaker": "George",
+        "text": "I can't join another project right now. It's not you, it's me.",
+        "translation": "지금은 다른 프로젝트에 참여할 수 없어. 네 문제가 아니라 내 문제야."
+      },
+      {
+        "speaker": "Jerry",
+        "text": "I get it. We can talk when your schedule clears up.",
+        "translation": "알겠어. 일정이 정리되면 다시 얘기하자."
+      }
+    ]
   },
   {
-    phrase: "There's a lot riding on this.",
-    meaning: "이 일에 걸린 게 많아, 책임이나 영향이 커.",
-    example: [
-      { speaker: "A", text: "Why is everyone so tense about the demo?", translation: "왜 다들 데모 때문에 이렇게 예민해?" },
-      { speaker: "B", text: "There's a lot riding on this. The renewal depends on it.", translation: "이 일에 걸린 게 많아. 재계약이 여기에 달렸거든." },
-    ],
-    tip: "중요도가 높다는 말을 영화나 드라마처럼 압축해서 전달합니다.",
-    scene: "큰 발표, 재계약, 시험, 가족의 중요한 선택처럼 결과의 무게가 큰 장면에 맞습니다.",
-    patterns: ["There's a lot riding on this meeting.", "I know there's a lot riding on it.", "With that much riding on it, we should rehearse."],
-    drills: ["A: Is this really that important? B: There's a lot riding on this.", "There's a lot riding on + 행사/결정", "With that much riding on it, + 준비 행동", "This is important를 더 긴장감 있게 바꿔보기"],
+    "phrase": "I'm out.",
+    "meaning": "난 빠질게, 더는 참여하지 않을게.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "Another three-hour meeting? I'm out.",
+        "translation": "또 세 시간짜리 회의라고? 난 빠질래."
+      },
+      {
+        "speaker": "Kramer",
+        "text": "Wait, there will be snacks this time.",
+        "translation": "잠깐, 이번에는 간식도 나온대."
+      }
+    ]
   },
   {
-    phrase: "I'm trying to get a read on the room.",
-    meaning: "사람들 분위기나 반응을 파악해보는 중이야.",
-    example: [
-      { speaker: "A", text: "Why haven't you pitched the idea yet?", translation: "왜 아직 그 아이디어 얘기 안 했어?" },
-      { speaker: "B", text: "I'm trying to get a read on the room first.", translation: "먼저 분위기를 좀 파악해보는 중이야." },
-    ],
-    tip: "눈치 본다는 말을 성숙하고 미국식으로 표현할 수 있습니다.",
-    scene: "회의실, 가족 모임, 협상 테이블, 유튜브 인터뷰처럼 사람들의 반응을 읽는 장면에 잘 맞습니다.",
-    patterns: ["Let me get a read on the room.", "What's your read on the room?", "I couldn't get a good read on him."],
-    drills: ["A: Should we bring it up now? B: I'm trying to get a read on the room.", "What's your read on + 사람/상황", "I couldn't get a good read on + 상대", "read the atmosphere를 자연스러운 영어로 바꿔보기"],
+    "phrase": "Serenity now.",
+    "meaning": "평온이여, 지금 당장. 진정하려고 외치는 유머러스한 말.",
+    "example": [
+      {
+        "speaker": "Frank",
+        "text": "The printer jammed again. Serenity now.",
+        "translation": "프린터가 또 걸렸어. 평온이여, 지금 당장."
+      },
+      {
+        "speaker": "George",
+        "text": "You don't sound very serene.",
+        "translation": "전혀 평온하게 들리지 않는데요."
+      }
+    ]
   },
   {
-    phrase: "Let's put a pin in that.",
-    meaning: "그건 잠깐 보류해두고 나중에 다시 보자.",
-    example: [
-      { speaker: "A", text: "Should we also redesign the onboarding flow?", translation: "온보딩 흐름도 다시 디자인할까요?" },
-      { speaker: "B", text: "Let's put a pin in that and finish the launch plan first.", translation: "그건 잠깐 보류하고 출시 계획부터 끝내죠." },
-    ],
-    tip: "회의에서 주제를 끊어내면서도 상대 아이디어를 무시하지 않는 표현입니다.",
-    scene: "회의가 옆길로 샐 때, 팟캐스트 진행자가 주제를 잠시 미룰 때, 팀 논의에서 자주 씁니다.",
-    patterns: ["Can we put a pin in that?", "Let's put a pin in the pricing question.", "I don't want to lose it, so let's put a pin in it."],
-    drills: ["A: What about next quarter's budget? B: Let's put a pin in that.", "Can we put a pin in + 주제", "I don't want to lose it, so + 보류 제안", "Let's talk later를 회의식 표현으로 바꿔보기"],
+    "phrase": "That's a shame.",
+    "meaning": "그거 안됐네, 아쉽다.",
+    "example": [
+      {
+        "speaker": "George",
+        "text": "The bakery sold the last loaf five minutes ago.",
+        "translation": "빵집에서 마지막 빵을 5분 전에 팔았대."
+      },
+      {
+        "speaker": "Jerry",
+        "text": "That's a shame. I came across town for it.",
+        "translation": "그거 안됐네. 난 그거 사려고 멀리서 왔는데."
+      }
+    ]
   },
   {
-    phrase: "That gives me pause.",
-    meaning: "그 점이 좀 걸려, 바로 넘기기 어렵네.",
-    example: [
-      { speaker: "A", text: "The vendor is cheap, but they won't share references.", translation: "그 업체가 싸긴 한데 레퍼런스를 안 공유하겠대." },
-      { speaker: "B", text: "That gives me pause.", translation: "그건 좀 걸리네요." },
-    ],
-    tip: "찜찜함을 공격적으로 말하지 않고, 판단을 멈추게 만드는 신호로 표현합니다.",
-    scene: "계약, 채용, 관계의 이상 신호, 범죄 드라마 속 단서 발견 장면에 자연스럽습니다.",
-    patterns: ["The lack of detail gives me pause.", "I like the idea, but that part gives me pause.", "That should give us pause."],
-    drills: ["A: They need full access by Friday. B: That gives me pause.", "The lack of + 정보 gives me pause", "I like it, but + 걸리는 부분 gives me pause", "I'm worried를 더 절제된 표현으로 바꿔보기"],
+    "phrase": "Get out!",
+    "meaning": "말도 안 돼! 정말이야? 놀라움을 강하게 나타내는 말.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "I got upgraded to first class for free.",
+        "translation": "무료로 일등석 업그레이드를 받았어."
+      },
+      {
+        "speaker": "Elaine",
+        "text": "Get out! How did that happen?",
+        "translation": "말도 안 돼! 어떻게 된 거야?"
+      }
+    ]
   },
   {
-    phrase: "I don't want to overpromise.",
-    meaning: "괜히 가능하다고 크게 말해놓고 못 지키고 싶진 않아.",
-    example: [
-      { speaker: "A", text: "Can you get the whole report done by tomorrow?", translation: "보고서 전체를 내일까지 끝낼 수 있어요?" },
-      { speaker: "B", text: "I don't want to overpromise. I can send the first section by noon.", translation: "괜히 장담하긴 싫어요. 첫 섹션은 정오까지 보낼 수 있어요." },
-    ],
-    tip: "못 한다고 딱 잘라 말하기보다 신뢰를 지키면서 범위를 조정하는 비즈니스 표현입니다.",
-    scene: "상사, 고객, 가족에게 기대치를 현실적으로 맞춰야 하는 장면에 좋습니다.",
-    patterns: ["I don't want to overpromise, but I can try.", "Let's not overpromise on the timeline.", "I'd rather not overpromise and underdeliver."],
-    drills: ["A: Can we guarantee Friday? B: I don't want to overpromise.", "I don't want to overpromise, but + 가능한 범위", "Let's not overpromise on + 일정/결과", "I can't promise를 더 프로답게 바꿔보기"],
+    "phrase": "Giddy up!",
+    "meaning": "좋아, 가보자! 신나게 동의하거나 출발을 재촉하는 말.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "The tickets are booked and the car is downstairs.",
+        "translation": "표도 예매했고 차도 아래에 와 있어."
+      },
+      {
+        "speaker": "Kramer",
+        "text": "Giddy up!",
+        "translation": "좋아, 가보자!"
+      }
+    ]
   },
   {
-    phrase: "Let's level-set before we move on.",
-    meaning: "넘어가기 전에 기준이나 이해를 먼저 맞추자.",
-    example: [
-      { speaker: "A", text: "Can we jump straight into next steps?", translation: "바로 다음 단계로 넘어갈까요?" },
-      { speaker: "B", text: "Let's level-set before we move on. What are we solving for?", translation: "넘어가기 전에 기준부터 맞추죠. 우리가 해결하려는 게 정확히 뭐죠?" },
-    ],
-    tip: "회의에서 모두의 이해와 목표를 맞추는 고급 실무 표현입니다.",
-    scene: "프로젝트 킥오프, 고객 미팅, 팀 갈등 조율, 전략 논의 초반에 자주 씁니다.",
-    patterns: ["Can we level-set for a minute?", "Let's level-set on expectations.", "Before we decide, I want to level-set."],
-    drills: ["A: Let's pick a vendor. B: Let's level-set before we move on.", "Can we level-set on + 기대치/목표", "Before we decide, I want to + 기준 맞추기", "Let's align을 더 구체적으로 바꿔보기"],
+    "phrase": "We're living in a society.",
+    "meaning": "우리 사회에는 지켜야 할 기본 예의가 있잖아.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "He took the last seat and put his bag on the one beside it.",
+        "translation": "그 사람이 마지막 자리를 차지하고 옆자리에는 가방까지 놨어."
+      },
+      {
+        "speaker": "George",
+        "text": "We're living in a society. You can't do that.",
+        "translation": "우리는 사회 속에서 살고 있다고. 그러면 안 되지."
+      }
+    ]
   },
   {
-    phrase: "There's more to it than that.",
-    meaning: "그렇게 단순한 문제는 아니야, 이면이 더 있어.",
-    example: [
-      { speaker: "A", text: "So they missed the target because the team was lazy?", translation: "그러니까 팀이 게을러서 목표를 못 맞춘 거야?" },
-      { speaker: "B", text: "There's more to it than that. The scope changed twice.", translation: "그렇게 단순하진 않아. 범위가 두 번 바뀌었거든." },
-    ],
-    tip: "상대가 문제를 너무 단순화할 때, 정면 반박보다 자연스럽게 깊이를 열어주는 표현입니다.",
-    scene: "미드의 갈등 설명, 회사 회고, 유튜브 분석, 가족 문제를 차분히 풀어가는 장면에 잘 맞습니다.",
-    patterns: ["There's more to it than that, though.", "I think there's more to it.", "It's easy to say that, but there's more to it."],
-    drills: ["A: He just quit because he was bored. B: There's more to it than that.", "There's more to it than + 단순 설명", "It's easy to say that, but + 숨은 맥락", "It's complicated를 더 자연스럽게 바꿔보기"],
+    "phrase": "Double-dip.",
+    "meaning": "한 번 베어 문 음식을 소스에 다시 찍는 행동.",
+    "example": [
+      {
+        "speaker": "Timmy",
+        "text": "Did you just double-dip that chip?",
+        "translation": "방금 그 칩을 소스에 두 번 찍은 거야?"
+      },
+      {
+        "speaker": "George",
+        "text": "I turned it around. It's practically a new chip.",
+        "translation": "반대쪽으로 돌렸어. 사실상 새 칩이나 마찬가지야."
+      }
+    ]
   },
   {
-    phrase: "That puts us in a tough spot.",
-    meaning: "그럼 우리가 꽤 난처한 상황에 놓이네.",
-    example: [
-      { speaker: "A", text: "The supplier can only ship half the order.", translation: "공급사가 주문량의 절반만 보낼 수 있대요." },
-      { speaker: "B", text: "That puts us in a tough spot with the client.", translation: "그럼 고객과의 관계에서 우리가 꽤 난처해지네요." },
-    ],
-    tip: "문제가 생겼다는 말보다, 그 문제가 우리 위치를 어떻게 어렵게 만드는지 보여줍니다.",
-    scene: "고객 대응, 가족 일정 충돌, 영화 속 협상 장면처럼 선택지가 좁아지는 순간에 씁니다.",
-    patterns: ["That puts me in a tough spot.", "This puts the team in a tough spot.", "I get it, but it puts us in a tough spot."],
-    drills: ["A: I can't cover the shift. B: That puts us in a tough spot.", "That puts me in + 난처한 위치", "I get it, but it puts us in + 문제 상황", "That's a problem을 더 관계적으로 바꿔보기"],
+    "phrase": "I can't spare a square.",
+    "meaning": "한 칸도 나눠줄 여유가 없어.",
+    "example": [
+      {
+        "speaker": "Elaine",
+        "text": "Can you spare a square of paper?",
+        "translation": "종이 한 칸만 좀 줄 수 있어?"
+      },
+      {
+        "speaker": "Jane",
+        "text": "Sorry, this is the last one.",
+        "translation": "미안하지만 이게 마지막 한 칸이야."
+      }
+    ]
   },
   {
-    phrase: "I'm not sure that holds up.",
-    meaning: "그 논리가 끝까지 버티는지는 잘 모르겠어.",
-    example: [
-      { speaker: "A", text: "If signups are up, retention must be fine too.", translation: "가입자가 늘었으면 유지율도 괜찮겠죠." },
-      { speaker: "B", text: "I'm not sure that holds up. Those are different metrics.", translation: "그 논리가 맞는지는 잘 모르겠어요. 둘은 다른 지표니까요." },
-    ],
-    tip: "상대 말을 바로 틀렸다고 하지 않으면서 논리의 약점을 짚는 중상급 표현입니다.",
-    scene: "데이터 리뷰, 토론, 드라마 속 추리, 유튜브 비평에서 주장의 타당성을 점검할 때 좋습니다.",
-    patterns: ["I'm not sure that argument holds up.", "Does that really hold up?", "It sounds good, but it may not hold up under scrutiny."],
-    drills: ["A: More features means more users. B: I'm not sure that holds up.", "Does that really hold up?", "It sounds good, but + 검증 시 약점", "I disagree를 더 분석적으로 바꿔보기"],
+    "phrase": "No soup for you.",
+    "meaning": "당신에게 줄 수프는 없어. 규칙을 어긴 사람을 단호하게 거절하는 말.",
+    "example": [
+      {
+        "speaker": "George",
+        "text": "Two dollars? But everyone in front of me got free bread.",
+        "translation": "2달러요? 하지만 제 앞 사람들은 모두 빵을 공짜로 받았잖아요."
+      },
+      {
+        "speaker": "Soup Nazi",
+        "text": "You want bread? Three dollars! No soup for you!",
+        "translation": "빵을 원해? 3달러! 당신에게 줄 수프는 없어!"
+      }
+    ]
   },
   {
-    phrase: "Let's keep our options open.",
-    meaning: "가능성을 닫지 말고 선택지를 열어두자.",
-    example: [
-      { speaker: "A", text: "Should we commit to this vendor today?", translation: "오늘 이 업체로 확정할까요?" },
-      { speaker: "B", text: "Let's keep our options open until we see the second quote.", translation: "두 번째 견적을 보기 전까지는 선택지를 열어두죠." },
-    ],
-    tip: "결정을 미루는 표현이지만 우유부단하게 들리지 않고 전략적으로 들립니다.",
-    scene: "계약, 이직, 여행, 관계 결정처럼 아직 정보가 더 필요한 상황에 맞습니다.",
-    patterns: ["I want to keep our options open.", "For now, let's keep our options open.", "Keeping our options open gives us more leverage."],
-    drills: ["A: Should we decide tonight? B: Let's keep our options open.", "For now, let's keep our options open until + 조건", "Keeping our options open gives us + 이점", "Let's wait를 더 전략적으로 바꿔보기"],
+    "phrase": "These pretzels are making me thirsty.",
+    "meaning": "이 프레첼을 먹으니 목이 마르네.",
+    "example": [
+      {
+        "speaker": "Kramer",
+        "text": "These crackers are making me thirsty.",
+        "translation": "이 크래커를 먹으니 목이 마르네."
+      },
+      {
+        "speaker": "Jerry",
+        "text": "There's water in the fridge.",
+        "translation": "냉장고에 물 있어."
+      }
+    ]
   },
   {
-    phrase: "I can live with that.",
-    meaning: "그 정도면 받아들일 수 있어, 완벽하진 않아도 괜찮아.",
-    example: [
-      { speaker: "A", text: "We can't move the deadline, but we can cut the scope.", translation: "마감은 못 미루지만 범위는 줄일 수 있어요." },
-      { speaker: "B", text: "I can live with that.", translation: "그 정도면 받아들일 수 있겠네요." },
-    ],
-    tip: "강한 찬성은 아니지만 현실적인 타협을 받아들이는 미국식 표현입니다.",
-    scene: "협상, 부부 대화, 팀 일정 조율, 영화 속 거래 장면에서 자연스럽습니다.",
-    patterns: ["It's not ideal, but I can live with that.", "If we get it in writing, I can live with that.", "I can live with the compromise."],
-    drills: ["A: We can do Tuesday, not Monday. B: I can live with that.", "It's not ideal, but + 수용", "If + 조건, I can live with that", "That's okay를 더 성숙하게 바꿔보기"],
+    "phrase": "I was in the pool!",
+    "meaning": "나 방금 수영장에 있었단 말이야. 민망한 상황을 다급하게 해명하는 말.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "Why is your hair completely flat?",
+        "translation": "머리가 왜 그렇게 완전히 납작해졌어?"
+      },
+      {
+        "speaker": "George",
+        "text": "I was in the pool!",
+        "translation": "나 수영장에 있었단 말이야!"
+      }
+    ]
   },
   {
-    phrase: "We're not out of the woods yet.",
-    meaning: "아직 완전히 안심할 단계는 아니야.",
-    example: [
-      { speaker: "A", text: "The site is back online, so we're good?", translation: "사이트 다시 켜졌으니 이제 괜찮은 거죠?" },
-      { speaker: "B", text: "We're not out of the woods yet. Let's watch the logs for another hour.", translation: "아직 완전히 안심하긴 일러요. 한 시간 더 로그를 보죠." },
-    ],
-    tip: "위기는 넘긴 듯하지만 아직 위험이 남아 있을 때 영화나 업무 현장에서 자주 나옵니다.",
-    scene: "장애 대응, 병원 장면, 시험 결과, 수사물처럼 긴장이 완전히 끝나지 않은 순간에 잘 맞습니다.",
-    patterns: ["We're not out of the woods just yet.", "I don't think we're out of the woods.", "Once the tests pass, we'll be out of the woods."],
-    drills: ["A: So the crisis is over? B: We're not out of the woods yet.", "We're not out of the woods until + 확인 조건", "I don't think we're out of the woods because + 남은 위험", "It's not over를 더 미국식으로 바꿔보기"],
+    "phrase": "Master of your domain.",
+    "meaning": "자기 욕구와 행동을 완전히 통제하는 사람.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "You walked past the dessert table without stopping.",
+        "translation": "디저트 테이블 앞을 멈추지 않고 지나갔네."
+      },
+      {
+        "speaker": "George",
+        "text": "I'm the master of my domain.",
+        "translation": "난 내 욕구를 완벽히 통제하는 사람이야."
+      }
+    ]
   },
-];
+  {
+    "phrase": "You are so good-looking.",
+    "meaning": "정말 멋져 보여. 외모를 직접 칭찬하는 말.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "I finally found a jacket that fits.",
+        "translation": "드디어 나한테 맞는 재킷을 찾았어."
+      },
+      {
+        "speaker": "Elaine",
+        "text": "You are so good-looking.",
+        "translation": "정말 멋져 보여."
+      }
+    ]
+  },
+  {
+    "phrase": "A Festivus for the rest of us.",
+    "meaning": "우리 같은 평범한 사람들을 위한 축제.",
+    "example": [
+      {
+        "speaker": "George",
+        "text": "No fancy dinner this year. Just friends and takeout.",
+        "translation": "올해는 근사한 저녁도 없어요. 친구들과 포장 음식만 먹을 거예요."
+      },
+      {
+        "speaker": "Frank",
+        "text": "A Festivus for the rest of us.",
+        "translation": "우리 같은 사람들을 위한 페스티버스지."
+      }
+    ]
+  },
+  {
+    "phrase": "They're real, and they're spectacular.",
+    "meaning": "진짜고, 게다가 아주 훌륭해.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "Are those photos actually from your trip?",
+        "translation": "그 사진들 정말 네 여행에서 찍은 거야?"
+      },
+      {
+        "speaker": "Sidra",
+        "text": "They're real, and they're spectacular.",
+        "translation": "진짜고, 아주 멋져."
+      }
+    ]
+  },
+  {
+    "phrase": "I don't wanna be a pirate.",
+    "meaning": "난 해적이 되고 싶지 않아. 원치 않는 역할이나 옷을 거부하는 말.",
+    "example": [
+      {
+        "speaker": "Kramer",
+        "text": "Everyone has to wear a cape for the photo.",
+        "translation": "사진 찍을 때 모두 망토를 입어야 해."
+      },
+      {
+        "speaker": "Jerry",
+        "text": "I don't wanna be a pirate.",
+        "translation": "난 해적이 되고 싶지 않아."
+      }
+    ]
+  },
+  {
+    "phrase": "The jerk store called.",
+    "meaning": "한참 뒤에 떠올린 유치한 반격을 꺼내는 말.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "I finally thought of the perfect comeback from yesterday.",
+        "translation": "어제 그 말에 받아칠 완벽한 대답이 이제야 생각났어."
+      },
+      {
+        "speaker": "George",
+        "text": "Let me guess. The jerk store called?",
+        "translation": "맞혀볼게. 멍청이 가게에서 전화 왔다고?"
+      }
+    ]
+  },
+  {
+    "phrase": "Maybe the dingo ate your baby.",
+    "meaning": "상대의 걱정을 엉뚱한 추측으로 받아치는 말.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "I can't find my phone anywhere.",
+        "translation": "내 휴대폰을 아무리 찾아도 없어."
+      },
+      {
+        "speaker": "Elaine",
+        "text": "Maybe the couch ate it.",
+        "translation": "소파가 먹어버렸나 보지."
+      }
+    ]
+  },
+  {
+    "phrase": "You're killing independent George!",
+    "meaning": "내 독립적인 자아를 없애고 있어. 서로 다른 인간관계가 섞일 때의 과장된 불평.",
+    "example": [
+      {
+        "speaker": "Susan",
+        "text": "My coworkers are joining our weekend game night.",
+        "translation": "내 직장 동료들도 이번 주말 게임 모임에 올 거야."
+      },
+      {
+        "speaker": "George",
+        "text": "You're killing independent me!",
+        "translation": "당신이 독립적인 나를 죽이고 있어!"
+      }
+    ]
+  },
+  {
+    "phrase": "I choose not to run.",
+    "meaning": "난 뛰지 않기로 선택했어. 못하는 일을 의지의 문제처럼 바꿔 말하는 표현.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "Are you worried you can't finish the race?",
+        "translation": "경주를 끝까지 못 뛸까 봐 걱정되는 거야?"
+      },
+      {
+        "speaker": "George",
+        "text": "No. I choose not to run.",
+        "translation": "아니. 난 뛰지 않기로 선택한 거야."
+      }
+    ]
+  },
+  {
+    "phrase": "That's gold.",
+    "meaning": "그거 정말 훌륭한 소재야, 완전 대박이야.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "My neighbor labels leftovers by emotional importance.",
+        "translation": "우리 이웃은 남은 음식에 감정적 중요도에 따라 이름표를 붙여."
+      },
+      {
+        "speaker": "Bania",
+        "text": "That's gold. Write that down.",
+        "translation": "그거 최고다. 적어 둬."
+      }
+    ]
+  },
+  {
+    "phrase": "They're all Twix!",
+    "meaning": "전부 같은 거잖아! 차이가 없다는 걸 흥분해서 지적하는 말.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "The menu lists three versions, but they're all the same sandwich.",
+        "translation": "메뉴에는 세 종류라고 적혀 있지만 전부 같은 샌드위치야."
+      },
+      {
+        "speaker": "George",
+        "text": "Exactly. They're all the same thing!",
+        "translation": "맞아. 전부 똑같은 거라고!"
+      }
+    ]
+  },
+  {
+    "phrase": "He's a close talker.",
+    "meaning": "그는 대화할 때 지나치게 가까이 다가오는 사람이야.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "Why do you keep stepping backward when Dan talks?",
+        "translation": "댄과 얘기할 때 왜 계속 뒤로 물러서는 거야?"
+      },
+      {
+        "speaker": "Elaine",
+        "text": "He's a close talker.",
+        "translation": "그 사람은 지나치게 가까이 붙어서 말해."
+      }
+    ]
+  },
+  {
+    "phrase": "It's sponge-worthy.",
+    "meaning": "아껴둔 것을 쓸 만큼 가치가 있어.",
+    "example": [
+      {
+        "speaker": "Jerry",
+        "text": "Is this occasion really candle-worthy?",
+        "translation": "정말 이럴 때 아껴둔 초를 쓸 가치가 있어?"
+      },
+      {
+        "speaker": "Elaine",
+        "text": "Absolutely. We've been waiting all year.",
+        "translation": "당연하지. 일 년 내내 기다렸잖아."
+      }
+    ]
+  },
+  {
+    "phrase": "You know how to take it; you just don't know how to hold it.",
+    "meaning": "받는 법은 알지만 제대로 유지하는 법은 모르는군요.",
+    "example": [
+      {
+        "speaker": "Clerk",
+        "text": "They accepted the booking, but they gave our table away.",
+        "translation": "예약은 받았지만 저희가 그 테이블을 다른 손님에게 드렸습니다."
+      },
+      {
+        "speaker": "Jerry",
+        "text": "So they know how to take a reservation, not how to hold one.",
+        "translation": "예약받는 법은 알아도 예약을 지키는 법은 모르는군요."
+      }
+    ]
+  }
+].map((expression) => ({ ...expression, source: episodeSources[expression.phrase] }));

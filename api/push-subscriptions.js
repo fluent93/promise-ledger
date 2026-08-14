@@ -38,18 +38,9 @@ function normalizeRecord(body) {
 
   return {
     subscription,
-    preferences: normalizePreferences(body.preferences),
     timezone: typeof body.timezone === "string" ? body.timezone : "Asia/Seoul",
     userAgent: typeof body.userAgent === "string" ? body.userAgent.slice(0, 300) : "",
     updatedAt: new Date().toISOString(),
-  };
-}
-
-function normalizePreferences(preferences = {}) {
-  return {
-    morning: Boolean(preferences.morning),
-    lunch: Boolean(preferences.lunch),
-    evening: Boolean(preferences.evening),
   };
 }
 

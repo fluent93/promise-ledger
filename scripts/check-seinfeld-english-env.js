@@ -37,7 +37,7 @@ const checks = [
 
 const optional = [
   {
-    key: "DAILY_VERSE_APP_URL",
+    key: "DAILY_ENGLISH_APP_URL",
     defaultValue: "/daily-verse/",
     hint: "Use /daily-verse/ unless the production route changes.",
     validate: (value) => value.startsWith("/") || value.startsWith("https://"),
@@ -46,7 +46,7 @@ const optional = [
 
 const failures = [];
 
-console.log("Daily Verse English production environment check\n");
+console.log("Seinfeld English production environment check\n");
 for (const check of checks) {
   const value = process.env[check.key] || "";
   const present = Boolean(value);
@@ -68,7 +68,7 @@ if (failures.length) {
     const label = failure.present ? "invalid" : "missing";
     console.log(`- ${failure.key}: ${label}. ${failure.hint}`);
   }
-  console.log("\nSee docs/daily-verse-deploy.md for the launch checklist.");
+  console.log("\nSee docs/seinfeld-english-deploy.md for the launch checklist.");
   process.exit(1);
 }
 

@@ -1,13 +1,13 @@
 {
   "id": "/daily-verse/",
-  "name": "Daily Verse English",
-  "short_name": "말씀영어",
-  "description": "매일 개역한글 말씀과 American English 표현을 함께 보는 작은 루틴 앱",
+  "name": "Seinfeld English",
+  "short_name": "Seinfeld English",
+  "description": "Seinfeld의 말맛으로 매일 American English 표현 하나를 연습하는 앱",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f4f3ef",
-  "theme_color": "#19766e",
+  "background_color": "#f1f2f4",
+  "theme_color": "#f4d03f",
   "icons": [
     {
       "src": "./icons/icon.svg",

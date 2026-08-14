@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "clips": {
+    "No soup for you.": {
+      "file": "no-soup-for-you.mp3",
+      "episode": "116 - The Soup Nazi - [DVD].avi",
+      "start": "00:03:45.320",
+      "end": "00:03:58.000"
+    }
+  }
+}
