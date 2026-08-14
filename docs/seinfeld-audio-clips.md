@@ -6,14 +6,16 @@
 
 1. `tools/seinfeld-clip-extractor.ipynb`를 Google Colab에서 연다.
 2. 첫 셀을 실행해 Drive를 마운트한다.
-3. `Run all`을 실행하면 첫 `No soup for you` 클립과 manifest가 자동 생성된다.
-4. 이후에는 자막 검색 결과에서 원하는 장면을 확인하고 `extract_clip(...)`을 실행한다.
+3. `Run all`을 실행하면 현재 29개 표현을 에피소드별로 찾아 일괄 추출한다.
+4. 완료 후 `clip-batch-report.json`에서 실제 매칭 문장과 누락 항목을 확인한다.
 
 노트북은 현재 Drive에서 확인된 `MyDrive/Seinfeld (small size_torrent)`를 기본 원본 경로로 사용한다. 출력은 `MyDrive/Seinfeld English Clips`에 생성된다.
 
 ```text
 Seinfeld English Clips/
   clip-manifest.json
+  clip-batch-report.json
+  seinfeld-clips-batch.zip
   no-soup-for-you.mp3
   serenity-now.mp3
 ```
