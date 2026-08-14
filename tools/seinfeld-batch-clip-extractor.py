@@ -26,7 +26,7 @@ CLIP_PLAN = [
     {"phrase": "Serenity now.", "season": 9, "episode": "The Serenity Now", "queries": ["serenity now insanity later", "serenity now"]},
     {"phrase": "That's a shame.", "season": 5, "episode": "The Stall", "queries": ["what a shame", "that's a shame"]},
     {"phrase": "Get out!", "season": 2, "episode": "The Apartment", "queries": ["get out"]},
-    {"phrase": "Giddy up!", "season": 2, "episode": "The Baby Shower", "queries": ["giddy up", "giddy-up", "giddyup"]},
+    {"phrase": "Giddy up!", "season": 2, "episode": "The Baby Shower", "queries": ["giddy up", "giddy-up", "giddyup", "giddap"]},
     {"phrase": "We're living in a society.", "season": 2, "episode": "The Chinese Restaurant", "queries": ["we're living in a society"]},
     {"phrase": "Double-dip.", "season": 4, "episode": "The Implant", "queries": ["double dip that chip", "double dipped the chip"], "before": 4.0, "after": 7.0},
     {"phrase": "I can't spare a square.", "season": 5, "episode": "The Stall", "queries": ["i can't spare a square"]},
@@ -54,6 +54,7 @@ def normalize_text(value):
     value = html.unescape(unicodedata.normalize("NFKC", value)).lower()
     value = re.sub(r"<[^>]+>", " ", value)
     value = re.sub(r"[^a-z0-9]+", " ", value)
+    value = re.sub(r"\bl\b", "i", value)
     return " ".join(value.split())
 
 
@@ -185,6 +186,17 @@ def main():
     report = []
     for index, plan in enumerate(CLIP_PLAN, start=1):
         print(f"[{index:02d}/{len(CLIP_PLAN)}] {plan['phrase']}")
+        existing = manifest["clips"].get(plan["phrase"])
+        existing_path = OUTPUT_ROOT / existing.get("file", "") if existing else None
+        if existing_path and existing_path.is_file():
+            report.append({
+                "phrase": plan["phrase"],
+                "status": "generated",
+                "existing": True,
+                **existing,
+            })
+            print(f"  existing: {existing_path.name}")
+            continue
         cue, query_index = find_match(plan, cues)
         video = matching_video(plan["episode"], videos_by_title)
         if cue is None or video is None:
