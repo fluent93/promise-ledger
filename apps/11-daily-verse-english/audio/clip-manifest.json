@@ -6,6 +6,174 @@
       "episode": "116 - The Soup Nazi - [DVD].avi",
       "start": "00:03:45.080",
       "end": "00:03:59.559"
+    },
+    "What's the deal with...?": {
+      "src": "/api/audio-clip?id=what-s-the-deal-with",
+      "episode": "156 - The Summer of George.mpg",
+      "start": "00:00:45.316",
+      "end": "00:00:58.912"
+    },
+    "Yada, yada, yada.": {
+      "src": "/api/audio-clip?id=yada-yada-yada",
+      "episode": "153 - The Yada Yada.avi",
+      "start": "00:00:57.529",
+      "end": "00:01:08.759"
+    },
+    "Not that there's anything wrong with that.": {
+      "src": "/api/audio-clip?id=not-that-there-s-anything-wrong-with-that",
+      "episode": "057 - The Outing - [DVD].avi",
+      "start": "00:07:10.793",
+      "end": "00:07:21.624"
+    },
+    "It's not you, it's me.": {
+      "src": "/api/audio-clip?id=it-s-not-you-it-s-me",
+      "episode": "070 - The Lip Reader - [DVD].avi",
+      "start": "00:09:27.171",
+      "end": "00:09:40.301"
+    },
+    "I'm out.": {
+      "src": "/api/audio-clip?id=i-m-out",
+      "episode": "051 - The Contest - [DVD].avi",
+      "start": "00:06:49.048",
+      "end": "00:07:00.778"
+    },
+    "Serenity now.": {
+      "src": "/api/audio-clip?id=serenity-now",
+      "episode": "159 - The Serenity Now.mpg",
+      "start": "00:00:19.290",
+      "end": "00:00:30.884"
+    },
+    "That's a shame.": {
+      "src": "/api/audio-clip?id=that-s-a-shame",
+      "episode": "076 - The Stall - [DVD].avi",
+      "start": "00:17:23.747",
+      "end": "00:17:35.511"
+    },
+    "Get out!": {
+      "src": "/api/audio-clip?id=get-out",
+      "episode": "010 - The Apartment - [DVD].avi",
+      "start": "00:04:24.240",
+      "end": "00:04:38.837"
+    },
+    "We're living in a society.": {
+      "src": "/api/audio-clip?id=we-re-living-in-a-society",
+      "episode": "016 - The Chinese Restaurant - [DVD].avi",
+      "start": "00:07:44.480",
+      "end": "00:07:56.995"
+    },
+    "Double-dip.": {
+      "src": "/api/audio-clip?id=double-dip",
+      "episode": "059 - The Implants - [DVD].avi",
+      "start": "00:16:31.568",
+      "end": "00:16:44.627"
+    },
+    "These pretzels are making me thirsty.": {
+      "src": "/api/audio-clip?id=these-pretzels-are-making-me-thirsty",
+      "episode": "028 - The Alternate Side - [DVD].avi",
+      "start": "00:07:33.624",
+      "end": "00:07:45.080"
+    },
+    "Master of your domain.": {
+      "src": "/api/audio-clip?id=master-of-your-domain",
+      "episode": "051 - The Contest - [DVD].avi",
+      "start": "00:11:14.513",
+      "end": "00:11:25.344"
+    },
+    "You are so good-looking.": {
+      "src": "/api/audio-clip?id=you-are-so-good-looking",
+      "episode": "037 - The Good Samaritan - [DVD].avi",
+      "start": "00:18:57.572",
+      "end": "00:19:08.066"
+    },
+    "A Festivus for the rest of us.": {
+      "src": "/api/audio-clip?id=a-festivus-for-the-rest-of-us",
+      "episode": "166 - The Strike.mpg",
+      "start": "00:09:36.614",
+      "end": "00:09:48.606"
+    },
+    "They're real, and they're spectacular.": {
+      "src": "/api/audio-clip?id=they-re-real-and-they-re-spectacular",
+      "episode": "059 - The Implants - [DVD].avi",
+      "start": "00:20:40.217",
+      "end": "00:20:54.484"
+    },
+    "The jerk store called.": {
+      "src": "/api/audio-clip?id=the-jerk-store-called",
+      "episode": "147 - The Comeback.mpg",
+      "start": "00:00:50.789",
+      "end": "00:01:03.316"
+    },
+    "Maybe the dingo ate your baby.": {
+      "src": "/api/audio-clip?id=maybe-the-dingo-ate-your-baby",
+      "episode": "027 - The Stranded - [DVD].avi",
+      "start": "00:07:06.760",
+      "end": "00:07:17.751"
+    },
+    "You're killing independent George!": {
+      "src": "/api/audio-clip?id=you-re-killing-independent-george",
+      "episode": "118 - The Pool Guy - [DVD].avi",
+      "start": "00:11:38.000",
+      "end": "00:11:51.198"
+    },
+    "I choose not to run.": {
+      "src": "/api/audio-clip?id=i-choose-not-to-run",
+      "episode": "096 - The Race - [DVD].avi",
+      "start": "00:04:02.914",
+      "end": "00:04:14.246"
+    },
+    "That's gold.": {
+      "src": "/api/audio-clip?id=that-s-gold",
+      "episode": "140 - The Fatigues.mpg",
+      "start": "00:18:27.644",
+      "end": "00:18:39.738"
+    },
+    "They're all Twix!": {
+      "src": "/api/audio-clip?id=they-re-all-twix",
+      "episode": "167 - The Dealership.mpg",
+      "start": "00:19:31.241",
+      "end": "00:19:42.436"
+    },
+    "He's a close talker.": {
+      "src": "/api/audio-clip?id=he-s-a-close-talker",
+      "episode": "082, 083 - The Raincoats - [DVD].avi",
+      "start": "00:05:53.224",
+      "end": "00:06:04.784"
+    },
+    "It's sponge-worthy.": {
+      "src": "/api/audio-clip?id=it-s-sponge-worthy",
+      "episode": "119 - The Sponge - [DVD].avi",
+      "start": "00:14:29.560",
+      "end": "00:14:42.758"
+    },
+    "You know how to take it; you just don't know how to hold it.": {
+      "src": "/api/audio-clip?id=you-know-how-to-take-it-you-just-don-t-know-how-to-hold-it",
+      "episode": "028 - The Alternate Side - [DVD].avi",
+      "start": "00:05:59.189",
+      "end": "00:06:11.045"
+    },
+    "Giddy up!": {
+      "src": "/api/audio-clip?id=giddy-up",
+      "episode": "015 - The Baby Shower - [DVD].avi",
+      "start": "00:13:23.040",
+      "end": "00:13:34.838"
+    },
+    "I can't spare a square.": {
+      "src": "/api/audio-clip?id=i-can-t-spare-a-square",
+      "episode": "076 - The Stall - [DVD].avi",
+      "start": "00:01:09.607",
+      "end": "00:01:21.440"
+    },
+    "I was in the pool!": {
+      "src": "/api/audio-clip?id=i-was-in-the-pool",
+      "episode": "085 - The Hamptons - [DVD].avi",
+      "start": "00:12:40.731",
+      "end": "00:12:51.665"
+    },
+    "I don't wanna be a pirate.": {
+      "src": "/api/audio-clip?id=i-don-t-wanna-be-a-pirate",
+      "episode": "066 - The Puffy Shirt - [DVD].avi",
+      "start": "00:11:38.469",
+      "end": "00:11:49.903"
     }
   }
 }

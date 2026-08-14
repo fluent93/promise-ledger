@@ -36,4 +36,10 @@ npm run audio:upload -- no-soup-for-you apps/11-daily-verse-english/audio/no-sou
 
 manifest의 `src`는 `/api/audio-clip?id=no-soup-for-you`처럼 지정한다. 이 API는 iPhone Safari의 byte-range 요청을 지원한다. 앱은 오늘 표현과 동일한 manifest 키가 있고 실제 MP3를 읽을 수 있을 때만 듣기 버튼을 활성화하며, 실패해도 브라우저 합성음으로 대체하지 않는다.
 
+일괄 ZIP을 푼 뒤에는 전체 MP3를 Redis에 올리고 앱 manifest를 한 번에 갱신한다.
+
+```bash
+npm run audio:import -- .tmp/seinfeld-clips-batch
+```
+
 생성 MP3와 실제 manifest는 `.gitignore`에 포함되어 있다. 개인 감상 범위를 벗어난 공개 배포나 공유에는 원저작물의 이용 조건을 별도로 확인해야 한다.
