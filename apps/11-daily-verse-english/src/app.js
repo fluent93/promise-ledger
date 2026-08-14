@@ -1,6 +1,6 @@
-import { EXPRESSION_POLICY_VERSION, advancedExpressions } from "./expression-data.js?v=0.25";
+import { EXPRESSION_POLICY_VERSION, advancedExpressions } from "./expression-data.js?v=0.26";
 
-const APP_VERSION = "0.25";
+const APP_VERSION = "0.26";
 const expressions = advancedExpressions;
 let clipManifest = {};
 let activeAudio = null;
@@ -23,6 +23,7 @@ const expression = getDailyExpression(today);
 render();
 loadClipManifest().then((manifest) => {
   clipManifest = manifest;
+  renderAudioState();
 });
 registerServiceWorker()
   .then(renderNotificationState)
@@ -47,10 +48,7 @@ function render() {
     : "";
   elements.expressionExample.replaceChildren(...expression.example.map(createDialogueLine));
 
-  if (!("Audio" in window) && !("speechSynthesis" in window)) {
-    elements.playButton.disabled = true;
-    elements.playButton.textContent = "음성 미지원";
-  }
+  renderAudioState();
 }
 
 function createDialogueLine(line) {
@@ -92,13 +90,13 @@ function toggleDialogueAudio() {
     return;
   }
 
-  playSynthesizedDialogue();
+  setStatus("이 표현의 실제 클립은 아직 준비되지 않았습니다.");
 }
 
 function playActualClip(clip) {
   const source = clip.src || (clip.file ? `./audio/${clip.file}` : "");
   if (!source) {
-    playSynthesizedDialogue();
+    setStatus("이 표현의 실제 클립은 아직 준비되지 않았습니다.");
     return;
   }
 
@@ -111,7 +109,7 @@ function playActualClip(clip) {
     if (activeAudio !== audio) return;
     activeAudio = null;
     setPlaybackState(false);
-    playSynthesizedDialogue();
+    setStatus("실제 클립을 재생하지 못했습니다.");
   });
 }
 
@@ -120,42 +118,32 @@ function finishAudioPlayback() {
   setPlaybackState(false);
 }
 
-function playSynthesizedDialogue() {
-  if (!("speechSynthesis" in window)) return;
-
-  const voices = speechSynthesis.getVoices().filter((voice) => voice.lang.toLowerCase().startsWith("en"));
-  const preferred = voices.filter((voice) => voice.lang.toLowerCase().startsWith("en-us"));
-  const available = preferred.length ? preferred : voices;
-  const lines = expression.example.map((line, index) => {
-    const utterance = new SpeechSynthesisUtterance(line.text);
-    utterance.lang = "en-US";
-    utterance.rate = 0.92;
-    utterance.pitch = index % 2 ? 1.05 : 0.94;
-    if (available.length) utterance.voice = available[index % available.length];
-    return utterance;
-  });
-
-  if (!lines.length) return;
-  lines.at(-1).addEventListener("end", () => setPlaybackState(false), { once: true });
-  lines.at(-1).addEventListener("error", () => setPlaybackState(false), { once: true });
-  setPlaybackState(true);
-  lines.forEach((line) => speechSynthesis.speak(line));
-}
-
 function stopDialogueAudio() {
   if (activeAudio) {
     activeAudio.pause();
     activeAudio.currentTime = 0;
     activeAudio = null;
   }
-  if ("speechSynthesis" in window) speechSynthesis.cancel();
   setPlaybackState(false);
 }
 
 function setPlaybackState(isPlaying) {
   playbackActive = isPlaying;
   elements.playButton.classList.toggle("is-playing", isPlaying);
-  elements.playButton.textContent = isPlaying ? "■ 정지" : "▶ 듣기";
+  if (isPlaying) {
+    elements.playButton.disabled = false;
+    elements.playButton.textContent = "■ 정지";
+    return;
+  }
+  renderAudioState();
+}
+
+function renderAudioState() {
+  const clip = clipManifest[expression.phrase];
+  const source = clip?.src || clip?.file;
+  const available = Boolean(source && "Audio" in window);
+  elements.playButton.disabled = !available;
+  elements.playButton.textContent = available ? "▶ 실제 클립" : "클립 준비 중";
 }
 
 async function loadClipManifest() {

@@ -15,7 +15,7 @@ Open `http://localhost:5174/daily-verse/`. The legacy route is intentionally kep
 
 `src/expression-data.js` contains short Seinfeld-associated expressions and newly written two-line conversations assigned to familiar characters. These are learning reconstructions, not verbatim episode transcripts. Full scripts and subtitle files are not stored in the repository.
 
-The play button prefers a matching personal MP3 in `audio/clip-manifest.json` and falls back to browser speech when no clip is installed. Use the Colab workflow in `../../docs/seinfeld-audio-clips.md` to extract only short clips while the original videos remain in Google Drive.
+The play button is enabled only when a matching personal MP3 exists in `audio/clip-manifest.json`; synthetic browser speech is not used. Use the Colab workflow in `../../docs/seinfeld-audio-clips.md` to extract only short clips while the original videos remain in Google Drive.
 
 The full-series candidate workflow is documented in `../../docs/seinfeld-curriculum.md`. It scans the Drive subtitles and produces five review candidates per episode without copying the source videos into this repository.
 
