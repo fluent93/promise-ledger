@@ -19,3 +19,4 @@ node_modules/
 .codex/
 # Test files are checked locally but should not deploy as functions
 api/*.test.js
+apps/11-daily-verse-english/audio/*.mp3

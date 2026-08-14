@@ -5,6 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import webpush from "web-push";
 
+import audioClipHandler from "../../api/audio-clip.js";
 import pushHealthHandler from "../../api/push-health.js";
 import pushPublicKeyHandler from "../../api/push-public-key.js";
 import pushSubscriptionsHandler from "../../api/push-subscriptions.js";
@@ -20,6 +21,7 @@ await loadEnvFile(path.join(rootDir, ".env.local"));
 await ensureLocalPushEnv();
 
 const apiRoutes = new Map([
+  ["/api/audio-clip", audioClipHandler],
   ["/api/daily-expression-data", dailyExpressionDataHandler],
   ["/api/push-health", pushHealthHandler],
   ["/api/push-public-key", pushPublicKeyHandler],
@@ -71,6 +73,9 @@ async function handleApi(handler, request, response, url) {
     json(payload) {
       if (!response.hasHeader("content-type")) response.setHeader("content-type", "application/json; charset=utf-8");
       response.end(JSON.stringify(payload));
+    },
+    end(payload) {
+      response.end(payload);
     },
   };
   await handler(request, wrapped);

@@ -7,4 +7,3 @@ node_modules/
 __pycache__/
 *.pyc
 apps/11-daily-verse-english/audio/*.mp3
-apps/11-daily-verse-english/audio/clip-manifest.json
