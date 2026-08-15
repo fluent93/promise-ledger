@@ -212,8 +212,8 @@
     "These pretzels are making me thirsty.": {
       "src": "/api/audio-clip?id=these-pretzels-are-making-me-thirsty",
       "episode": "028 - The Alternate Side - [DVD].avi",
-      "start": "00:07:33.624",
-      "end": "00:07:45.080",
+      "start": "00:09:34.545",
+      "end": "00:09:46.810",
       "dialogue": [
         {
           "speaker": "Kramer",
@@ -225,9 +225,7 @@
           "text": "Is that how you're gonna say it?",
           "translation": "그렇게 말할 생각이야?"
         }
-      ],
-      "audioVerified": false,
-      "audioNote": "Production MP3 is the wrong scene (seven-dates / face-to-face breakup). Re-extract and re-upload id these-pretzels-are-making-me-thirsty."
+      ]
     },
     "Master of your domain.": {
       "src": "/api/audio-clip?id=master-of-your-domain",

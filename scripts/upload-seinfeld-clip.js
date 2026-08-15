@@ -42,6 +42,16 @@ if (!redisResponse.ok || payload.error || payload.result !== "OK") {
 
 console.log(`${id}: uploaded ${audio.length} bytes (${record.sha256.slice(0, 12)})`);
 
+function unquoteEnvValue(value) {
+  if (
+    (value.startsWith('"') && value.endsWith('"')) ||
+    (value.startsWith("'") && value.endsWith("'"))
+  ) {
+    return value.slice(1, -1);
+  }
+  return value;
+}
+
 async function loadEnvFile(file) {
   try {
     const content = await fs.readFile(file, "utf8");
@@ -51,7 +61,7 @@ async function loadEnvFile(file) {
       const index = trimmed.indexOf("=");
       if (index === -1) continue;
       const key = trimmed.slice(0, index).trim();
-      const value = trimmed.slice(index + 1).trim();
+      const value = unquoteEnvValue(trimmed.slice(index + 1).trim());
       if (!process.env[key]) process.env[key] = value;
     }
   } catch (error) {
