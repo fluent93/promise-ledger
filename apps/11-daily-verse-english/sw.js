@@ -1,10 +1,10 @@
-const CACHE_NAME = "seinfeld-english:v28";
+const CACHE_NAME = "seinfeld-english:v29";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=0.28",
-  "./src/app.js?v=0.28",
-  "./src/expression-data.js?v=0.28",
+  "./styles.css?v=0.29",
+  "./src/app.js?v=0.29",
+  "./src/expression-data.js?v=0.29",
   "./manifest.json",
   "./icons/icon.svg",
 ];
@@ -25,6 +25,11 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
+  const url = new URL(event.request.url);
+  if (url.pathname.startsWith("/api/")) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;

@@ -27,7 +27,7 @@ export default async function handler(request, response) {
     const body = audio.subarray(start, end + 1);
 
     response.setHeader("accept-ranges", "bytes");
-    response.setHeader("cache-control", "private, max-age=86400, immutable");
+    response.setHeader("cache-control", "private, max-age=0, must-revalidate");
     response.setHeader("content-disposition", `inline; filename="${record.fileName || `${id}.mp3`}"`);
     response.setHeader("content-type", record.contentType || "audio/mpeg");
     response.setHeader("content-length", String(body.length));

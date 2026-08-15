@@ -1,6 +1,6 @@
-import { EXPRESSION_POLICY_VERSION, advancedExpressions } from "./expression-data.js?v=0.28";
+import { EXPRESSION_POLICY_VERSION, advancedExpressions } from "./expression-data.js?v=0.29";
 
-const APP_VERSION = "0.28";
+const APP_VERSION = "0.29";
 const expressions = advancedExpressions;
 let clipManifest = {};
 let activeAudio = null;
@@ -221,7 +221,7 @@ async function renderNotificationState() {
 
 async function registerServiceWorker() {
   if (!("serviceWorker" in navigator)) return null;
-  return navigator.serviceWorker.register("./sw.js");
+  return navigator.serviceWorker.register("./sw.js?v=0.29");
 }
 
 async function getPushPublicKey() {

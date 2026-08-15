@@ -210,7 +210,7 @@
       ]
     },
     "These pretzels are making me thirsty.": {
-      "src": "/api/audio-clip?id=these-pretzels-are-making-me-thirsty",
+      "src": "/api/audio-clip?id=these-pretzels-are-making-me-thirsty&v=7bcab9dcfde8",
       "episode": "028 - The Alternate Side - [DVD].avi",
       "start": "00:09:34.545",
       "end": "00:09:46.810",
