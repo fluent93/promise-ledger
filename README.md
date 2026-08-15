@@ -68,7 +68,7 @@ npm run push:env-check
 npm run check:11
 ```
 
-After deployment, open `/api/push-health` and expect `ok: true` before enabling the 09:30 notification.
+After deployment, open `/api/push-health` and expect `ok: true` before enabling the 09:30 notification. Exact 09:30 KST delivery still uses Google Cloud Scheduler; see `docs/seinfeld-english-scheduler.md`. Vercel Hobby cron is a backup near the same time.
 
 Detailed launch steps live in `docs/seinfeld-english-deploy.md`.
 

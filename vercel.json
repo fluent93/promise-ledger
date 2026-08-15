@@ -28,5 +28,11 @@
       "destination": "/daily-verse/",
       "permanent": false
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/send-daily-expression",
+      "schedule": "30 0 * * *"
+    }
   ]
 }

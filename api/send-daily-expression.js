@@ -6,6 +6,7 @@ import {
   isStorageConfigured,
   listSubscriptions,
   recordSendLog,
+  releaseSendLock,
 } from "./push-store.js";
 
 const SERVICE_TIME_ZONE = "Asia/Seoul";
@@ -38,6 +39,7 @@ export default async function handler(request, response) {
   const dateKey = formatDateInTimeZone(now, SERVICE_TIME_ZONE);
   const triggeredAt = now.toISOString();
   const triggeredAtLocal = formatDateTimeInTimeZone(now, SERVICE_TIME_ZONE);
+  let lockAcquired = false;
   try {
     const shouldSend = await createSendLock({ slot: "daily", dateKey, triggeredAt });
     if (!shouldSend) {
@@ -52,6 +54,7 @@ export default async function handler(request, response) {
       response.status(200).json({ ok: true, duplicate: true, skipped: true, dateKey, triggeredAtLocal });
       return;
     }
+    lockAcquired = true;
 
     webpush.setVapidDetails(
       process.env.VAPID_SUBJECT || "mailto:hello@example.com",
@@ -75,10 +78,23 @@ export default async function handler(request, response) {
       ...summary,
     };
 
+    // If nobody received a push, free the lock so a later retry can succeed.
+    if (summary.sent === 0 && records.length > 0) {
+      await releaseSendLock({ slot: "daily", dateKey });
+      lockAcquired = false;
+    }
+
     await recordSendLog(logEntry);
     console.log(JSON.stringify(logEntry));
     response.status(200).json({ ok: true, ...logEntry });
   } catch (error) {
+    if (lockAcquired) {
+      try {
+        await releaseSendLock({ slot: "daily", dateKey });
+      } catch {
+        // Keep the original send error as the response.
+      }
+    }
     response.status(500).json({ error: error.message || "Failed to send push notifications" });
   }
 }

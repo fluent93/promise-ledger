@@ -33,6 +33,8 @@ export default async function handler(request, response) {
   const cron = {
     secretConfigured: Boolean(process.env.CRON_SECRET),
     schedule: "09:30 Asia/Seoul",
+    endpoint: "/api/send-daily-expression",
+    legacyEndpoint: "/api/send-daily-verse-morning",
   };
 
   response.status(200).json({
@@ -42,5 +44,9 @@ export default async function handler(request, response) {
     storage,
     cron,
     recentSends,
+    warning:
+      storage.ok && storage.count > 0 && recentSends.length === 0
+        ? "Subscriptions exist but no send logs yet. Confirm Cloud Scheduler or Vercel cron hits /api/send-daily-expression."
+        : undefined,
   });
 }

@@ -39,13 +39,13 @@ export const advancedExpressions = [
     "example": [
       {
         "speaker": "Jerry",
-        "text": "What's the deal with airline boarding groups?",
-        "translation": "비행기 탑승 그룹은 도대체 왜 저런 거야?"
+        "text": "What's the deal with those guys down in the pit?",
+        "translation": "저 아래 구덩이에 있는 사람들은 도대체 뭐야?"
       },
       {
-        "speaker": "George",
-        "text": "Exactly. Six groups, one line.",
-        "translation": "그러게. 그룹은 여섯 개인데 줄은 하나야."
+        "speaker": "Jerry",
+        "text": "What are they doing down there?",
+        "translation": "저 아래에서 뭘 하는 건데?"
       }
     ]
   },
@@ -54,14 +54,14 @@ export const advancedExpressions = [
     "meaning": "이러쿵저러쿵, 중간 과정은 생략하고.",
     "example": [
       {
-        "speaker": "Elaine",
-        "text": "We had dinner, yada, yada, yada, and I got home late.",
-        "translation": "저녁을 먹고, 이러쿵저러쿵하다가 집에 늦게 왔어."
+        "speaker": "George",
+        "text": "You yada yada'd over the best part.",
+        "translation": "제일 중요한 부분을 이러쿵저러쿵으로 넘겼잖아."
       },
       {
-        "speaker": "Jerry",
-        "text": "Sounds like you skipped the important part.",
-        "translation": "중요한 부분을 건너뛴 것 같은데."
+        "speaker": "Elaine",
+        "text": "No, I mentioned the yada yada.",
+        "translation": "아니야, 이러쿵저러쿵은 말했다고."
       }
     ]
   },
@@ -71,13 +71,13 @@ export const advancedExpressions = [
     "example": [
       {
         "speaker": "Jerry",
-        "text": "He color-codes every shelf. Not that there's anything wrong with that.",
-        "translation": "그 사람은 선반마다 색깔로 구분해 둬. 그게 잘못됐다는 뜻은 아니고."
+        "text": "We're not gay. Not that there's anything wrong with that.",
+        "translation": "우린 게이가 아니야. 그게 잘못됐다는 뜻은 아니고."
       },
       {
         "speaker": "George",
-        "text": "At least it's easy to find everything.",
-        "translation": "적어도 물건 찾기는 쉽겠네."
+        "text": "Not that there's anything wrong with that.",
+        "translation": "그게 잘못됐다는 뜻은 아니야."
       }
     ]
   },
@@ -87,13 +87,13 @@ export const advancedExpressions = [
     "example": [
       {
         "speaker": "George",
-        "text": "I can't join another project right now. It's not you, it's me.",
-        "translation": "지금은 다른 프로젝트에 참여할 수 없어. 네 문제가 아니라 내 문제야."
+        "text": "It's not you, it's me.",
+        "translation": "네 문제가 아니라 내 문제야."
       },
       {
-        "speaker": "Jerry",
-        "text": "I get it. We can talk when your schedule clears up.",
-        "translation": "알겠어. 일정이 정리되면 다시 얘기하자."
+        "speaker": "George",
+        "text": "This is the best break-up line ever invented.",
+        "translation": "이건 역사상 최고의 이별 멘트야."
       }
     ]
   },
@@ -103,13 +103,13 @@ export const advancedExpressions = [
     "example": [
       {
         "speaker": "Jerry",
-        "text": "Another three-hour meeting? I'm out.",
-        "translation": "또 세 시간짜리 회의라고? 난 빠질래."
+        "text": "I'm out.",
+        "translation": "난 빠질게."
       },
       {
-        "speaker": "Kramer",
-        "text": "Wait, there will be snacks this time.",
-        "translation": "잠깐, 이번에는 간식도 나온대."
+        "speaker": "George",
+        "text": "What do you mean, you're out?",
+        "translation": "빠지겠다는 게 무슨 뜻이야?"
       }
     ]
   },
@@ -119,13 +119,13 @@ export const advancedExpressions = [
     "example": [
       {
         "speaker": "Frank",
-        "text": "The printer jammed again. Serenity now.",
-        "translation": "프린터가 또 걸렸어. 평온이여, 지금 당장."
+        "text": "Serenity now! Serenity now!",
+        "translation": "평온이여, 지금! 평온이여, 지금!"
       },
       {
         "speaker": "George",
-        "text": "You don't sound very serene.",
-        "translation": "전혀 평온하게 들리지 않는데요."
+        "text": "What the hell is serenity now?",
+        "translation": "평온이여 지금이 대체 뭐야?"
       }
     ]
   },
@@ -134,14 +134,14 @@ export const advancedExpressions = [
     "meaning": "그거 안됐네, 아쉽다.",
     "example": [
       {
-        "speaker": "George",
-        "text": "The bakery sold the last loaf five minutes ago.",
-        "translation": "빵집에서 마지막 빵을 5분 전에 팔았대."
+        "speaker": "Elaine",
+        "text": "She's got a girlfriend.",
+        "translation": "그 여자한테 여자친구가 있대."
       },
       {
         "speaker": "Jerry",
-        "text": "That's a shame. I came across town for it.",
-        "translation": "그거 안됐네. 난 그거 사려고 멀리서 왔는데."
+        "text": "What a shame.",
+        "translation": "참 안됐네."
       }
     ]
   },
@@ -150,14 +150,14 @@ export const advancedExpressions = [
     "meaning": "말도 안 돼! 정말이야? 놀라움을 강하게 나타내는 말.",
     "example": [
       {
-        "speaker": "Jerry",
-        "text": "I got upgraded to first class for free.",
-        "translation": "무료로 일등석 업그레이드를 받았어."
+        "speaker": "Elaine",
+        "text": "Get out!",
+        "translation": "말도 안 돼!"
       },
       {
-        "speaker": "Elaine",
-        "text": "Get out! How did that happen?",
-        "translation": "말도 안 돼! 어떻게 된 거야?"
+        "speaker": "Jerry",
+        "text": "I'm serious.",
+        "translation": "진짜라니까."
       }
     ]
   },
@@ -166,14 +166,14 @@ export const advancedExpressions = [
     "meaning": "좋아, 가보자! 신나게 동의하거나 출발을 재촉하는 말.",
     "example": [
       {
-        "speaker": "Jerry",
-        "text": "The tickets are booked and the car is downstairs.",
-        "translation": "표도 예매했고 차도 아래에 와 있어."
-      },
-      {
         "speaker": "Kramer",
         "text": "Giddy up!",
         "translation": "좋아, 가보자!"
+      },
+      {
+        "speaker": "Jerry",
+        "text": "All right, let's go.",
+        "translation": "좋아, 가자."
       }
     ]
   },
@@ -182,14 +182,14 @@ export const advancedExpressions = [
     "meaning": "우리 사회에는 지켜야 할 기본 예의가 있잖아.",
     "example": [
       {
-        "speaker": "Jerry",
-        "text": "He took the last seat and put his bag on the one beside it.",
-        "translation": "그 사람이 마지막 자리를 차지하고 옆자리에는 가방까지 놨어."
+        "speaker": "George",
+        "text": "We're living in a society!",
+        "translation": "우리는 사회 속에서 살고 있다고!"
       },
       {
         "speaker": "George",
-        "text": "We're living in a society. You can't do that.",
-        "translation": "우리는 사회 속에서 살고 있다고. 그러면 안 되지."
+        "text": "We're supposed to act in a civilized way.",
+        "translation": "문명인답게 행동해야지."
       }
     ]
   },
@@ -204,8 +204,8 @@ export const advancedExpressions = [
       },
       {
         "speaker": "George",
-        "text": "I turned it around. It's practically a new chip.",
-        "translation": "반대쪽으로 돌렸어. 사실상 새 칩이나 마찬가지야."
+        "text": "What?",
+        "translation": "뭐?"
       }
     ]
   },
@@ -215,13 +215,13 @@ export const advancedExpressions = [
     "example": [
       {
         "speaker": "Elaine",
-        "text": "Can you spare a square of paper?",
-        "translation": "종이 한 칸만 좀 줄 수 있어?"
+        "text": "Can you spare a square?",
+        "translation": "한 칸만 좀 나눠줄 수 있어?"
       },
       {
         "speaker": "Jane",
-        "text": "Sorry, this is the last one.",
-        "translation": "미안하지만 이게 마지막 한 칸이야."
+        "text": "I can't spare a square.",
+        "translation": "한 칸도 나눠줄 여유가 없어."
       }
     ]
   },
@@ -230,14 +230,14 @@ export const advancedExpressions = [
     "meaning": "당신에게 줄 수프는 없어. 규칙을 어긴 사람을 단호하게 거절하는 말.",
     "example": [
       {
-        "speaker": "George",
-        "text": "Two dollars? But everyone in front of me got free bread.",
-        "translation": "2달러요? 하지만 제 앞 사람들은 모두 빵을 공짜로 받았잖아요."
+        "speaker": "Soup Nazi",
+        "text": "No soup for you!",
+        "translation": "당신에게 줄 수프는 없어!"
       },
       {
         "speaker": "Soup Nazi",
-        "text": "You want bread? Three dollars! No soup for you!",
-        "translation": "빵을 원해? 3달러! 당신에게 줄 수프는 없어!"
+        "text": "Come back one year!",
+        "translation": "1년 뒤에 다시 와!"
       }
     ]
   },
@@ -246,14 +246,14 @@ export const advancedExpressions = [
     "meaning": "이 프레첼을 먹으니 목이 마르네.",
     "example": [
       {
-        "speaker": "Kramer",
-        "text": "These crackers are making me thirsty.",
-        "translation": "이 크래커를 먹으니 목이 마르네."
+        "speaker": "Elaine",
+        "text": "These pretzels are making me thirsty.",
+        "translation": "이 프레첼을 먹으니 목이 마르네."
       },
       {
         "speaker": "Jerry",
-        "text": "There's water in the fridge.",
-        "translation": "냉장고에 물 있어."
+        "text": "No. These pretzels are making me thirsty.",
+        "translation": "아니. 이 프레첼을 먹으니 목이 마르네."
       }
     ]
   },
@@ -262,14 +262,14 @@ export const advancedExpressions = [
     "meaning": "나 방금 수영장에 있었단 말이야. 민망한 상황을 다급하게 해명하는 말.",
     "example": [
       {
-        "speaker": "Jerry",
-        "text": "Why is your hair completely flat?",
-        "translation": "머리가 왜 그렇게 완전히 납작해졌어?"
+        "speaker": "George",
+        "text": "I was in the pool!",
+        "translation": "나 수영장에 있었단 말이야!"
       },
       {
         "speaker": "George",
         "text": "I was in the pool!",
-        "translation": "나 수영장에 있었단 말이야!"
+        "translation": "수영장에 있었다고!"
       }
     ]
   },
@@ -279,13 +279,13 @@ export const advancedExpressions = [
     "example": [
       {
         "speaker": "Jerry",
-        "text": "You walked past the dessert table without stopping.",
-        "translation": "디저트 테이블 앞을 멈추지 않고 지나갔네."
+        "text": "Are you still master of your domain?",
+        "translation": "아직도 네 욕구의 주인이야?"
       },
       {
         "speaker": "George",
-        "text": "I'm the master of my domain.",
-        "translation": "난 내 욕구를 완벽히 통제하는 사람이야."
+        "text": "I'm king of the county.",
+        "translation": "난 그 지역의 왕이야."
       }
     ]
   },
@@ -294,14 +294,14 @@ export const advancedExpressions = [
     "meaning": "정말 멋져 보여. 외모를 직접 칭찬하는 말.",
     "example": [
       {
-        "speaker": "Jerry",
-        "text": "I finally found a jacket that fits.",
-        "translation": "드디어 나한테 맞는 재킷을 찾았어."
-      },
-      {
-        "speaker": "Elaine",
+        "speaker": "Woman",
         "text": "You are so good-looking.",
         "translation": "정말 멋져 보여."
+      },
+      {
+        "speaker": "Jerry",
+        "text": "Thank you.",
+        "translation": "고마워."
       }
     ]
   },
@@ -310,14 +310,14 @@ export const advancedExpressions = [
     "meaning": "우리 같은 평범한 사람들을 위한 축제.",
     "example": [
       {
-        "speaker": "George",
-        "text": "No fancy dinner this year. Just friends and takeout.",
-        "translation": "올해는 근사한 저녁도 없어요. 친구들과 포장 음식만 먹을 거예요."
+        "speaker": "Frank",
+        "text": "A Festivus for the rest of us!",
+        "translation": "우리 같은 사람들을 위한 페스티버스다!"
       },
       {
         "speaker": "Frank",
-        "text": "A Festivus for the rest of us.",
-        "translation": "우리 같은 사람들을 위한 페스티버스지."
+        "text": "Welcome, newcomers.",
+        "translation": "새로 온 사람들, 환영한다."
       }
     ]
   },
@@ -327,13 +327,13 @@ export const advancedExpressions = [
     "example": [
       {
         "speaker": "Jerry",
-        "text": "Are those photos actually from your trip?",
-        "translation": "그 사진들 정말 네 여행에서 찍은 거야?"
+        "text": "And they're real?",
+        "translation": "그리고 진짜야?"
       },
       {
         "speaker": "Sidra",
         "text": "They're real, and they're spectacular.",
-        "translation": "진짜고, 아주 멋져."
+        "translation": "진짜고, 게다가 아주 훌륭해."
       }
     ]
   },
@@ -342,14 +342,14 @@ export const advancedExpressions = [
     "meaning": "난 해적이 되고 싶지 않아. 원치 않는 역할이나 옷을 거부하는 말.",
     "example": [
       {
-        "speaker": "Kramer",
-        "text": "Everyone has to wear a cape for the photo.",
-        "translation": "사진 찍을 때 모두 망토를 입어야 해."
-      },
-      {
         "speaker": "Jerry",
         "text": "I don't wanna be a pirate.",
         "translation": "난 해적이 되고 싶지 않아."
+      },
+      {
+        "speaker": "Kramer",
+        "text": "You look like a pirate.",
+        "translation": "너 해적처럼 보여."
       }
     ]
   },
@@ -358,14 +358,14 @@ export const advancedExpressions = [
     "meaning": "한참 뒤에 떠올린 유치한 반격을 꺼내는 말.",
     "example": [
       {
-        "speaker": "Jerry",
-        "text": "I finally thought of the perfect comeback from yesterday.",
-        "translation": "어제 그 말에 받아칠 완벽한 대답이 이제야 생각났어."
+        "speaker": "George",
+        "text": "The jerk store called.",
+        "translation": "멍청이 가게에서 전화 왔어."
       },
       {
         "speaker": "George",
-        "text": "Let me guess. The jerk store called?",
-        "translation": "맞혀볼게. 멍청이 가게에서 전화 왔다고?"
+        "text": "They're running out of you.",
+        "translation": "네가 다 떨어졌대."
       }
     ]
   },
@@ -374,14 +374,14 @@ export const advancedExpressions = [
     "meaning": "상대의 걱정을 엉뚱한 추측으로 받아치는 말.",
     "example": [
       {
-        "speaker": "Jerry",
-        "text": "I can't find my phone anywhere.",
-        "translation": "내 휴대폰을 아무리 찾아도 없어."
+        "speaker": "Kramer",
+        "text": "Maybe the dingo ate your baby.",
+        "translation": "딩고가 네 아기를 잡아먹었을지도 모르지."
       },
       {
-        "speaker": "Elaine",
-        "text": "Maybe the couch ate it.",
-        "translation": "소파가 먹어버렸나 보지."
+        "speaker": "Jerry",
+        "text": "What?",
+        "translation": "뭐?"
       }
     ]
   },
@@ -390,14 +390,14 @@ export const advancedExpressions = [
     "meaning": "내 독립적인 자아를 없애고 있어. 서로 다른 인간관계가 섞일 때의 과장된 불평.",
     "example": [
       {
-        "speaker": "Susan",
-        "text": "My coworkers are joining our weekend game night.",
-        "translation": "내 직장 동료들도 이번 주말 게임 모임에 올 거야."
+        "speaker": "George",
+        "text": "You're killing independent George!",
+        "translation": "당신이 독립적인 조지를 죽이고 있어!"
       },
       {
-        "speaker": "George",
-        "text": "You're killing independent me!",
-        "translation": "당신이 독립적인 나를 죽이고 있어!"
+        "speaker": "Susan",
+        "text": "Who?",
+        "translation": "누구?"
       }
     ]
   },
@@ -406,14 +406,14 @@ export const advancedExpressions = [
     "meaning": "난 뛰지 않기로 선택했어. 못하는 일을 의지의 문제처럼 바꿔 말하는 표현.",
     "example": [
       {
-        "speaker": "Jerry",
-        "text": "Are you worried you can't finish the race?",
-        "translation": "경주를 끝까지 못 뛸까 봐 걱정되는 거야?"
+        "speaker": "George",
+        "text": "I choose not to run.",
+        "translation": "난 뛰지 않기로 선택했어."
       },
       {
-        "speaker": "George",
-        "text": "No. I choose not to run.",
-        "translation": "아니. 난 뛰지 않기로 선택한 거야."
+        "speaker": "Jerry",
+        "text": "You choose not to run?",
+        "translation": "뛰지 않기로 선택했다고?"
       }
     ]
   },
@@ -422,14 +422,14 @@ export const advancedExpressions = [
     "meaning": "그거 정말 훌륭한 소재야, 완전 대박이야.",
     "example": [
       {
-        "speaker": "Jerry",
-        "text": "My neighbor labels leftovers by emotional importance.",
-        "translation": "우리 이웃은 남은 음식에 감정적 중요도에 따라 이름표를 붙여."
+        "speaker": "Bania",
+        "text": "That's gold, Jerry! Gold!",
+        "translation": "그거 황금이야, 제리! 황금!"
       },
       {
-        "speaker": "Bania",
-        "text": "That's gold. Write that down.",
-        "translation": "그거 최고다. 적어 둬."
+        "speaker": "Jerry",
+        "text": "Will you stop saying that?",
+        "translation": "그 말 좀 그만할래?"
       }
     ]
   },
@@ -439,13 +439,13 @@ export const advancedExpressions = [
     "example": [
       {
         "speaker": "Jerry",
-        "text": "The menu lists three versions, but they're all the same sandwich.",
-        "translation": "메뉴에는 세 종류라고 적혀 있지만 전부 같은 샌드위치야."
+        "text": "They're all Twix!",
+        "translation": "전부 트윅스잖아!"
       },
       {
-        "speaker": "George",
-        "text": "Exactly. They're all the same thing!",
-        "translation": "맞아. 전부 똑같은 거라고!"
+        "speaker": "Jerry",
+        "text": "Left Twix, right Twix — it's the same candy!",
+        "translation": "왼쪽 트윅스, 오른쪽 트윅스 — 같은 사탕이라고!"
       }
     ]
   },
@@ -455,13 +455,13 @@ export const advancedExpressions = [
     "example": [
       {
         "speaker": "Jerry",
-        "text": "Why do you keep stepping backward when Dan talks?",
-        "translation": "댄과 얘기할 때 왜 계속 뒤로 물러서는 거야?"
+        "text": "He's a close talker.",
+        "translation": "그 사람은 가까이 붙어서 말해."
       },
       {
         "speaker": "Elaine",
-        "text": "He's a close talker.",
-        "translation": "그 사람은 지나치게 가까이 붙어서 말해."
+        "text": "A little too close.",
+        "translation": "조금만 너무 가깝지."
       }
     ]
   },
@@ -470,14 +470,14 @@ export const advancedExpressions = [
     "meaning": "아껴둔 것을 쓸 만큼 가치가 있어.",
     "example": [
       {
-        "speaker": "Jerry",
-        "text": "Is this occasion really candle-worthy?",
-        "translation": "정말 이럴 때 아껴둔 초를 쓸 가치가 있어?"
+        "speaker": "Elaine",
+        "text": "Is he sponge-worthy?",
+        "translation": "그 사람은 스펀지 쓸 가치가 있어?"
       },
       {
-        "speaker": "Elaine",
-        "text": "Absolutely. We've been waiting all year.",
-        "translation": "당연하지. 일 년 내내 기다렸잖아."
+        "speaker": "Jerry",
+        "text": "He might be sponge-worthy.",
+        "translation": "스펀지 쓸 만할지도 모르지."
       }
     ]
   },
@@ -486,15 +486,18 @@ export const advancedExpressions = [
     "meaning": "받는 법은 알지만 제대로 유지하는 법은 모르는군요.",
     "example": [
       {
-        "speaker": "Clerk",
-        "text": "They accepted the booking, but they gave our table away.",
-        "translation": "예약은 받았지만 저희가 그 테이블을 다른 손님에게 드렸습니다."
+        "speaker": "Jerry",
+        "text": "You know how to take the reservation.",
+        "translation": "예약 받는 법은 아시잖아요."
       },
       {
         "speaker": "Jerry",
-        "text": "So they know how to take a reservation, not how to hold one.",
-        "translation": "예약받는 법은 알아도 예약을 지키는 법은 모르는군요."
+        "text": "You just don't know how to hold the reservation.",
+        "translation": "예약을 지키는 법을 모를 뿐이죠."
       }
     ]
   }
-].map((expression) => ({ ...expression, source: episodeSources[expression.phrase] }));
+].map((expression) => ({
+  ...expression,
+  source: episodeSources[expression.phrase],
+}));

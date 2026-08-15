@@ -30,7 +30,7 @@ DAILY_ENGLISH_APP_URL=/daily-verse/
 CRON_SECRET=...
 ```
 
-After deployment, check `/api/push-health` and press `09:30 알림` once in the app. Scheduled delivery uses the endpoint in `seinfeld-english-scheduler.md`.
+After deployment, check `/api/push-health` and press `09:30 알림` once in the app. Vercel Hobby cron calls `/api/send-daily-expression` once daily near 09:30 KST; for exact timing keep the Google Cloud Scheduler job documented in `seinfeld-english-scheduler.md`.
 
 Without Redis, the expression and voice playback still work; only the daily push is unavailable. Personal episode clips are optional and ignored by Git; see `seinfeld-audio-clips.md`.
 

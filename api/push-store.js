@@ -72,7 +72,7 @@ export async function listSubscriptions() {
 
 export async function createSendLock({ slot, dateKey, triggeredAt }) {
   if (useLocalStore()) return true;
-  const key = `${SEND_LOCK_PREFIX}:${dateKey}:${slot}`;
+  const key = sendLockKey(dateKey, slot);
   const result = await upstashCommand([
     "SET",
     key,
@@ -82,6 +82,15 @@ export async function createSendLock({ slot, dateKey, triggeredAt }) {
     String(SEND_LOCK_TTL_SECONDS),
   ]);
   return result === "OK";
+}
+
+export async function releaseSendLock({ slot, dateKey }) {
+  if (useLocalStore()) return;
+  await upstashCommand(["DEL", sendLockKey(dateKey, slot)]);
+}
+
+function sendLockKey(dateKey, slot) {
+  return `${SEND_LOCK_PREFIX}:${dateKey}:${slot}`;
 }
 
 export async function recordSendLog(entry) {

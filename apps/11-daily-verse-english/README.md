@@ -13,7 +13,7 @@ Open `http://localhost:5174/daily-verse/`. The legacy route is intentionally kep
 
 ## Content
 
-`src/expression-data.js` contains short Seinfeld-associated expressions and newly written two-line conversations assigned to familiar characters. These are learning reconstructions, not verbatim episode transcripts. Full scripts and subtitle files are not stored in the repository.
+`src/expression-data.js` contains short Seinfeld-associated expressions. Conversation lines are kept close to the spoken dialogue in the matching personal MP3 clip so listening and reading stay aligned. Full scripts and subtitle files are not stored in the repository.
 
 The play button is enabled only when a matching personal MP3 exists in `audio/clip-manifest.json`; synthetic browser speech is not used. Use the Colab workflow in `../../docs/seinfeld-audio-clips.md` to extract only short clips while the original videos remain in Google Drive.
 
