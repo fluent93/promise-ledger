@@ -7,11 +7,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Seinfeld English" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <title>Seinfeld English</title>
+    <title>Seinfeld English — Authentic Sitcom Mastery</title>
     <link rel="manifest" href="./manifest.json" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="./icons/icon.svg" />
-    <link rel="stylesheet" href="./styles.css?v=0.29" />
+    <link rel="stylesheet" href="./styles.css?v=0.31" />
   </head>
   <body>
     <header class="app-header">
@@ -19,27 +19,47 @@
         <span>SE</span>
         <strong>Seinfeld English</strong>
       </a>
-      <button type="button" class="quiet-button" id="notificationButton" aria-pressed="false">09:30 알림</button>
+      <div class="header-actions">
+        <button type="button" class="quiet-button" id="notificationButton" aria-pressed="false">09:30 알림</button>
+      </div>
     </header>
 
     <main class="lesson">
-      <p class="date" id="dateLabel"></p>
-      <p class="eyebrow">Today's expression</p>
+      <div class="lesson-meta">
+        <p class="date" id="dateLabel"></p>
+        <span class="badge">Original Sitcom Audio</span>
+      </div>
+
+      <p class="eyebrow">Today's Expression</p>
       <h1 id="expressionPhrase"></h1>
       <p class="meaning" id="expressionMeaning"></p>
       <p class="episode-source" id="expressionSource"></p>
 
+      <!-- Dialogue Section -->
       <section class="conversation" aria-labelledby="conversationTitle">
-        <header>
-          <h2 id="conversationTitle">Conversation</h2>
-          <button type="button" class="play-button" id="playButton">▶ 듣기</button>
+        <header class="section-header">
+          <h2 id="conversationTitle">Scene Dialogue</h2>
+          <button type="button" class="play-button" id="playButton">▶ 원본 클립 듣기</button>
         </header>
         <div class="dialogue" id="expressionExample"></div>
+      </section>
+
+      <!-- Intermediate Nuance & Context Section -->
+      <section class="card nuance-card">
+        <h3>💡 뉘앙스 & 문화적 맥락 (Nuance & Context)</h3>
+        <div id="expressionNuance" class="card-content"></div>
+      </section>
+
+      <!-- Real-World Application Section -->
+      <section class="card modern-card">
+        <h3>💼 2026 실전 응용 (Real-World Application)</h3>
+        <p class="card-subtitle">미국인 친구/직장에서 지금 바로 쓰는 현대적 대화</p>
+        <div id="expressionModern" class="dialogue modern-dialogue"></div>
       </section>
 
       <p class="status" id="statusMessage" role="status"></p>
     </main>
 
-    <script src="./src/app.js?v=0.29" type="module"></script>
+    <script src="./src/app.js?v=0.31" type="module"></script>
   </body>
 </html>

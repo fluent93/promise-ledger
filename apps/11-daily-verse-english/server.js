@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import webpush from "web-push";
 
 import audioClipHandler from "../../api/audio-clip.js";
+import ttsHandler from "../../api/tts.js";
 import pushHealthHandler from "../../api/push-health.js";
 import pushPublicKeyHandler from "../../api/push-public-key.js";
 import pushSubscriptionsHandler from "../../api/push-subscriptions.js";
@@ -22,6 +23,7 @@ await ensureLocalPushEnv();
 
 const apiRoutes = new Map([
   ["/api/audio-clip", audioClipHandler],
+  ["/api/tts", ttsHandler],
   ["/api/daily-expression-data", dailyExpressionDataHandler],
   ["/api/push-health", pushHealthHandler],
   ["/api/push-public-key", pushPublicKeyHandler],
@@ -104,7 +106,8 @@ async function loadEnvFile(file) {
       const index = trimmed.indexOf("=");
       if (index === -1) continue;
       const key = trimmed.slice(0, index).trim();
-      const value = trimmed.slice(index + 1).trim();
+      let value = trimmed.slice(index + 1).trim();
+      value = value.replace(/^["']|["']$/g, "");
       if (!process.env[key]) process.env[key] = value;
     }
   } catch (error) {

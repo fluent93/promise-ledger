@@ -117,7 +117,9 @@ export async function listSendLogs(limit = 10) {
 
 async function upstashCommand(command) {
   if (!isStorageConfigured()) throw new Error("Upstash Redis is not configured");
-  const response = await fetch(process.env.UPSTASH_REDIS_REST_URL, {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const endpoint = url.endsWith("/") ? url : `${url}/`;
+  const response = await fetch(endpoint, {
     method: "POST",
     headers: {
       authorization: `Bearer ${process.env.UPSTASH_REDIS_REST_TOKEN}`,

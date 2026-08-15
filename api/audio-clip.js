@@ -1,3 +1,6 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+
 const AUDIO_KEY_PREFIX = "seinfeld-english:audio:v1";
 
 export default async function handler(request, response) {
@@ -27,7 +30,7 @@ export default async function handler(request, response) {
     const body = audio.subarray(start, end + 1);
 
     response.setHeader("accept-ranges", "bytes");
-    response.setHeader("cache-control", "private, max-age=0, must-revalidate");
+    response.setHeader("cache-control", "public, max-age=86400, s-maxage=86400");
     response.setHeader("content-disposition", `inline; filename="${record.fileName || `${id}.mp3`}"`);
     response.setHeader("content-type", record.contentType || "audio/mpeg");
     response.setHeader("content-length", String(body.length));
@@ -70,11 +73,28 @@ export function parseByteRange(header, length) {
 }
 
 async function loadAudioClip(id) {
+  // 1. Try local file first (fastest and reliable)
+  try {
+    const localPath = path.join(process.cwd(), "apps/11-daily-verse-english/audio", `${id}.mp3`);
+    const fileBuffer = await fs.readFile(localPath);
+    if (fileBuffer && fileBuffer.length > 0) {
+      return {
+        data: fileBuffer.toString("base64"),
+        fileName: `${id}.mp3`,
+        contentType: "audio/mpeg",
+      };
+    }
+  } catch {
+    // Local file not present, fall through to Upstash
+  }
+
+  // 2. Try Upstash Redis storage
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!url || !token) throw new Error("Upstash Redis is not configured");
 
-  const redisResponse = await fetch(url, {
+  const endpoint = url.endsWith("/") ? url : `${url}/`;
+  const redisResponse = await fetch(endpoint, {
     method: "POST",
     headers: {
       authorization: `Bearer ${token}`,

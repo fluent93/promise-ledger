@@ -9,6 +9,7 @@ import subprocess
 import unicodedata
 import zipfile
 
+import os
 import pysubs2
 
 
@@ -16,12 +17,15 @@ SOURCE_ROOT = Path("/content/drive/MyDrive/Seinfeld (small size_torrent)")
 OUTPUT_ROOT = Path("/content/drive/MyDrive/Seinfeld English Clips")
 VIDEO_EXTENSIONS = {".avi", ".mkv", ".mp4", ".m4v", ".mpg", ".mpeg"}
 SUBTITLE_EXTENSIONS = {".srt", ".ass", ".ssa", ".vtt"}
+EXTRACTION_VERSION = 3
+EPISODE_TITLE_MATCH_THRESHOLD = 0.82
+NEARBY_WINDOW_MS = 45_000
 
 CLIP_PLAN = [
     {"phrase": "What's the deal with...?", "season": 8, "episode": "The Summer of George", "queries": ["what's the deal with those guys down in the pit", "what's the deal with"]},
-    {"phrase": "Yada, yada, yada.", "season": 8, "episode": "The Yada Yada", "queries": ["yada yada yada"]},
-    {"phrase": "Not that there's anything wrong with that.", "season": 4, "episode": "The Outing", "queries": ["not that there's anything wrong with that", "not that there is anything wrong with that"]},
-    {"phrase": "It's not you, it's me.", "season": 5, "episode": "The Lip Reader", "queries": ["it's not you it's me routine"]},
+    {"phrase": "Yada, yada, yada.", "season": 8, "episode": "The Yada Yada", "queries": ["you yada yada'd over the best part", "yada yada'd over the best part", "yada yada'd", "yada yada yada"]},
+    {"phrase": "Not that there's anything wrong with that.", "season": 4, "episode": "The Outing", "queries": ["not that there's anything wrong with that", "not that there is anything wrong with that", "anything wrong with that"]},
+    {"phrase": "It's not you, it's me.", "season": 5, "episode": "The Lip Reader", "queries": ["this is the best break-up line ever invented", "it's not you it's me routine", "it's not you it's me"]},
     {"phrase": "I'm out.", "season": 4, "episode": "The Contest", "queries": ["i'm out of the contest", "i'm out"]},
     {"phrase": "Serenity now.", "season": 9, "episode": "The Serenity Now", "queries": ["serenity now insanity later", "serenity now"]},
     {"phrase": "That's a shame.", "season": 5, "episode": "The Stall", "queries": ["what a shame", "that's a shame"]},
@@ -31,17 +35,26 @@ CLIP_PLAN = [
     {"phrase": "Double-dip.", "season": 4, "episode": "The Implant", "queries": ["double dip that chip", "double dipped the chip"], "before": 4.0, "after": 7.0},
     {"phrase": "I can't spare a square.", "season": 5, "episode": "The Stall", "queries": ["i can't spare a square"]},
     {"phrase": "No soup for you.", "season": 7, "episode": "The Soup Nazi", "queries": ["no soup for you"], "before": 11.0, "after": 2.0},
-    {"phrase": "These pretzels are making me thirsty.", "season": 3, "episode": "The Alternate Side", "queries": ["these pretzels are making me thirsty"]},
+    {
+        "phrase": "These pretzels are making me thirsty.",
+        "season": 3,
+        "episode": "The Alternate Side",
+        "queries": ["boy these pretzels are making me thirsty", "these pretzels are making me thirsty"],
+        "nearby": ["working on it", "boy these pretzels", "thirsty"],
+        "avoid_nearby": ["seven dates", "face to face", "over the limit", "i m coming down", "shut up i hear you"],
+        "before": 0.5,
+        "after": 5.5,
+    },
     {"phrase": "I was in the pool!", "season": 5, "episode": "The Hamptons", "queries": ["i was in the pool"]},
     {"phrase": "Master of your domain.", "season": 4, "episode": "The Contest", "queries": ["master of your domain"]},
     {"phrase": "You are so good-looking.", "season": 3, "episode": "The Good Samaritan", "queries": ["you are so good-looking", "you're so good-looking"]},
     {"phrase": "A Festivus for the rest of us.", "season": 9, "episode": "The Strike", "queries": ["a festivus for the rest of us"]},
     {"phrase": "They're real, and they're spectacular.", "season": 4, "episode": "The Implant", "queries": ["they're real and they're spectacular"]},
-    {"phrase": "I don't wanna be a pirate.", "season": 5, "episode": "The Puffy Shirt", "queries": ["i don't wanna be a pirate", "i don't want to be a pirate"]},
-    {"phrase": "The jerk store called.", "season": 8, "episode": "The Comeback", "queries": ["the jerk store called", "jerk store called"]},
+    {"phrase": "I don't wanna be a pirate.", "season": 5, "episode": "The Puffy Shirt", "queries": ["i don't wanna be a pirate", "i don't want to be a pirate", "wanna be a pirate", "want to be a pirate"]},
+    {"phrase": "The jerk store called.", "season": 8, "episode": "The Comeback", "queries": ["the jerk store called", "jerk store called", "jerk store"]},
     {"phrase": "Maybe the dingo ate your baby.", "season": 3, "episode": "The Stranded", "queries": ["maybe the dingo ate your baby"]},
     {"phrase": "You're killing independent George!", "season": 7, "episode": "The Pool Guy", "queries": ["you're killing independent george"]},
-    {"phrase": "I choose not to run.", "season": 6, "episode": "The Race", "queries": ["i choose not to run", "choose not to run"]},
+    {"phrase": "I choose not to run.", "season": 6, "episode": "The Race", "queries": ["i choose not to run", "choose not to run", "i choose not to"]},
     {"phrase": "That's gold.", "season": 8, "episode": "The Fatigues", "queries": ["that's gold jerry gold", "it's gold jerry gold"]},
     {"phrase": "They're all Twix!", "season": 9, "episode": "The Dealership", "queries": ["they're all twix"]},
     {"phrase": "He's a close talker.", "season": 5, "episode": "The Raincoats", "queries": ["he's nice a bit of a close talker", "close talker"]},
@@ -109,20 +122,62 @@ def matching_video(title, videos_by_title):
         return videos_by_title[key]
     scored = [(SequenceMatcher(None, key, candidate).ratio(), video) for candidate, video in videos_by_title.items()]
     score, video = max(scored, default=(0, None), key=lambda item: item[0])
-    return video if score >= 0.82 else None
+    return video if score >= EPISODE_TITLE_MATCH_THRESHOLD else None
+
+
+def episode_title_matches(actual, expected):
+    if actual == expected:
+        return True
+    return SequenceMatcher(None, actual, expected).ratio() >= EPISODE_TITLE_MATCH_THRESHOLD
+
+
+def nearby_text(episode_cues, match, window_ms=NEARBY_WINDOW_MS):
+    start = match["start_ms"]
+    return " ".join(
+        cue["normalized"]
+        for cue in episode_cues
+        if abs(cue["start_ms"] - start) <= window_ms
+    )
+
+
+def cue_fits_context(plan, episode_cues, match):
+    window = nearby_text(episode_cues, match)
+    avoid = [normalize_text(item) for item in plan.get("avoid_nearby", [])]
+    if any(item and item in window for item in avoid):
+        return False
+    required = [normalize_text(item) for item in plan.get("nearby", [])]
+    if not required:
+        return True
+    return any(item and item in window for item in required)
+
+
+def search_cues(plan, pool):
+    for query_index, query in enumerate(plan["queries"]):
+        needle = normalize_text(query)
+        matches = [cue for cue in pool if needle and needle in cue["normalized"]]
+        if not matches:
+            continue
+        matches.sort(key=lambda cue: cue["start_ms"])
+        contextual = [cue for cue in matches if cue_fits_context(plan, pool, cue)]
+        if contextual:
+            return contextual[0], query_index
+        if not plan.get("nearby") and not plan.get("avoid_nearby"):
+            return matches[0], query_index
+    return None, None
 
 
 def find_match(plan, cues):
     expected_title = normalize_text(plan["episode"])
     season_cues = [cue for cue in cues if cue["season"] == plan["season"]]
-    for query_index, query in enumerate(plan["queries"]):
-        needle = normalize_text(query)
-        matches = [cue for cue in season_cues if needle and needle in cue["normalized"]]
-        if not matches:
-            continue
-        matches.sort(key=lambda cue: (cue["subtitle_title"] != expected_title, cue["start_ms"]))
-        return matches[0], query_index
-    return None, None
+    episode_cues = [
+        cue
+        for cue in season_cues
+        if episode_title_matches(cue["subtitle_title"], expected_title)
+    ]
+    match = search_cues(plan, episode_cues)
+    if match[0] is not None:
+        return match
+    return search_cues(plan, season_cues)
 
 
 def extract_clip(plan, cue, video):
@@ -175,20 +230,30 @@ def main():
 
     print(f"Videos: {len(videos)}, subtitles: {len(subtitle_paths)}, searchable cues: {len(cues):,}")
     manifest_path = OUTPUT_ROOT / "clip-manifest.json"
-    manifest = {"version": 1, "clips": {}}
+    manifest = {"version": EXTRACTION_VERSION, "clips": {}}
     if manifest_path.exists():
         try:
-            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            existing_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            if existing_manifest.get("version") == EXTRACTION_VERSION:
+                manifest = existing_manifest
+            else:
+                print("Extraction version changed; regenerating every clip.")
         except (json.JSONDecodeError, OSError):
             pass
     manifest.setdefault("clips", {})
 
+    only_phrase = os.environ.get("CLIP_PHRASE", "").strip()
+    plans = [plan for plan in CLIP_PLAN if not only_phrase or plan["phrase"] == only_phrase]
+    if only_phrase and not plans:
+        raise ValueError(f"Unknown CLIP_PHRASE: {only_phrase}")
+    force_reextract = os.environ.get("FORCE_REEXTRACT") == "1"
+
     report = []
-    for index, plan in enumerate(CLIP_PLAN, start=1):
-        print(f"[{index:02d}/{len(CLIP_PLAN)}] {plan['phrase']}")
+    for index, plan in enumerate(plans, start=1):
+        print(f"[{index:02d}/{len(plans)}] {plan['phrase']}")
         existing = manifest["clips"].get(plan["phrase"])
         existing_path = OUTPUT_ROOT / existing.get("file", "") if existing else None
-        if existing_path and existing_path.is_file():
+        if existing_path and existing_path.is_file() and not force_reextract:
             report.append({
                 "phrase": plan["phrase"],
                 "status": "generated",
@@ -228,6 +293,7 @@ def main():
                 "end": format_seconds(end),
             })
             print(f"  {output.name} ({output.stat().st_size / 1024:.1f} KB)")
+            print(f"  matched: {cue['text']}")
         except Exception as error:
             report.append({"phrase": plan["phrase"], "status": "error", "error": str(error)})
             print(f"  ERROR: {error}")
@@ -247,7 +313,7 @@ def main():
 
     generated = sum(item["status"] == "generated" for item in report)
     missing = [item["phrase"] for item in report if item["status"] != "generated"]
-    print(f"\nGenerated: {generated}/{len(CLIP_PLAN)}")
+    print(f"\nGenerated: {generated}/{len(plans)}")
     print(f"ZIP: {zip_path} ({zip_path.stat().st_size / 1024 / 1024:.1f} MB)")
     if missing:
         print("Needs review:")

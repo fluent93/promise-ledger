@@ -1,6 +1,6 @@
-import { EXPRESSION_POLICY_VERSION, advancedExpressions } from "./expression-data.js?v=0.29";
+import { EXPRESSION_POLICY_VERSION, advancedExpressions } from "./expression-data.js?v=0.31";
 
-const APP_VERSION = "0.29";
+const APP_VERSION = "0.31";
 const expressions = advancedExpressions;
 let clipManifest = {};
 let activeAudio = null;
@@ -12,6 +12,8 @@ const elements = {
   expressionMeaning: document.querySelector("#expressionMeaning"),
   expressionSource: document.querySelector("#expressionSource"),
   expressionExample: document.querySelector("#expressionExample"),
+  expressionNuance: document.querySelector("#expressionNuance"),
+  expressionModern: document.querySelector("#expressionModern"),
   playButton: document.querySelector("#playButton"),
   notificationButton: document.querySelector("#notificationButton"),
   statusMessage: document.querySelector("#statusMessage"),
@@ -21,14 +23,16 @@ const today = startOfLocalDay(new Date());
 const expression = getDailyExpression(today);
 
 render();
+
 loadClipManifest().then((manifest) => {
   clipManifest = manifest;
   render();
 });
+
 registerServiceWorker()
   .then(renderNotificationState)
   .catch(() => {
-    elements.notificationButton.disabled = true;
+    if (elements.notificationButton) elements.notificationButton.disabled = true;
   });
 
 elements.playButton.addEventListener("click", toggleDialogueAudio);
@@ -41,12 +45,29 @@ function render() {
     day: "numeric",
     weekday: "long",
   }).format(today);
+
   elements.expressionPhrase.textContent = expression.phrase;
   elements.expressionMeaning.textContent = expression.meaning;
   elements.expressionSource.textContent = expression.source
     ? `Season ${expression.source.season} · ${expression.source.episode}`
     : "";
-  elements.expressionExample.replaceChildren(...getDialogueLines(expression).map(createDialogueLine));
+
+  // Render Scene Dialogue
+  elements.expressionExample.replaceChildren(
+    ...getDialogueLines(expression).map((line) => createDialogueLine(line))
+  );
+
+  // Render Nuance & Context
+  elements.expressionNuance.innerHTML = `<p>${expression.nuance || "미국 일상에서 매우 자주 활용되는 대표적 표현입니다."}</p>`;
+
+  // Render Modern Usage
+  if (Array.isArray(expression.modernUsage) && expression.modernUsage.length) {
+    elements.expressionModern.replaceChildren(
+      ...expression.modernUsage.map((line) => createDialogueLine(line))
+    );
+  } else {
+    elements.expressionModern.replaceChildren();
+  }
 
   renderAudioState();
 }
@@ -58,29 +79,29 @@ function getDialogueLines(expression) {
 }
 
 function createDialogueLine(line) {
-  const row = document.createElement("p");
+  const row = document.createElement("div");
   row.className = "dialogue-line";
 
   const speaker = document.createElement("span");
   speaker.className = "speaker";
   speaker.textContent = line.speaker || "•";
 
-  const text = document.createElement("span");
-  text.className = "dialogue-text";
+  const textContainer = document.createElement("div");
+  textContainer.className = "dialogue-text";
 
   const english = document.createElement("span");
   english.className = "dialogue-english";
   english.textContent = line.text;
-  text.append(english);
+  textContainer.append(english);
 
   if (line.translation) {
     const translation = document.createElement("span");
     translation.className = "dialogue-translation";
     translation.textContent = line.translation;
-    text.append(translation);
+    textContainer.append(translation);
   }
 
-  row.append(speaker, text);
+  row.append(speaker, textContainer);
   return row;
 }
 
@@ -96,13 +117,13 @@ function toggleDialogueAudio() {
     return;
   }
 
-  setStatus("이 표현의 실제 클립은 아직 준비되지 않았습니다.");
+  setStatus("이 표현의 원본 클립 오디오가 아직 준비되지 않았습니다.");
 }
 
 function playActualClip(clip) {
   const source = clip.src || (clip.file ? `./audio/${clip.file}` : "");
   if (!source) {
-    setStatus("이 표현의 실제 클립은 아직 준비되지 않았습니다.");
+    setStatus("이 표현의 원본 클립이 준비되지 않았습니다.");
     return;
   }
 
@@ -111,11 +132,12 @@ function playActualClip(clip) {
   audio.preload = "auto";
   audio.addEventListener("ended", finishAudioPlayback, { once: true });
   setPlaybackState(true);
+
   audio.play().catch(() => {
     if (activeAudio !== audio) return;
     activeAudio = null;
     setPlaybackState(false);
-    setStatus("실제 클립을 재생하지 못했습니다.");
+    setStatus("실제 원본 클립 오디오를 재생하지 못했습니다.");
   });
 }
 
@@ -136,22 +158,18 @@ function stopDialogueAudio() {
 function setPlaybackState(isPlaying) {
   playbackActive = isPlaying;
   elements.playButton.classList.toggle("is-playing", isPlaying);
-  if (isPlaying) {
-    elements.playButton.disabled = false;
-    elements.playButton.textContent = "■ 정지";
-    return;
-  }
-  renderAudioState();
+  elements.playButton.textContent = isPlaying ? "■ 정지" : "▶ 원본 클립 듣기";
 }
 
 function renderAudioState() {
   const clip = clipManifest[expression.phrase];
-  const source = clip?.src || clip?.file;
-  const available = Boolean(source && "Audio" in window);
+  const available = Boolean((clip?.src || clip?.file) && "Audio" in window);
   elements.playButton.disabled = !available;
-  elements.playButton.textContent = available ? "▶ 실제 클립" : "클립 준비 중";
-  if (clip?.audioVerified === false) {
-    setStatus("이 표현의 업로드된 오디오가 다른 장면입니다. 클립을 다시 추출·업로드해 주세요.");
+  elements.playButton.textContent = available ? "▶ 원본 클립 듣기" : "클립 준비 중";
+  if (available) {
+    setStatus("📼 Seinfeld 생생한 원본 시트콤 음성 오디오를 재생합니다.");
+  } else {
+    setStatus("이 표현의 원본 오디오가 아직 준비되지 않았습니다.");
   }
 }
 
@@ -209,6 +227,7 @@ async function toggleDailyNotification() {
 
 async function renderNotificationState() {
   const supported = "Notification" in window && "serviceWorker" in navigator && "PushManager" in window;
+  if (!elements.notificationButton) return;
   elements.notificationButton.disabled = !supported;
   if (!supported) return;
 
@@ -221,7 +240,7 @@ async function renderNotificationState() {
 
 async function registerServiceWorker() {
   if (!("serviceWorker" in navigator)) return null;
-  return navigator.serviceWorker.register("./sw.js?v=0.29");
+  return navigator.serviceWorker.register("./sw.js?v=0.31");
 }
 
 async function getPushPublicKey() {
@@ -255,7 +274,9 @@ function positiveModulo(value, divisor) {
 }
 
 function setStatus(message) {
-  elements.statusMessage.textContent = message;
+  if (elements.statusMessage) {
+    elements.statusMessage.textContent = message;
+  }
 }
 
 function urlBase64ToUint8Array(base64String) {
