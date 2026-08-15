@@ -1,6 +1,6 @@
-import { EXPRESSION_POLICY_VERSION, advancedExpressions } from "./expression-data.js?v=0.27";
+import { EXPRESSION_POLICY_VERSION, advancedExpressions } from "./expression-data.js?v=0.28";
 
-const APP_VERSION = "0.27";
+const APP_VERSION = "0.28";
 const expressions = advancedExpressions;
 let clipManifest = {};
 let activeAudio = null;
@@ -23,7 +23,7 @@ const expression = getDailyExpression(today);
 render();
 loadClipManifest().then((manifest) => {
   clipManifest = manifest;
-  renderAudioState();
+  render();
 });
 registerServiceWorker()
   .then(renderNotificationState)
@@ -46,9 +46,15 @@ function render() {
   elements.expressionSource.textContent = expression.source
     ? `Season ${expression.source.season} · ${expression.source.episode}`
     : "";
-  elements.expressionExample.replaceChildren(...expression.example.map(createDialogueLine));
+  elements.expressionExample.replaceChildren(...getDialogueLines(expression).map(createDialogueLine));
 
   renderAudioState();
+}
+
+function getDialogueLines(expression) {
+  const clip = clipManifest[expression.phrase];
+  if (Array.isArray(clip?.dialogue) && clip.dialogue.length) return clip.dialogue;
+  return expression.example;
 }
 
 function createDialogueLine(line) {

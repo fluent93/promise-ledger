@@ -230,14 +230,14 @@ export const advancedExpressions = [
     "meaning": "당신에게 줄 수프는 없어. 규칙을 어긴 사람을 단호하게 거절하는 말.",
     "example": [
       {
-        "speaker": "Soup Nazi",
-        "text": "No soup for you!",
-        "translation": "당신에게 줄 수프는 없어!"
+        "speaker": "George",
+        "text": "Two dollars? But everyone in front of me got free bread.",
+        "translation": "2달러요? 하지만 제 앞 사람들은 모두 빵을 공짜로 받았잖아요."
       },
       {
         "speaker": "Soup Nazi",
-        "text": "Come back one year!",
-        "translation": "1년 뒤에 다시 와!"
+        "text": "You want bread? Three dollars! No soup for you!",
+        "translation": "빵을 원해? 3달러! 당신에게 줄 수프는 없어!"
       }
     ]
   },
@@ -246,14 +246,14 @@ export const advancedExpressions = [
     "meaning": "이 프레첼을 먹으니 목이 마르네.",
     "example": [
       {
-        "speaker": "Elaine",
-        "text": "These pretzels are making me thirsty.",
-        "translation": "이 프레첼을 먹으니 목이 마르네."
+        "speaker": "Kramer",
+        "text": "Boy, these pretzels are making me thirsty.",
+        "translation": "이봐, 이 프레첼을 먹으니 목이 마르네."
       },
       {
-        "speaker": "Jerry",
-        "text": "No. These pretzels are making me thirsty.",
-        "translation": "아니. 이 프레첼을 먹으니 목이 마르네."
+        "speaker": "George",
+        "text": "Is that how you're gonna say it?",
+        "translation": "그렇게 말할 생각이야?"
       }
     ]
   },
