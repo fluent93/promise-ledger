@@ -150,6 +150,9 @@ function renderAudioState() {
   const available = Boolean(source && "Audio" in window);
   elements.playButton.disabled = !available;
   elements.playButton.textContent = available ? "▶ 실제 클립" : "클립 준비 중";
+  if (clip?.audioVerified === false) {
+    setStatus("이 표현의 업로드된 오디오가 다른 장면입니다. 클립을 다시 추출·업로드해 주세요.");
+  }
 }
 
 async function loadClipManifest() {

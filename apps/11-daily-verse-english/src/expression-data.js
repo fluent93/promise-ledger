@@ -231,6 +231,16 @@ export const advancedExpressions = [
     "example": [
       {
         "speaker": "George",
+        "text": "Excuse me, I think you forgot my bread.",
+        "translation": "저기요, 제 빵을 빼먹으신 것 같은데요."
+      },
+      {
+        "speaker": "Soup Nazi",
+        "text": "Bread — two dollars extra.",
+        "translation": "빵은 2달러 추가."
+      },
+      {
+        "speaker": "George",
         "text": "Two dollars? But everyone in front of me got free bread.",
         "translation": "2달러요? 하지만 제 앞 사람들은 모두 빵을 공짜로 받았잖아요."
       },
