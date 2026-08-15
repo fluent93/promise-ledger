@@ -131,7 +131,9 @@ function isPushConfigured() {
 function assertCronAuthorized(request) {
   if (!process.env.CRON_SECRET) return true;
   const authorization = getHeader(request, "authorization");
-  return authorization === `Bearer ${process.env.CRON_SECRET}`;
+  if (authorization === `Bearer ${process.env.CRON_SECRET}`) return true;
+  const querySecret = request.query?.secret || "";
+  return querySecret === process.env.CRON_SECRET;
 }
 
 function getHeader(request, name) {
