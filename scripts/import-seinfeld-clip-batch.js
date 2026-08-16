@@ -46,9 +46,15 @@ for (const [phrase, clip] of entries) {
   await setRedisValue(`${AUDIO_KEY_PREFIX}:${id}`, JSON.stringify(record), url, token);
   deployedManifest.clips[phrase] = {
     src: `/api/audio-clip?id=${id}`,
+    file: `${id}.mp3`,
     episode: clip.episode,
+    season: clip.season,
     start: clip.start,
     end: clip.end,
+    dialogue: clip.dialogue || [],
+    meaning: clip.meaning || "",
+    nuance: clip.nuance || "",
+    modernUsage: clip.modernUsage || [],
   };
   console.log(`[${deployedManifest.clips[phrase].src}] ${phrase}`);
 }
