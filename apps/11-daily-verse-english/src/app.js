@@ -127,7 +127,8 @@ function playActualClip(clip) {
     return;
   }
 
-  const audio = new Audio(source);
+  const audioUrl = source.includes("?") ? `${source}&_t=${Date.now()}` : `${source}?_t=${Date.now()}`;
+  const audio = new Audio(audioUrl);
   activeAudio = audio;
   audio.preload = "auto";
   audio.addEventListener("ended", finishAudioPlayback, { once: true });
