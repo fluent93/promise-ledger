@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "clips": {
     "These pretzels are making me thirsty.": {
       "src": "/api/audio-clip?id=these-pretzels-are-making-me-thirsty&v=7bcab9dcfde8",
@@ -9,8 +9,8 @@
       "dialogue": [
         {
           "speaker": "Kramer",
-          "text": "Boy, these pretzels are making me thirsty.",
-          "translation": "이봐, 이 프레첼을 먹으니 목이 마르네."
+          "text": "Woody Allen wants me to say: 'These pretzels are making me thirsty.'",
+          "translation": "우디 앨런 감독이 나보고 말하래: '이 프레첼 때문에 목이 마르네.'"
         },
         {
           "speaker": "George",
@@ -21,6 +21,16 @@
           "speaker": "Jerry",
           "text": "You gotta put the emphasis on 'these': *These* pretzels are making me thirsty!",
           "translation": "'These'에 강세를 줘야지: *이* 프레첼 때문에 목마르다고!"
+        },
+        {
+          "speaker": "George",
+          "text": "No, no: These pretzels are making me *thirsty*!",
+          "translation": "아니지: 이 프레첼을 먹으니 *목이 마르네*!"
+        },
+        {
+          "speaker": "Elaine",
+          "text": "See, I'd say: These *pretzels* are making me thirsty.",
+          "translation": "나 같으면: 이 *프레첼* 때문에 목이 마르네 하고 말하겠다."
         },
         {
           "speaker": "Kramer",
@@ -54,6 +64,16 @@
           "speaker": "Soup Nazi",
           "text": "You want bread? Three dollars! No soup for you!",
           "translation": "빵을 원해? 3달러! 당신에게 줄 수프는 없어!"
+        },
+        {
+          "speaker": "George",
+          "text": "Wait, what about my soup?!",
+          "translation": "잠깐만요, 제 수프는요?!"
+        },
+        {
+          "speaker": "Soup Nazi",
+          "text": "Next!",
+          "translation": "다음 분!"
         }
       ]
     },
@@ -70,18 +90,23 @@
         },
         {
           "speaker": "George",
-          "text": "Pop, you're not supposed to yell it.",
-          "translation": "아버지, 소리 지르면서 외치는 게 아니에요."
+          "text": "Pop, you're not supposed to yell it. You're supposed to say it calmly.",
+          "translation": "아버지, 소리 지르면서 외치는 게 아니라 차분하게 말해야죠."
+        },
+        {
+          "speaker": "Frank",
+          "text": "The tape said to yell it! Serenity now!",
+          "translation": "테이프에서 소리 지르라 그랬어! 평온이여, 지금!"
         },
         {
           "speaker": "Jerry",
-          "text": "The doctor said it calms the nervous system.",
-          "translation": "의사가 신경계를 정돈해 준다고 했대요."
+          "text": "You know, Lloyd Braun used that phrase for years.",
+          "translation": "있잖아, 로이드 브라운도 그 구절을 몇 년 동안 썼대."
         },
         {
           "speaker": "George",
-          "text": "Yeah, serenity now, insanity later.",
-          "translation": "그래요, 지금은 평온, 나중엔 미치는 거죠."
+          "text": "And where is Lloyd Braun now? In a mental institution! Serenity now, insanity later!",
+          "translation": "그래서 지금 로이드 브라운이 어디 있는데? 정신병원에 있지! 지금은 평온, 나중엔 미치는 거라고요!"
         }
       ]
     },
@@ -91,6 +116,11 @@
       "episode": "153 - The Yada Yada.avi",
       "season": 8,
       "dialogue": [
+        {
+          "speaker": "Elaine",
+          "text": "I met this lawyer, we went out to dinner, had lobster bisque, yada yada yada, I never heard from him again.",
+          "translation": "변호사를 만나서 저녁 먹으러 가고 랍스터 비스크 스프를 먹고 이러쿵저러쿵해서 그 뒤로 다시는 연락이 없었어."
+        },
         {
           "speaker": "George",
           "text": "You yada yada'd over the best part!",
@@ -107,9 +137,9 @@
           "translation": "어떤 이러쿵저러쿵을 말했는데?"
         },
         {
-          "speaker": "Elaine",
-          "text": "I yada yada'd the lobster bisque.",
-          "translation": "랍스터 비스크 스프 먹은 걸 이러쿵저러쿵으로 넘겼지."
+          "speaker": "George",
+          "text": "You can't yada yada sex!",
+          "translation": "그런 중요한 상황을 이러쿵저러쿵으로 퉁칠 순 없다고!"
         }
       ]
     },
@@ -334,6 +364,11 @@
           "speaker": "Jerry",
           "text": "His wife is in a coma...",
           "translation": "걔 아내 혼수상태인데..."
+        },
+        {
+          "speaker": "George",
+          "text": "Well, the life support machine called!",
+          "translation": "그럼 인공호흡기 유지 장치에서 전화 왔대!"
         }
       ]
     },
@@ -383,8 +418,18 @@
         },
         {
           "speaker": "George",
-          "text": "This is gonna be the Summer of George! I'm gonna read, bite into big cheese blocks!",
-          "translation": "이번 여름은 조지의 여름이 될 거야! 책도 읽고 거대한 치즈 덩어리도 베어 먹을 거라고!"
+          "text": "This is gonna be the Summer of George! I'm gonna read, bite into big cheese blocks like apples!",
+          "translation": "이번 여름은 조지의 여름이 될 거야! 책도 읽고 사과처럼 거대한 치즈 덩어리도 베어 먹을 거라고!"
+        },
+        {
+          "speaker": "Jerry",
+          "text": "Are you gonna get up before noon?",
+          "translation": "정오 전에는 일어날 거냐?"
+        },
+        {
+          "speaker": "George",
+          "text": "Jerry, I may never put on pants again!",
+          "translation": "제리, 나 앞으로 다시는 바지를 안 입을지도 몰라!"
         },
         {
           "speaker": "Jerry",

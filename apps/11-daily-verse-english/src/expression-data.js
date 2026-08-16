@@ -1,4 +1,4 @@
-export const EXPRESSION_POLICY_VERSION = 4;
+export const EXPRESSION_POLICY_VERSION = 5;
 
 const episodeSources = {
   "These pretzels are making me thirsty.": { season: 3, episode: "The Alternate Side" },
@@ -21,12 +21,12 @@ export const advancedExpressions = [
   {
     phrase: "These pretzels are making me thirsty.",
     meaning: "이 프레첼을 먹으니 목이 마르네. (어조와 강세 연기 연습의 명대사)",
-    nuance: "Kramer가 우디 앨런 영화의 단역 대사를 얻어 친구들에게 여러 강세로 연기해 보이는 씬입니다. 영어는 강조하는 단어(These vs Pretzels vs Thirsty)에 따라 전달되는 감정이 완전히 달라지며, 미국식 연기 및 억양 훈련의 표준 예문입니다.",
+    nuance: "Kramer가 우디 앨런 영화의 단역 대사를 얻어 친구들에게 여러 강세로 연기해 보이는 풀 씬입니다. 각자 어떤 단어를 강조하느냐에 따라 뉘앙스가 완전히 바뀌는 미국식 유머와 연기 연습의 정석입니다.",
     example: [
       {
         speaker: "Kramer",
-        text: "Boy, these pretzels are making me thirsty.",
-        translation: "이봐, 이 프레첼을 먹으니 목이 마르네."
+        text: "Woody Allen wants me to say: 'These pretzels are making me thirsty.'",
+        translation: "우디 앨런 감독이 나보고 말하래: '이 프레첼 때문에 목이 마르네.'"
       },
       {
         speaker: "George",
@@ -37,6 +37,16 @@ export const advancedExpressions = [
         speaker: "Jerry",
         text: "You gotta put the emphasis on 'these': *These* pretzels are making me thirsty!",
         translation: "'These'에 강세를 줘야지: *이* 프레첼 때문에 목마르다고!"
+      },
+      {
+        speaker: "George",
+        text: "No, no: These pretzels are making me *thirsty*!",
+        translation: "아니지: 이 프레첼을 먹으니 *목이 마르네*!"
+      },
+      {
+        speaker: "Elaine",
+        text: "See, I'd say: These *pretzels* are making me thirsty.",
+        translation: "나 같으면: 이 *프레첼* 때문에 목이 마르네 하고 말하겠다."
       },
       {
         speaker: "Kramer",
@@ -60,7 +70,7 @@ export const advancedExpressions = [
   {
     phrase: "No soup for you.",
     meaning: "당신에게 줄 수프는 없어! (규칙 위반자에게 단호하고 유머러스하게 거절할 때)",
-    nuance: "전설적인 'Soup Nazi' 에피소드에서 나온 멘트입니다. 주문 줄에서 잡담을 하거나 정해진 절차를 어기면 단칼에 거절하는 씬으로, 현대 미국에서는 친구나 동료가 규칙을 어기거나 짓궂은 요청을 할 때 쓰는 대표 유머 거절 밈입니다.",
+    nuance: "전설적인 'Soup Nazi' 씬 전체입니다. 대기 줄에서 잡담을 하거나 정해진 절차를 어기면 수프 그릇을 뺏고 빵 값까지 3달러로 올려버린 뒤 쫓아내는 씬으로, 현대 미국 최고의 유머 거절 밈입니다.",
     example: [
       {
         speaker: "George",
@@ -81,6 +91,16 @@ export const advancedExpressions = [
         speaker: "Soup Nazi",
         text: "You want bread? Three dollars! No soup for you!",
         translation: "빵을 원해? 3달러! 당신에게 줄 수프는 없어!"
+      },
+      {
+        speaker: "George",
+        text: "Wait, what about my soup?!",
+        translation: "잠깐만요, 제 수프는요?!"
+      },
+      {
+        speaker: "Soup Nazi",
+        text: "Next!",
+        translation: "다음 분!"
       }
     ],
     modernUsage: [
@@ -99,7 +119,7 @@ export const advancedExpressions = [
   {
     phrase: "Serenity now.",
     meaning: "평온이여, 지금 당장! (스트레스가 폭발하기 직전 스스로를 가라앉힐 때)",
-    nuance: "Frank Costanza가 화 분노 조절 테이프에서 배운 대사입니다. 소리를 지르며 'Serenity now!'를 외치지만 정작 화가 풀리기는커녕 억누르기만 하여 훗날 George가 'Serenity now, insanity later(지금은 평온, 나중엔 미침)'라고 꼬집는 명장면입니다.",
+    nuance: "Frank Costanza가 분노 조절 테이프에서 배운 대사를 소리 지르며 외치자, George와 Jerry가 태클을 걸고 Lloyd Braun의 정신병원 에피소드까지 언급되는 명장면 전체입니다.",
     example: [
       {
         speaker: "Frank",
@@ -108,18 +128,23 @@ export const advancedExpressions = [
       },
       {
         speaker: "George",
-        text: "Pop, you're not supposed to yell it.",
-        translation: "아버지, 소리 지르면서 외치는 게 아니에요."
+        text: "Pop, you're not supposed to yell it. You're supposed to say it calmly.",
+        translation: "아버지, 소리 지르면서 외치는 게 아니라 차분하게 말해야죠."
+      },
+      {
+        speaker: "Frank",
+        text: "The tape said to yell it! Serenity now!",
+        translation: "테이프에서 소리 지르라 그랬어! 평온이여, 지금!"
       },
       {
         speaker: "Jerry",
-        text: "The doctor said it calms the nervous system.",
-        translation: "의사가 신경계를 정돈해 준다고 했대요."
+        text: "You know, Lloyd Braun used that phrase for years.",
+        translation: "있잖아, 로이드 브라운도 그 구절을 몇 년 동안 썼대."
       },
       {
         speaker: "George",
-        text: "Yeah, serenity now, insanity later.",
-        translation: "그래요, 지금은 평온, 나중엔 미치는 거죠."
+        text: "And where is Lloyd Braun now? In a mental institution! Serenity now, insanity later!",
+        translation: "그래서 지금 로이드 브라운이 어디 있는데? 정신병원에 있지! 지금은 평온, 나중엔 미치는 거라고요!"
       }
     ],
     modernUsage: [
@@ -138,8 +163,13 @@ export const advancedExpressions = [
   {
     phrase: "Yada, yada, yada.",
     meaning: "이러쿵저러쿵해서, (미묘하거나 곤란한) 중간 과정은 생략하고.",
-    nuance: "대화에서 구구절절 설명하기 싫거나 본론만 빨리 전달하고 싶을 때 씁니다. 주의할 점은 핵심적인 순간(예: 데이트 후 결과 등)을 슬그머니 넘기려 할 때 상대방이 'You yada yada'd over the best part!'라고 지적하는 유머 포인트입니다.",
+    nuance: "Elaine이 데이트 핵심 과정이나 랍스터 비스크 수프 먹은 상황을 'yada yada'로 뭉뚱그려 넘기려 하자 George와 Jerry가 어이없어하는 명장면 전체입니다.",
     example: [
+      {
+        speaker: "Elaine",
+        text: "I met this lawyer, we went out to dinner, had lobster bisque, yada yada yada, I never heard from him again.",
+        translation: "변호사를 만나서 저녁 먹으러 가고 랍스터 비스크 스프를 먹고 이러쿵저러쿵해서 그 뒤로 다시는 연락이 없었어."
+      },
       {
         speaker: "George",
         text: "You yada yada'd over the best part!",
@@ -156,9 +186,9 @@ export const advancedExpressions = [
         translation: "어떤 이러쿵저러쿵을 말했는데?"
       },
       {
-        speaker: "Elaine",
-        text: "I yada yada'd the lobster bisque.",
-        translation: "랍스터 비스크 스프 먹은 걸 이러쿵저러쿵으로 넘겼지."
+        speaker: "George",
+        text: "You can't yada yada sex!",
+        translation: "그런 중요한 상황을 이러쿵저러쿵으로 퉁칠 순 없다고!"
       }
     ],
     modernUsage: [
@@ -177,7 +207,7 @@ export const advancedExpressions = [
   {
     phrase: "Not that there's anything wrong with that.",
     meaning: "그게 잘못됐다는 뜻은 아니야. (오해나 편견을 다급히 해명할 때)",
-    nuance: "자신의 발언이 오해나 차별처럼 들릴까 봐 정치적 올바름(PC)을 의식하며 다급히 덧붙이는 방어적 표현입니다. 상대의 성향이나 취향을 언급한 직후 빠르게 덧붙여야 유머가 살아납니다.",
+    nuance: "대학 신문 기자에게 오해받은 Jerry와 George가 동성애 차별처럼 들릴까 봐 다급히 'Not that there's anything wrong with that'을 연발하는 시트콤 최고의 클래식 해명 씬입니다.",
     example: [
       {
         speaker: "Jerry",
@@ -216,7 +246,7 @@ export const advancedExpressions = [
   {
     phrase: "It's not you, it's me.",
     meaning: "네 문제가 아니라 내 문제야. (클래식 이별 핑계 멘트)",
-    nuance: "상대방의 상처를 줄이려고 쓰지만, 사실상 영혼 없는 전형적인 이별 핑계로 유명한 대사입니다. 미국 문화권에서는 이 말을 들으면 '진짜 내 탓이 아니구나'가 아니라 '진부한 핑계를 대는구나'로 받아들여 지는 유머 포인트입니다.",
+    nuance: "George가 자신의 전매특허 이별 멘트 'It's not you, it's me'를 날렸다가 오히려 상대방 Gwen이 자기가 멘트를 차지하겠다며 티키타카 싸움으로 번지는 명장면입니다.",
     example: [
       {
         speaker: "George",
@@ -255,7 +285,7 @@ export const advancedExpressions = [
   {
     phrase: "I'm out.",
     meaning: "난 포기야, 난 빠질게! (유혹이나 내기에서 즉시 손을 털 때)",
-    nuance: "Kramer가 참을성 내기(The Contest)가 시작되자마자 2분 만에 돈을 테이블에 턱 내던지며 포기를 선언하는 장면입니다. 조건이나 유혹에 1초도 못 버티고 항복할 때 과장되게 외치는 표현입니다.",
+    nuance: "Kramer가 참을성 내기가 시작되자마자 2분 만에 돈을 테이블에 턱 내던지며 포기하고 길 건너 여자 때문이라며 핑계를 대는 클래식 씬 전체입니다.",
     example: [
       {
         speaker: "Kramer",
@@ -294,7 +324,7 @@ export const advancedExpressions = [
   {
     phrase: "Master of your domain.",
     meaning: "네 욕구와 자제력의 주인이 되다.",
-    nuance: "'The Contest' 에피소드에서 수위 높은 단어 대신 절제력과 자제력을 고급스럽게 비유하며 사용한 표현입니다. 직장이나 일상에서 유혹을 잘 참아낼 때 위트 있게 인용하는 구절입니다.",
+    nuance: "'The Contest' 에피소드에서 수위 높은 단어 대신 자제력을 고급스럽게 영주, 왕, 여왕으로 비유하며 주고받는 시트콤 역사상 가장 지적인 티키타카 씬입니다.",
     example: [
       {
         speaker: "Jerry",
@@ -333,7 +363,7 @@ export const advancedExpressions = [
   {
     phrase: "We're living in a society.",
     meaning: "우리는 사회 속에서 살고 있잖아! (기본적인 매너나 질서를 지키라고 호소할 때)",
-    nuance: "공중전화 줄을 새치기당한 George가 분통을 터뜨리며 외치는 대사입니다. 대중교통이나 공공장소에서 기본적인 매너를 지키지 않는 행동을 볼 때 약간의 과장된 격분 톤으로 유머러스하게 외치는 문장입니다.",
+    nuance: "공중전화를 묵비권 행사하며 안 내놓는 남자에게 George가 분통을 터뜨리며 '문명인답게 살자!'라고 외치는 폭소 명장면입니다.",
     example: [
       {
         speaker: "George",
@@ -372,7 +402,7 @@ export const advancedExpressions = [
   {
     phrase: "Double-dip.",
     meaning: "한 번 입으로 문 칩을 소스에 다시 찍다. (위생 규범 위반)",
-    nuance: "George가 장례식장에서 칩을 한 입 베어 물고 다시 소스 그릇에 찍다가 걸리는 장면입니다. 미국 문화권에서는 소스 그릇에 두 번 찍는 행동('double-dipping')을 상당한 실례로 여기는 계기가 된 문화적 명장면입니다.",
+    nuance: "Timmy가 George의 칩 두 번 찍기를 적발하고 '소스 그릇에 입을 집어넣는 거나 마찬가지'라고 추궁하는 장례식장 명장면 전체입니다.",
     example: [
       {
         speaker: "Timmy",
@@ -411,7 +441,7 @@ export const advancedExpressions = [
   {
     phrase: "I can't spare a square.",
     meaning: "휴지 한 칸도 나눠줄 여유가 없어.",
-    nuance: "화장실 칸막이 너머로 휴지를 빌려달라는 Elaine의 요청을 옆 칸 여성이 단호히 거절하는 유머 명장면입니다. 작은 양보조차 딱 잘라 거절할 때 인용되는 유명한 유머 구절입니다.",
+    nuance: "화장실 옆 칸의 Jane에게 Elaine이 한 겹, 한 칸이라도 구걸하지만 단칼에 '나눠줄 휴지 한 칸도 없다'며 거절당하는 레전드 씬입니다.",
     example: [
       {
         speaker: "Elaine",
@@ -449,8 +479,8 @@ export const advancedExpressions = [
   },
   {
     phrase: "The jerk store called.",
-    meaning: "멍청이 가게에서 전화 왔는데 너 다 떨어졌대. (뒤늦게 생각해낸 통쾌한 반박 멘트)",
-    nuance: "회의에서 놀림을 당한 George가 하루 종일 머리를 쥐어짜며 생각해낸 뒤늦은 반박 멘트입니다. 미국 일상에서는 상대방의 깐족거림에 유머러스하게 응수할 때 쓰는 대명사 멘트입니다.",
+    meaning: "멍청이 가게에서 전화 왔는데 너 다 떨어졌대.",
+    nuance: "George가 하루 종일 머리를 쥐어짜며 겨우 날린 반박 멘트에 Reilly가 역으로 받아치고, 멘붕 온 George가 아내 드립을 쳤다가 썰렁해지는 웃픈 씬 전체입니다.",
     example: [
       {
         speaker: "George",
@@ -471,6 +501,11 @@ export const advancedExpressions = [
         speaker: "Jerry",
         text: "His wife is in a coma...",
         translation: "걔 아내 혼수상태인데..."
+      },
+      {
+        speaker: "George",
+        text: "Well, the life support machine called!",
+        translation: "그럼 인공호흡기 유지 장치에서 전화 왔대!"
       }
     ],
     modernUsage: [
@@ -489,7 +524,7 @@ export const advancedExpressions = [
   {
     phrase: "They're real, and they're spectacular.",
     meaning: "진짜고, 게다가 아주 훌륭해.",
-    nuance: "오해로 헤어지게 된 여자친구 Sidra가 떠나며 Jerry에게 날리는 명대사입니다. 누군가가 무언가의 진위나 진짜 가치에 의문을 제기할 때 자신감 있게 결론을 내릴 때 인용됩니다.",
+    nuance: "Sidra가 Jerry와 헤어지며 문을 열고 나가며 명대사 'And by the way, they're real... and they're spectacular!'를 날리고, Elaine이 뒤에서 맞장구치는 명장면 전체입니다.",
     example: [
       {
         speaker: "Sidra",
@@ -528,7 +563,7 @@ export const advancedExpressions = [
   {
     phrase: "The Summer of George!",
     meaning: "나만의 최고의 전성기/휴식기를 선언할 때!",
-    nuance: "퇴직금을 받게 된 George가 자신만의 여유로운 휴식과 독서, 치즈 먹기를 선언하며 외치는 구절입니다. 휴가나 방학, 리프레시 기간을 맞이했을 때 'The Summer of [내 이름]!'으로 변형하여 신나게 선언할 때 씁니다.",
+    nuance: "3개월 치 퇴직금을 받은 George가 바지도 입지 않고 거대한 치즈를 베어 먹으며 최고의 여름을 보내겠다고 호언장담하자 Jerry가 2주일 건다고 비꼬는 폭소 씬 전체입니다.",
     example: [
       {
         speaker: "George",
@@ -542,8 +577,18 @@ export const advancedExpressions = [
       },
       {
         speaker: "George",
-        text: "This is gonna be the Summer of George! I'm gonna read, bite into big cheese blocks!",
-        translation: "이번 여름은 조지의 여름이 될 거야! 책도 읽고 거대한 치즈 덩어리도 베어 먹을 거라고!"
+        text: "This is gonna be the Summer of George! I'm gonna read, bite into big cheese blocks like apples!",
+        translation: "이번 여름은 조지의 여름이 될 거야! 책도 읽고 사과처럼 거대한 치즈 덩어리도 베어 먹을 거라고!"
+      },
+      {
+        speaker: "Jerry",
+        text: "Are you gonna get up before noon?",
+        translation: "정오 전에는 일어날 거냐?"
+      },
+      {
+        speaker: "George",
+        text: "Jerry, I may never put on pants again!",
+        translation: "제리, 나 앞으로 다시는 바지를 안 입을지도 몰라!"
       },
       {
         speaker: "Jerry",
