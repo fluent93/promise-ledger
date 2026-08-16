@@ -527,14 +527,24 @@ export const advancedExpressions = [
     nuance: "Sidra가 Jerry와 헤어지며 문을 열고 나가며 명대사 'And by the way, they're real... and they're spectacular!'를 날리고, Elaine이 뒤에서 맞장구치는 명장면 전체입니다.",
     example: [
       {
+        speaker: "Jerry",
+        text: "So, where were we?",
+        translation: "그럼 우린 어디까지 얘기했었지?"
+      },
+      {
         speaker: "Sidra",
-        text: "You know, Jerry, I was really starting to like you.",
-        translation: "있잖아 제리, 나 진짜 당신이 좋아지려고 했었어."
+        text: "I was just leaving.",
+        translation: "전 이제 나가려던 참이었어요."
       },
       {
         speaker: "Jerry",
-        text: "Sidra, wait! It was all an accident!",
-        translation: "시드라, 잠시만! 전부 실수였어!"
+        text: "Right, you were leaving.",
+        translation: "맞아, 떠나려던 참이었지."
+      },
+      {
+        speaker: "Sidra",
+        text: "I can't believe you sent a woman into the sauna! I think you're both mentally ill!",
+        translation: "나를 조사하겠다고 사우나에 여자를 들여보내다니! 두 사람 다 제정신이 아니에요!"
       },
       {
         speaker: "Sidra",
@@ -543,8 +553,8 @@ export const advancedExpressions = [
       },
       {
         speaker: "Elaine",
-        text: "I told you they were real!",
-        translation: "내가 진짜라고 말했잖아!"
+        text: "Get out! Get out!",
+        translation: "나가! 나가!"
       }
     ],
     modernUsage: [
