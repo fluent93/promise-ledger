@@ -122,9 +122,9 @@ CLIP_PLAN = [
         "phrase": "They're real, and they're spectacular.",
         "season": 4,
         "episode": "The Implant",
-        "queries": ["you know jerry i was really starting to like you", "they're real and they're spectacular"],
-        "before": 3.0,
-        "after": 14.0,
+        "queries": ["they're real and they're spectacular", "you know jerry i was really starting to like you"],
+        "before": 20.0,
+        "after": 10.0,
     },
     {
         "phrase": "The Summer of George!",
