@@ -197,13 +197,23 @@
       "dialogue": [
         {
           "speaker": "Jerry",
-          "text": "We're not gay, not that there's anything wrong with that.",
-          "translation": "우린 게이가 아니에요, 그게 잘못됐다는 뜻은 아니지만."
+          "text": "There's been a big misunderstanding here.",
+          "translation": "여기 큰 오해가 있었어요."
+        },
+        {
+          "speaker": "George",
+          "text": "We knew you were eavesdropping! All that was on purpose!",
+          "translation": "당신이 도청하는 걸 알고 일부러 연기한 거란 말이에요!"
+        },
+        {
+          "speaker": "Jerry",
+          "text": "We're not gay... not that there's anything wrong with that.",
+          "translation": "우린 게이가 아니에요... 그게 잘못됐다는 뜻은 절대 아니지만."
         },
         {
           "speaker": "Journalist",
           "text": "Oh, of course not. I mean, it's fine if that's who you are.",
-          "translation": "아, 당연히 아니죠. 당신들이 누구든 전 괜찮아요."
+          "translation": "아, 당연히 아니죠. 당신들이 누구든 전 다 괜찮아요."
         },
         {
           "speaker": "George",
@@ -214,6 +224,11 @@
           "speaker": "Jerry",
           "text": "Not that there's anything wrong with that!",
           "translation": "그게 잘못됐다는 뜻은 절대 아니죠!"
+        },
+        {
+          "speaker": "Jerry",
+          "text": "It was a joke! Do you want to have sex with me right now? Let's go!",
+          "translation": "농담이었다고요! 지금 나랑 잘래요? 나랑 잘 거냐고요? 갑시다!"
         }
       ],
       "meaning": "그게 잘못됐다는 뜻은 아니야. (오해나 편견을 다급히 해명할 때)",
@@ -456,7 +471,7 @@
         },
         {
           "speaker": "Jane",
-          "text": "I'm sorry, I won't have three squares.",
+          "text": "I'm sorry, I don't have three squares.",
           "translation": "미안하지만 세 칸은 안 돼요."
         },
         {

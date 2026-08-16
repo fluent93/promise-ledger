@@ -211,23 +211,38 @@ export const advancedExpressions = [
     example: [
       {
         speaker: "Jerry",
-        text: "We're not gay. Not that there's anything wrong with that.",
-        translation: "우린 게이가 아니야. 그게 잘못됐다는 뜻은 아니고."
+        text: "There's been a big misunderstanding here.",
+        translation: "여기 큰 오해가 있었어요."
       },
       {
         speaker: "George",
-        text: "No, no! Absolutely not! People can do whatever they want!",
-        translation: "그럼, 당연히 아니지! 사람은 자기 원하는 대로 살 수 있는 거지!"
+        text: "We knew you were eavesdropping! All that was on purpose!",
+        translation: "당신이 도청하는 걸 알고 일부러 연기한 거란 말이에요!"
       },
       {
         speaker: "Jerry",
-        text: "My father's gay, not that there's anything wrong with that.",
-        translation: "우리 아버지도 게이야, 그게 잘못됐다는 뜻은 아니고."
+        text: "We're not gay... not that there's anything wrong with that.",
+        translation: "우린 게이가 아니에요... 그게 잘못됐다는 뜻은 절대 아니지만."
+      },
+      {
+        speaker: "Journalist",
+        text: "Oh, of course not. I mean, it's fine if that's who you are.",
+        translation: "아, 당연히 아니죠. 당신들이 누구든 전 다 괜찮아요."
       },
       {
         speaker: "George",
+        text: "Absolutely! I mean, I have many gay friends. My father's gay!",
+        translation: "그럼요! 게이 친구도 많고요, 우리 아버지도 게이에요!"
+      },
+      {
+        speaker: "Jerry",
         text: "Not that there's anything wrong with that!",
-        translation: "그게 잘못됐다는 뜻은 절대 아니지!"
+        translation: "그게 잘못됐다는 뜻은 절대 아니죠!"
+      },
+      {
+        speaker: "Jerry",
+        text: "It was a joke! Do you want to have sex with me right now? Let's go!",
+        translation: "농담이었다고요! 지금 나랑 잘래요? 나랑 잘 거냐고요? 갑시다!"
       }
     ],
     modernUsage: [

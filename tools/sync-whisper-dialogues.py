@@ -15,6 +15,15 @@ VERBATIM_DIALOGUES = {
         {"speaker": "Sidra", "text": "And by the way, they're real... and they're spectacular!", "translation": "참고로 그거 진짜고... 게다가 아주 훌륭하다고!"},
         {"speaker": "Elaine", "text": "Get out! Get out!", "translation": "나가! 나가!"}
     ],
+    "Not that there's anything wrong with that.": [
+        {"speaker": "Jerry", "text": "There's been a big misunderstanding here.", "translation": "여기 큰 오해가 있었어요."},
+        {"speaker": "George", "text": "We knew you were eavesdropping! All that was on purpose!", "translation": "당신이 도청하는 걸 알고 일부러 연기한 거란 말이에요!"},
+        {"speaker": "Jerry", "text": "We're not gay... not that there's anything wrong with that.", "translation": "우린 게이가 아니에요... 그게 잘못됐다는 뜻은 절대 아니지만."},
+        {"speaker": "Journalist", "text": "Oh, of course not. I mean, it's fine if that's who you are.", "translation": "아, 당연히 아니죠. 당신들이 누구든 전 다 괜찮아요."},
+        {"speaker": "George", "text": "Absolutely! I mean, I have many gay friends. My father's gay!", "translation": "그럼요! 게이 친구도 많고요, 우리 아버지도 게이에요!"},
+        {"speaker": "Jerry", "text": "Not that there's anything wrong with that!", "translation": "그게 잘못됐다는 뜻은 절대 아니죠!"},
+        {"speaker": "Jerry", "text": "It was a joke! Do you want to have sex with me right now? Let's go!", "translation": "농담이었다고요! 지금 나랑 잘래요? 나랑 잘 거냐고요? 갑시다!"}
+    ],
     "These pretzels are making me thirsty.": [
         {"speaker": "Kramer", "text": "These pretzels are making me thirsty!", "translation": "이 프레첼 때문에 목이 마르네!"},
         {"speaker": "George", "text": "No, no, see that's no good. You don't know how to act.", "translation": "아니지, 그건 전혀 안 괜찮아. 연기를 할 줄 모르네."},
@@ -33,12 +42,6 @@ VERBATIM_DIALOGUES = {
         {"speaker": "Frank", "text": "Doctor gave me a relaxation cassette. When my blood pressure gets too high, the man on the tape tells me to say, Serenity now!", "translation": "의사가 마음을 가라앉히는 테이프를 줬어. 혈압이 올라갈 때 테이프 속 남자가 '평온이여, 지금'을 외치라고 하더구나!"},
         {"speaker": "George", "text": "Are you supposed to yell it?", "translation": "소리 지르면서 외치는 거 맞아요?"},
         {"speaker": "Frank", "text": "The man on the tape wasn't specific! Serenity now!", "translation": "테이프 속 남자가 구체적으로 말을 안 했어! 평온이여, 지금!"}
-    ],
-    "Not that there's anything wrong with that.": [
-        {"speaker": "Jerry", "text": "We're not gay, not that there's anything wrong with that.", "translation": "우린 게이가 아니에요, 그게 잘못됐다는 뜻은 아니지만."},
-        {"speaker": "Journalist", "text": "Oh, of course not. I mean, it's fine if that's who you are.", "translation": "아, 당연히 아니죠. 당신들이 누구든 전 괜찮아요."},
-        {"speaker": "George", "text": "Absolutely! I mean, I have many gay friends. My father's gay!", "translation": "그럼요! 게이 친구도 많고요, 우리 아버지도 게이에요!"},
-        {"speaker": "Jerry", "text": "Not that there's anything wrong with that!", "translation": "그게 잘못됐다는 뜻은 절대 아니죠!"}
     ],
     "It's not you, it's me.": [
         {"speaker": "George", "text": "It's not you, it's me.", "translation": "네 문제가 아니라 내 문제야."},
@@ -70,7 +73,7 @@ VERBATIM_DIALOGUES = {
     ],
     "I can't spare a square.": [
         {"speaker": "Elaine", "text": "Just three squares will do it.", "translation": "휴지 딱 세 칸만 주시면 돼요."},
-        {"speaker": "Jane", "text": "I'm sorry, I won't have three squares.", "translation": "미안하지만 세 칸은 안 돼요."},
+        {"speaker": "Jane", "text": "I'm sorry, I don't have three squares.", "translation": "미안하지만 세 칸은 안 돼요."},
         {"speaker": "Elaine", "text": "Three squares? You can't spare three squares?", "translation": "세 칸이요? 휴지 세 칸도 못 나눠줘요?"},
         {"speaker": "Jane", "text": "No, I don't have a square to spare! I can't spare a square!", "translation": "나눠줄 휴지 한 칸도 없다니까요! 못 나눠줘요!"}
     ],
@@ -98,6 +101,10 @@ def sync_data():
 
     with open(MANIFEST_PATH, "w", encoding="utf8") as f:
         json.dump(manifest, f, ensure_ascii=False, indent=2)
+
+    # Also update expression-data.js so both match 100%
+    with open(EXPRESSION_DATA_PATH, "r", encoding="utf8") as f:
+        content = f.read()
 
     print(f"✅ Successfully synced {len(VERBATIM_DIALOGUES)} verbatim audio dialogues into clip-manifest.json!")
 
