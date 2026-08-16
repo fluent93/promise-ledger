@@ -1,11 +1,13 @@
 {
-  "version": 5,
+  "version": 6,
   "clips": {
     "These pretzels are making me thirsty.": {
-      "src": "/api/audio-clip?id=these-pretzels-are-making-me-thirsty&v=7bcab9dcfde8",
+      "src": "/api/audio-clip?id=these-pretzels-are-making-me-thirsty&v=8f9ab2c1de34",
       "file": "these-pretzels-are-making-me-thirsty.mp3",
       "episode": "028 - The Alternate Side - [DVD].avi",
       "season": 3,
+      "start": "00:09:28.500",
+      "end": "00:09:56.500",
       "dialogue": [
         {
           "speaker": "Kramer",
@@ -44,6 +46,8 @@
       "file": "no-soup-for-you.mp3",
       "episode": "116 - The Soup Nazi - [DVD].avi",
       "season": 7,
+      "start": "00:03:42.000",
+      "end": "00:04:08.000",
       "dialogue": [
         {
           "speaker": "George",
@@ -82,6 +86,8 @@
       "file": "serenity-now.mp3",
       "episode": "159 - The Serenity Now.mpg",
       "season": 9,
+      "start": "00:00:18.000",
+      "end": "00:00:46.000",
       "dialogue": [
         {
           "speaker": "Frank",
@@ -115,6 +121,8 @@
       "file": "yada-yada-yada.mp3",
       "episode": "153 - The Yada Yada.avi",
       "season": 8,
+      "start": "00:00:55.000",
+      "end": "00:01:22.000",
       "dialogue": [
         {
           "speaker": "Elaine",
@@ -148,6 +156,8 @@
       "file": "not-that-there-s-anything-wrong-with-that.mp3",
       "episode": "057 - The Outing - [DVD].avi",
       "season": 4,
+      "start": "00:07:08.000",
+      "end": "00:07:35.000",
       "dialogue": [
         {
           "speaker": "Jerry",
@@ -176,6 +186,8 @@
       "file": "it-s-not-you-it-s-me.mp3",
       "episode": "070 - The Lip Reader - [DVD].avi",
       "season": 5,
+      "start": "00:09:25.000",
+      "end": "00:09:50.000",
       "dialogue": [
         {
           "speaker": "George",
@@ -204,6 +216,8 @@
       "file": "i-m-out.mp3",
       "episode": "051 - The Contest - [DVD].avi",
       "season": 4,
+      "start": "00:06:47.000",
+      "end": "00:07:15.000",
       "dialogue": [
         {
           "speaker": "Kramer",
@@ -232,6 +246,8 @@
       "file": "master-of-your-domain.mp3",
       "episode": "051 - The Contest - [DVD].avi",
       "season": 4,
+      "start": "00:11:12.000",
+      "end": "00:11:38.000",
       "dialogue": [
         {
           "speaker": "Jerry",
@@ -260,6 +276,8 @@
       "file": "we-re-living-in-a-society.mp3",
       "episode": "016 - The Chinese Restaurant - [DVD].avi",
       "season": 2,
+      "start": "00:07:42.000",
+      "end": "00:08:08.000",
       "dialogue": [
         {
           "speaker": "George",
@@ -288,6 +306,8 @@
       "file": "double-dip.mp3",
       "episode": "059 - The Implant - [DVD].avi",
       "season": 4,
+      "start": "00:16:29.000",
+      "end": "00:16:55.000",
       "dialogue": [
         {
           "speaker": "Timmy",
@@ -316,6 +336,8 @@
       "file": "i-can-t-spare-a-square.mp3",
       "episode": "076 - The Stall - [DVD].avi",
       "season": 5,
+      "start": "00:01:07.000",
+      "end": "00:01:32.000",
       "dialogue": [
         {
           "speaker": "Elaine",
@@ -344,6 +366,8 @@
       "file": "the-jerk-store-called.mp3",
       "episode": "147 - The Comeback.mpg",
       "season": 8,
+      "start": "00:00:48.000",
+      "end": "00:01:15.000",
       "dialogue": [
         {
           "speaker": "George",
@@ -377,6 +401,8 @@
       "file": "they-re-real-and-they-re-spectacular.mp3",
       "episode": "059 - The Implant - [DVD].avi",
       "season": 4,
+      "start": "00:20:38.000",
+      "end": "00:21:05.000",
       "dialogue": [
         {
           "speaker": "Sidra",
@@ -403,8 +429,9 @@
     "The Summer of George!": {
       "src": "/api/audio-clip?id=the-summer-of-george",
       "file": "the-summer-of-george.mp3",
-      "episode": "156 - The Summer of George.mpg",
       "season": 8,
+      "start": "00:00:48.000",
+      "end": "00:01:18.000",
       "dialogue": [
         {
           "speaker": "George",
