@@ -1,6 +1,6 @@
-import { EXPRESSION_POLICY_VERSION, advancedExpressions } from "./expression-data.js?v=0.31";
+import { EXPRESSION_POLICY_VERSION, advancedExpressions } from "./expression-data.js?v=0.37";
 
-const APP_VERSION = "0.31";
+const APP_VERSION = "0.37";
 const expressions = advancedExpressions;
 let clipManifest = {};
 let activeAudio = null;
