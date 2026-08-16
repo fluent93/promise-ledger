@@ -1,6 +1,9 @@
 import crypto from "node:crypto";
+import { execSync } from "node:child_process";
 import fs from "node:fs/promises";
+import { existsSync } from "node:fs";
 import path from "node:path";
+import os from "node:os";
 
 const AUDIO_KEY_PREFIX = "seinfeld-english:audio:v1";
 const MAX_CLIP_BYTES = 1024 * 1024;
@@ -8,20 +11,52 @@ const APP_MANIFEST = path.resolve("apps/11-daily-verse-english/audio/clip-manife
 
 await loadEnvFile(path.resolve(".env.local"));
 
-const sourceDir = path.resolve(process.argv[2] || "");
-if (!process.argv[2]) {
-  throw new Error("Usage: node scripts/import-seinfeld-clip-batch.js <extracted-batch-directory>");
+let inputPath = process.argv[2] ? path.resolve(process.argv[2]) : "";
+
+// Auto-detect zip or folder in Downloads if not specified or missing
+if (!inputPath || !existsSync(inputPath)) {
+  const homeDownloads = path.join(os.homedir(), "Downloads");
+  const candidates = [
+    path.join(process.cwd(), ".tmp/seinfeld-clips-batch"),
+    path.join(process.cwd(), ".tmp/seinfeld-clips-batch.zip"),
+    path.join(homeDownloads, "seinfeld-clips-batch"),
+    path.join(homeDownloads, "seinfeld-clips-batch.zip"),
+  ];
+
+  const found = candidates.find((c) => existsSync(c));
+  if (found) {
+    inputPath = found;
+    console.log(`🔍 Auto-detected batch file/folder: ${inputPath}`);
+  } else {
+    throw new Error(
+      `Could not find batch files at '${inputPath || ".tmp/seinfeld-clips-batch"}'.\nPlease place 'seinfeld-clips-batch.zip' in your Downloads folder or .tmp/ directory.`
+    );
+  }
+}
+
+// If inputPath is a zip file, unzip it into .tmp/seinfeld-clips-batch
+let targetDir = inputPath;
+if (inputPath.endsWith(".zip")) {
+  targetDir = path.resolve(".tmp/seinfeld-clips-batch");
+  await fs.mkdir(targetDir, { recursive: true });
+  console.log(`📦 Unzipping ${inputPath} -> ${targetDir}...`);
+  execSync(`unzip -o "${inputPath}" -d "${targetDir}"`, { stdio: "inherit" });
 }
 
 const url = process.env.UPSTASH_REDIS_REST_URL;
 const token = process.env.UPSTASH_REDIS_REST_TOKEN;
 if (!url || !token) throw new Error("UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN are required");
 
-const sourceManifest = JSON.parse(await fs.readFile(path.join(sourceDir, "clip-manifest.json"), "utf8"));
+const manifestFile = path.join(targetDir, "clip-manifest.json");
+if (!existsSync(manifestFile)) {
+  throw new Error(`clip-manifest.json not found in ${targetDir}`);
+}
+
+const sourceManifest = JSON.parse(await fs.readFile(manifestFile, "utf8"));
 const entries = Object.entries(sourceManifest.clips || {});
 if (!entries.length) throw new Error("The batch manifest contains no clips");
 
-const deployedManifest = { version: 2, clips: {} };
+const deployedManifest = { version: 6, clips: {} };
 const seenIds = new Set();
 for (const [phrase, clip] of entries) {
   const fileName = path.basename(String(clip.file || ""));
@@ -31,7 +66,13 @@ for (const [phrase, clip] of entries) {
   }
   seenIds.add(id);
 
-  const audio = await fs.readFile(path.join(sourceDir, fileName));
+  const mp3Path = path.join(targetDir, fileName);
+  if (!existsSync(mp3Path)) {
+    console.warn(`⚠️ Skipping missing audio file: ${fileName}`);
+    continue;
+  }
+
+  const audio = await fs.readFile(mp3Path);
   if (!audio.length || audio.length > MAX_CLIP_BYTES) {
     throw new Error(`${fileName} must be between 1 byte and 1 MB`);
   }
@@ -44,6 +85,12 @@ for (const [phrase, clip] of entries) {
     data: audio.toString("base64"),
   };
   await setRedisValue(`${AUDIO_KEY_PREFIX}:${id}`, JSON.stringify(record), url, token);
+
+  // Copy MP3 to local audio directory for offline/local server access
+  const localAudioDir = path.resolve("apps/11-daily-verse-english/audio");
+  await fs.mkdir(localAudioDir, { recursive: true });
+  await fs.writeFile(path.join(localAudioDir, fileName), audio);
+
   deployedManifest.clips[phrase] = {
     src: `/api/audio-clip?id=${id}`,
     file: `${id}.mp3`,
@@ -56,11 +103,11 @@ for (const [phrase, clip] of entries) {
     nuance: clip.nuance || "",
     modernUsage: clip.modernUsage || [],
   };
-  console.log(`[${deployedManifest.clips[phrase].src}] ${phrase}`);
+  console.log(`✅ [Uploaded to DB & Local] ${phrase} -> ${id}.mp3 (${audio.length} bytes)`);
 }
 
 await fs.writeFile(APP_MANIFEST, `${JSON.stringify(deployedManifest, null, 2)}\n`, "utf8");
-console.log(`Imported ${entries.length} clips and updated ${path.relative(process.cwd(), APP_MANIFEST)}`);
+console.log(`\n🎉 Successfully imported ${entries.length} clips to Redis & updated local manifest!`);
 
 async function setRedisValue(key, value, redisUrl, redisToken) {
   const endpoint = redisUrl.endsWith("/") ? redisUrl : `${redisUrl}/`;
@@ -72,10 +119,20 @@ async function setRedisValue(key, value, redisUrl, redisToken) {
     },
     body: JSON.stringify(["SET", key, value]),
   });
-  const payload = await response.json();
-  if (!response.ok || payload.error || payload.result !== "OK") {
-    throw new Error(payload.error || `Upload failed: ${response.status}`);
+  const data = await response.json();
+  if (!response.ok || data.error || data.result !== "OK") {
+    throw new Error(data.error || `Upstash request failed: ${response.status}`);
   }
+}
+
+function unquoteEnvValue(value) {
+  if (
+    (value.startsWith('"') && value.endsWith('"')) ||
+    (value.startsWith("'") && value.endsWith("'"))
+  ) {
+    return value.slice(1, -1);
+  }
+  return value;
 }
 
 async function loadEnvFile(file) {
@@ -87,7 +144,7 @@ async function loadEnvFile(file) {
       const index = trimmed.indexOf("=");
       if (index === -1) continue;
       const key = trimmed.slice(0, index).trim();
-      const value = trimmed.slice(index + 1).trim();
+      const value = unquoteEnvValue(trimmed.slice(index + 1).trim());
       if (!process.env[key]) process.env[key] = value;
     }
   } catch (error) {
