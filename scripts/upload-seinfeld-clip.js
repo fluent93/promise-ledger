@@ -27,7 +27,8 @@ const record = {
   sha256: crypto.createHash("sha256").update(audio).digest("hex"),
   data: audio.toString("base64"),
 };
-const redisResponse = await fetch(url, {
+const endpoint = url.endsWith("/") ? url : `${url}/`;
+const redisResponse = await fetch(endpoint, {
   method: "POST",
   headers: {
     authorization: `Bearer ${token}`,

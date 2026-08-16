@@ -57,7 +57,8 @@ await fs.writeFile(APP_MANIFEST, `${JSON.stringify(deployedManifest, null, 2)}\n
 console.log(`Imported ${entries.length} clips and updated ${path.relative(process.cwd(), APP_MANIFEST)}`);
 
 async function setRedisValue(key, value, redisUrl, redisToken) {
-  const response = await fetch(redisUrl, {
+  const endpoint = redisUrl.endsWith("/") ? redisUrl : `${redisUrl}/`;
+  const response = await fetch(endpoint, {
     method: "POST",
     headers: {
       authorization: `Bearer ${redisToken}`,
