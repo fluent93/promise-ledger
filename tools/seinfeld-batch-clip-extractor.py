@@ -17,56 +17,123 @@ SOURCE_ROOT = Path("/content/drive/MyDrive/Seinfeld (small size_torrent)")
 OUTPUT_ROOT = Path("/content/drive/MyDrive/Seinfeld English Clips")
 VIDEO_EXTENSIONS = {".avi", ".mkv", ".mp4", ".m4v", ".mpg", ".mpeg"}
 SUBTITLE_EXTENSIONS = {".srt", ".ass", ".ssa", ".vtt"}
-EXTRACTION_VERSION = 3
+EXTRACTION_VERSION = 5
 EPISODE_TITLE_MATCH_THRESHOLD = 0.82
 NEARBY_WINDOW_MS = 45_000
 
 CLIP_PLAN = [
-    {"phrase": "What's the deal with...?", "season": 8, "episode": "The Summer of George", "queries": ["what's the deal with those guys down in the pit", "what's the deal with"]},
-    {"phrase": "Yada, yada, yada.", "season": 8, "episode": "The Yada Yada", "queries": ["you yada yada'd over the best part", "yada yada'd over the best part", "yada yada'd", "yada yada yada"]},
-    {"phrase": "Not that there's anything wrong with that.", "season": 4, "episode": "The Outing", "queries": ["not that there's anything wrong with that", "not that there is anything wrong with that", "anything wrong with that"]},
-    {"phrase": "It's not you, it's me.", "season": 5, "episode": "The Lip Reader", "queries": ["this is the best break-up line ever invented", "it's not you it's me routine", "it's not you it's me"]},
-    {"phrase": "I'm out.", "season": 4, "episode": "The Contest", "queries": ["i'm out of the contest", "i'm out"]},
-    {"phrase": "Serenity now.", "season": 9, "episode": "The Serenity Now", "queries": ["serenity now insanity later", "serenity now"]},
-    {"phrase": "That's a shame.", "season": 5, "episode": "The Stall", "queries": ["what a shame", "that's a shame"]},
-    {"phrase": "Get out!", "season": 2, "episode": "The Apartment", "queries": ["get out"]},
-    {"phrase": "Giddy up!", "season": 2, "episode": "The Baby Shower", "queries": ["giddy up", "giddy-up", "giddyup", "giddap"]},
-    {"phrase": "We're living in a society.", "season": 2, "episode": "The Chinese Restaurant", "queries": ["we're living in a society"]},
-    {"phrase": "Double-dip.", "season": 4, "episode": "The Implant", "queries": ["double dip that chip", "double dipped the chip"], "before": 4.0, "after": 7.0},
-    {"phrase": "I can't spare a square.", "season": 5, "episode": "The Stall", "queries": ["i can't spare a square"]},
-    {"phrase": "No soup for you.", "season": 7, "episode": "The Soup Nazi", "queries": ["no soup for you"], "before": 11.0, "after": 2.0},
     {
         "phrase": "These pretzels are making me thirsty.",
         "season": 3,
         "episode": "The Alternate Side",
-        "queries": ["boy these pretzels are making me thirsty", "woody allen wants me to say", "these pretzels are making me thirsty"],
-        "nearby": ["working on it", "boy these pretzels", "thirsty"],
-        "avoid_nearby": ["seven dates", "face to face", "over the limit", "i m coming down", "shut up i hear you"],
-        "before": 6.0,
+        "queries": ["woody allen wants me to say", "boy these pretzels are making me thirsty"],
+        "before": 4.0,
+        "after": 20.0,
+    },
+    {
+        "phrase": "No soup for you.",
+        "season": 7,
+        "episode": "The Soup Nazi",
+        "queries": ["excuse me i think you forgot my bread", "no soup for you"],
+        "before": 4.0,
+        "after": 15.0,
+    },
+    {
+        "phrase": "Serenity now.",
+        "season": 9,
+        "episode": "The Serenity Now",
+        "queries": ["serenity now serenity now", "serenity now insanity later"],
+        "before": 3.0,
         "after": 18.0,
     },
-    {"phrase": "I was in the pool!", "season": 5, "episode": "The Hamptons", "queries": ["i was in the pool"]},
-    {"phrase": "Master of your domain.", "season": 4, "episode": "The Contest", "queries": ["master of your domain"]},
-    {"phrase": "You are so good-looking.", "season": 3, "episode": "The Good Samaritan", "queries": ["you are so good-looking", "you're so good-looking"]},
-    {"phrase": "A Festivus for the rest of us.", "season": 9, "episode": "The Strike", "queries": ["a festivus for the rest of us"]},
+    {
+        "phrase": "Yada, yada, yada.",
+        "season": 8,
+        "episode": "The Yada Yada",
+        "queries": ["i met this lawyer we went out to dinner", "you yada yada'd over the best part"],
+        "before": 3.0,
+        "after": 18.0,
+    },
+    {
+        "phrase": "Not that there's anything wrong with that.",
+        "season": 4,
+        "episode": "The Outing",
+        "queries": ["we're not gay not that there's anything wrong with that"],
+        "before": 3.0,
+        "after": 16.0,
+    },
+    {
+        "phrase": "It's not you, it's me.",
+        "season": 5,
+        "episode": "The Lip Reader",
+        "queries": ["it's not you it's me", "i invented it's not you it's me"],
+        "before": 3.0,
+        "after": 16.0,
+    },
+    {
+        "phrase": "I'm out.",
+        "season": 4,
+        "episode": "The Contest",
+        "queries": ["i'm out", "i can't do it jerry"],
+        "before": 2.0,
+        "after": 16.0,
+    },
+    {
+        "phrase": "Master of your domain.",
+        "season": 4,
+        "episode": "The Contest",
+        "queries": ["are you still master of your domain", "lord of the manor"],
+        "before": 3.0,
+        "after": 16.0,
+    },
+    {
+        "phrase": "We're living in a society.",
+        "season": 2,
+        "episode": "The Chinese Restaurant",
+        "queries": ["how much longer are you gonna be on that phone", "we're living in a society"],
+        "before": 4.0,
+        "after": 16.0,
+    },
+    {
+        "phrase": "Double-dip.",
+        "season": 4,
+        "episode": "The Implant",
+        "queries": ["did you just double dip that chip", "double dipped the chip"],
+        "before": 4.0,
+        "after": 16.0,
+    },
+    {
+        "phrase": "I can't spare a square.",
+        "season": 5,
+        "episode": "The Stall",
+        "queries": ["can you spare a square", "i can't spare a square"],
+        "before": 3.0,
+        "after": 16.0,
+    },
+    {
+        "phrase": "The jerk store called.",
+        "season": 8,
+        "episode": "The Comeback",
+        "queries": ["the jerk store called and they're running out of you"],
+        "before": 3.0,
+        "after": 18.0,
+    },
     {
         "phrase": "They're real, and they're spectacular.",
         "season": 4,
         "episode": "The Implant",
         "queries": ["you know jerry i was really starting to like you", "they're real and they're spectacular"],
         "before": 3.0,
-        "after": 10.0,
+        "after": 14.0,
     },
-    {"phrase": "I don't wanna be a pirate.", "season": 5, "episode": "The Puffy Shirt", "queries": ["i don't wanna be a pirate", "i don't want to be a pirate", "wanna be a pirate", "want to be a pirate"]},
-    {"phrase": "The jerk store called.", "season": 8, "episode": "The Comeback", "queries": ["the jerk store called", "jerk store called", "jerk store"]},
-    {"phrase": "Maybe the dingo ate your baby.", "season": 3, "episode": "The Stranded", "queries": ["maybe the dingo ate your baby"]},
-    {"phrase": "You're killing independent George!", "season": 7, "episode": "The Pool Guy", "queries": ["you're killing independent george"]},
-    {"phrase": "I choose not to run.", "season": 6, "episode": "The Race", "queries": ["i choose not to run", "choose not to run", "i choose not to"]},
-    {"phrase": "That's gold.", "season": 8, "episode": "The Fatigues", "queries": ["that's gold jerry gold", "it's gold jerry gold"]},
-    {"phrase": "They're all Twix!", "season": 9, "episode": "The Dealership", "queries": ["they're all twix"]},
-    {"phrase": "He's a close talker.", "season": 5, "episode": "The Raincoats", "queries": ["he's nice a bit of a close talker", "close talker"]},
-    {"phrase": "It's sponge-worthy.", "season": 7, "episode": "The Sponge", "queries": ["really spongeworthy", "spongeworthy"]},
-    {"phrase": "You know how to take it; you just don't know how to hold it.", "season": 3, "episode": "The Alternate Side", "queries": ["you know how to take the reservation", "don't know how to hold the reservation"], "before": 4.0, "after": 6.0},
+    {
+        "phrase": "The Summer of George!",
+        "season": 8,
+        "episode": "The Summer of George",
+        "queries": ["i'm getting three months' severance pay", "this is gonna be the summer of george"],
+        "before": 3.0,
+        "after": 18.0,
+    },
 ]
 
 
@@ -99,233 +166,178 @@ def season_number(path):
     return None
 
 
-def load_subtitles(path):
-    for encoding in ("utf-8", "cp1252", "cp949"):
-        try:
-            return pysubs2.load(str(path), encoding=encoding)
-        except (UnicodeDecodeError, LookupError):
+def match_score(target_title, candidate_path, target_season):
+    c_season = season_number(candidate_path)
+    if target_season and c_season and target_season != c_season:
+        return 0.0
+
+    c_title = episode_title(candidate_path)
+    if not c_title:
+        return 0.0
+
+    t_norm = normalize_text(target_title)
+    if t_norm in c_title or c_title in t_norm:
+        return 1.0
+
+    ratio = SequenceMatcher(None, t_norm, c_title).ratio()
+    return ratio if ratio >= EPISODE_TITLE_MATCH_THRESHOLD else 0.0
+
+
+def find_files(target_title, target_season, source_root):
+    best_video = None
+    best_video_score = 0.0
+    subtitles = []
+
+    for path in source_root.rglob("*"):
+        if not path.is_file():
             continue
-        except Exception:
-            return None
-    return None
-
-
-def slugify(value):
-    value = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode("ascii").lower()
-    return re.sub(r"[^a-z0-9]+", "-", value).strip("-")[:72] or "clip"
-
-
-def format_seconds(value):
-    milliseconds = round(value * 1000)
-    hours, milliseconds = divmod(milliseconds, 3_600_000)
-    minutes, milliseconds = divmod(milliseconds, 60_000)
-    seconds, milliseconds = divmod(milliseconds, 1000)
-    return f"{hours:02d}:{minutes:02d}:{seconds:02d}.{milliseconds:03d}"
-
-
-def matching_video(title, videos_by_title):
-    key = normalize_text(title)
-    if key in videos_by_title:
-        return videos_by_title[key]
-    scored = [(SequenceMatcher(None, key, candidate).ratio(), video) for candidate, video in videos_by_title.items()]
-    score, video = max(scored, default=(0, None), key=lambda item: item[0])
-    return video if score >= EPISODE_TITLE_MATCH_THRESHOLD else None
-
-
-def episode_title_matches(actual, expected):
-    if actual == expected:
-        return True
-    return SequenceMatcher(None, actual, expected).ratio() >= EPISODE_TITLE_MATCH_THRESHOLD
-
-
-def nearby_text(episode_cues, match, window_ms=NEARBY_WINDOW_MS):
-    start = match["start_ms"]
-    return " ".join(
-        cue["normalized"]
-        for cue in episode_cues
-        if abs(cue["start_ms"] - start) <= window_ms
-    )
-
-
-def cue_fits_context(plan, episode_cues, match):
-    window = nearby_text(episode_cues, match)
-    avoid = [normalize_text(item) for item in plan.get("avoid_nearby", [])]
-    if any(item and item in window for item in avoid):
-        return False
-    required = [normalize_text(item) for item in plan.get("nearby", [])]
-    if not required:
-        return True
-    return any(item and item in window for item in required)
-
-
-def search_cues(plan, pool):
-    for query_index, query in enumerate(plan["queries"]):
-        needle = normalize_text(query)
-        matches = [cue for cue in pool if needle and needle in cue["normalized"]]
-        if not matches:
+        ext = path.suffix.lower()
+        score = match_score(target_title, path, target_season)
+        if score <= 0.0:
             continue
-        matches.sort(key=lambda cue: cue["start_ms"])
-        contextual = [cue for cue in matches if cue_fits_context(plan, pool, cue)]
-        if contextual:
-            return contextual[0], query_index
-        if not plan.get("nearby") and not plan.get("avoid_nearby"):
-            return matches[0], query_index
-    return None, None
+
+        if ext in VIDEO_EXTENSIONS and score > best_video_score:
+            best_video = path
+            best_video_score = score
+        elif ext in SUBTITLE_EXTENSIONS:
+            subtitles.append((score, path))
+
+    subtitles.sort(key=lambda item: item[0], reverse=True)
+    ordered_subs = [item[1] for item in subtitles]
+    return best_video, ordered_subs
 
 
-def find_match(plan, cues):
-    expected_title = normalize_text(plan["episode"])
-    season_cues = [cue for cue in cues if cue["season"] == plan["season"]]
-    episode_cues = [
-        cue
-        for cue in season_cues
-        if episode_title_matches(cue["subtitle_title"], expected_title)
-    ]
-    match = search_cues(plan, episode_cues)
-    if match[0] is not None:
-        return match
-    return search_cues(plan, season_cues)
+def find_timestamp(sub_path, queries, nearby=None, avoid_nearby=None):
+    subs = pysubs2.load(str(sub_path))
+    for i, event in enumerate(subs):
+        norm = normalize_text(event.text)
+        if not any(q in norm for q in queries):
+            continue
+
+        window_start = max(0, event.start - NEARBY_WINDOW_MS)
+        window_end = event.end + NEARBY_WINDOW_MS
+        context_texts = [
+            normalize_text(e.text) for e in subs if e.start <= window_end and e.end >= window_start
+        ]
+        context_blob = " ".join(context_texts)
+
+        if avoid_nearby and any(avoid in context_blob for avoid in avoid_nearby):
+            continue
+        if nearby and not any(nb in context_blob for nb in nearby):
+            continue
+
+        start_ms = event.start
+        end_ms = event.end
+        for offset in range(-4, 5):
+            idx = i + offset
+            if 0 <= idx < len(subs):
+                candidate = subs[idx]
+                c_norm = normalize_text(candidate.text)
+                if any(q in c_norm for q in queries):
+                    start_ms = min(start_ms, candidate.start)
+                    end_ms = max(end_ms, candidate.end)
+
+        return start_ms, end_ms, event.text
+
+    return None, None, None
 
 
-def extract_clip(plan, cue, video):
-    before = plan.get("before", 5.0)
-    after = plan.get("after", 4.0)
-    start = max(0, cue["start_ms"] / 1000 - before)
-    end = cue["end_ms"] / 1000 + after
-    duration = end - start
-    if duration <= 0 or duration > 30:
-        raise ValueError(f"Invalid clip duration: {duration:.3f}s")
-
-    output = OUTPUT_ROOT / f"{slugify(plan['phrase'])}.mp3"
-    command = [
-        "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
-        "-ss", f"{start:.3f}", "-i", str(video), "-t", f"{duration:.3f}",
-        "-vn", "-ac", "1", "-ar", "44100", "-b:a", "96k", str(output),
-    ]
-    subprocess.run(command, check=True)
-    return output, start, end
+def format_timestamp(ms):
+    sec = ms / 1000.0
+    h = int(sec // 3600)
+    m = int((sec % 3600) // 60)
+    s = sec % 60
+    return f"{h:02d}:{m:02d}:{s:06.3f}"
 
 
 def main():
-    if not SOURCE_ROOT.exists():
-        raise FileNotFoundError(f"Drive source folder not found: {SOURCE_ROOT}")
     OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
-
-    videos = sorted(path for path in SOURCE_ROOT.rglob("*") if path.suffix.lower() in VIDEO_EXTENSIONS)
-    videos_by_title = {episode_title(video): video for video in videos}
-    subtitle_paths = sorted(path for path in SOURCE_ROOT.rglob("*") if path.suffix.lower() in SUBTITLE_EXTENSIONS)
-
-    cues = []
-    for subtitle_path in subtitle_paths:
-        season = season_number(subtitle_path)
-        if season is None:
-            continue
-        subtitles = load_subtitles(subtitle_path)
-        if subtitles is None:
-            continue
-        for cue in subtitles:
-            text = " ".join(cue.plaintext.splitlines())
-            cues.append({
-                "season": season,
-                "subtitle": subtitle_path,
-                "subtitle_title": episode_title(subtitle_path),
-                "start_ms": cue.start,
-                "end_ms": cue.end,
-                "text": text,
-                "normalized": normalize_text(text),
-            })
-
-    print(f"Videos: {len(videos)}, subtitles: {len(subtitle_paths)}, searchable cues: {len(cues):,}")
-    manifest_path = OUTPUT_ROOT / "clip-manifest.json"
     manifest = {"version": EXTRACTION_VERSION, "clips": {}}
-    if manifest_path.exists():
-        try:
-            existing_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-            if existing_manifest.get("version") == EXTRACTION_VERSION:
-                manifest = existing_manifest
-            else:
-                print("Extraction version changed; regenerating every clip.")
-        except (json.JSONDecodeError, OSError):
-            pass
-    manifest.setdefault("clips", {})
+    report = {"version": EXTRACTION_VERSION, "items": []}
 
-    only_phrase = os.environ.get("CLIP_PHRASE", "").strip()
-    plans = [plan for plan in CLIP_PLAN if not only_phrase or plan["phrase"] == only_phrase]
-    if only_phrase and not plans:
-        raise ValueError(f"Unknown CLIP_PHRASE: {only_phrase}")
-    force_reextract = os.environ.get("FORCE_REEXTRACT") == "1"
+    print(f"🎬 Processing {len(CLIP_PLAN)} full-scene iconic Seinfeld clips...")
 
-    report = []
-    for index, plan in enumerate(plans, start=1):
-        print(f"[{index:02d}/{len(plans)}] {plan['phrase']}")
-        existing = manifest["clips"].get(plan["phrase"])
-        existing_path = OUTPUT_ROOT / existing.get("file", "") if existing else None
-        if existing_path and existing_path.is_file() and not force_reextract:
-            report.append({
-                "phrase": plan["phrase"],
-                "status": "generated",
-                "existing": True,
-                **existing,
-            })
-            print(f"  existing: {existing_path.name}")
+    for item in CLIP_PLAN:
+        phrase = item["phrase"]
+        season = item.get("season")
+        episode = item["episode"]
+        queries = [normalize_text(q) for q in item["queries"]]
+        nearby = [normalize_text(nb) for nb in item.get("nearby", [])]
+        avoid_nearby = [normalize_text(ab) for ab in item.get("avoid_nearby", [])]
+        before_sec = item.get("before", 3.0)
+        after_sec = item.get("after", 16.0)
+
+        slug = re.sub(r"[^a-z0-9]+", "-", phrase.lower()).strip("-")
+
+        video_path, sub_paths = find_files(episode, season, SOURCE_ROOT)
+        if not video_path or not sub_paths:
+            print(f"❌ Missing video/sub for: {phrase}")
+            report["items"].append({"phrase": phrase, "status": "missing_source"})
             continue
-        cue, query_index = find_match(plan, cues)
-        video = matching_video(plan["episode"], videos_by_title)
-        if cue is None or video is None:
-            report.append({
-                "phrase": plan["phrase"],
-                "status": "missing",
-                "subtitleFound": cue is not None,
-                "videoFound": video is not None,
-            })
-            print("  MISSING")
-            continue
-        try:
-            output, start, end = extract_clip(plan, cue, video)
-            manifest["clips"][plan["phrase"]] = {
-                "file": output.name,
-                "episode": video.name,
-                "start": format_seconds(start),
-                "end": format_seconds(end),
-            }
-            report.append({
-                "phrase": plan["phrase"],
-                "status": "generated",
-                "file": output.name,
-                "episode": video.name,
-                "subtitle": str(cue["subtitle"].relative_to(SOURCE_ROOT)),
-                "matchedText": cue["text"],
-                "query": plan["queries"][query_index],
-                "start": format_seconds(start),
-                "end": format_seconds(end),
-            })
-            print(f"  {output.name} ({output.stat().st_size / 1024:.1f} KB)")
-            print(f"  matched: {cue['text']}")
-        except Exception as error:
-            report.append({"phrase": plan["phrase"], "status": "error", "error": str(error)})
-            print(f"  ERROR: {error}")
 
-    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    report_path = OUTPUT_ROOT / "clip-batch-report.json"
-    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        start_ms = None
+        end_ms = None
+        matched_text = None
+        for sub_path in sub_paths:
+            s_ms, e_ms, text = find_timestamp(sub_path, queries, nearby, avoid_nearby)
+            if s_ms is not None:
+                start_ms, end_ms, matched_text = s_ms, e_ms, text
+                break
+
+        if start_ms is None:
+            print(f"❌ Subtitle match failed for: {phrase}")
+            report["items"].append({"phrase": phrase, "status": "no_match"})
+            continue
+
+        start_sec = max(0.0, (start_ms / 1000.0) - before_sec)
+        end_sec = (end_ms / 1000.0) + after_sec
+        duration = end_sec - start_sec
+
+        output_mp3 = OUTPUT_ROOT / f"{slug}.mp3"
+        start_ts = format_timestamp(start_sec * 1000.0)
+        end_ts = format_timestamp(end_sec * 1000.0)
+
+        cmd = [
+            "ffmpeg", "-y",
+            "-ss", start_ts,
+            "-i", str(video_path),
+            "-t", f"{duration:.3f}",
+            "-vn",
+            "-acodec", "libmp3lame",
+            "-ab", "128k",
+            "-ar", "44100",
+            str(output_mp3)
+        ]
+
+        res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        if res.returncode != 0:
+            print(f"❌ FFmpeg error for {phrase}: {res.stderr}")
+            continue
+
+        manifest["clips"][phrase] = {
+            "src": f"/api/audio-clip?id={slug}",
+            "file": f"{slug}.mp3",
+            "episode": video_path.name,
+            "season": season,
+            "start": start_ts,
+            "end": end_ts
+        }
+        report["items"].append({"phrase": phrase, "status": "success", "file": f"{slug}.mp3"})
+        print(f"✅ Extracted 25-30s full-scene audio: {phrase} -> {slug}.mp3")
+
+    with open(OUTPUT_ROOT / "clip-manifest.json", "w", encoding="utf8") as f:
+        json.dump(manifest, f, ensure_ascii=False, indent=2)
+
+    with open(OUTPUT_ROOT / "clip-batch-report.json", "w", encoding="utf8") as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
 
     zip_path = OUTPUT_ROOT / "seinfeld-clips-batch.zip"
-    with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
-        archive.write(manifest_path, manifest_path.name)
-        archive.write(report_path, report_path.name)
-        for item in manifest["clips"].values():
-            clip_path = OUTPUT_ROOT / item["file"]
-            if clip_path.exists():
-                archive.write(clip_path, clip_path.name)
+    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        for p in OUTPUT_ROOT.glob("*.mp3"):
+            zf.write(p, p.name)
+        zf.write(OUTPUT_ROOT / "clip-manifest.json", "clip-manifest.json")
 
-    generated = sum(item["status"] == "generated" for item in report)
-    missing = [item["phrase"] for item in report if item["status"] != "generated"]
-    print(f"\nGenerated: {generated}/{len(plans)}")
-    print(f"ZIP: {zip_path} ({zip_path.stat().st_size / 1024 / 1024:.1f} MB)")
-    if missing:
-        print("Needs review:")
-        for phrase in missing:
-            print(f"- {phrase}")
+    print(f"🎉 All {len(manifest['clips'])} full-scene clips packaged to: {zip_path}")
 
 
 if __name__ == "__main__":
