@@ -1,219 +1,11 @@
 {
-  "version": 3,
+  "version": 4,
   "clips": {
-    "No soup for you.": {
-      "src": "/api/audio-clip?id=no-soup-for-you",
-      "episode": "116 - The Soup Nazi - [DVD].avi",
-      "start": "00:03:45.080",
-      "end": "00:03:59.559",
-      "dialogue": [
-        {
-          "speaker": "George",
-          "text": "Excuse me, I think you forgot my bread.",
-          "translation": "저기요, 제 빵을 빼먹으신 것 같은데요."
-        },
-        {
-          "speaker": "Soup Nazi",
-          "text": "Bread — two dollars extra.",
-          "translation": "빵은 2달러 추가."
-        },
-        {
-          "speaker": "George",
-          "text": "Two dollars? But everyone in front of me got free bread.",
-          "translation": "2달러요? 하지만 제 앞 사람들은 모두 빵을 공짜로 받았잖아요."
-        },
-        {
-          "speaker": "Soup Nazi",
-          "text": "You want bread? Three dollars! No soup for you!",
-          "translation": "빵을 원해? 3달러! 당신에게 줄 수프는 없어!"
-        }
-      ]
-    },
-    "What's the deal with...?": {
-      "src": "/api/audio-clip?id=what-s-the-deal-with",
-      "episode": "156 - The Summer of George.mpg",
-      "start": "00:00:45.316",
-      "end": "00:00:58.912",
-      "dialogue": [
-        {
-          "speaker": "Jerry",
-          "text": "What's the deal with those guys down in the pit?",
-          "translation": "저 아래 구덩이에 있는 사람들은 도대체 뭐야?"
-        },
-        {
-          "speaker": "Jerry",
-          "text": "What are they doing down there?",
-          "translation": "저 아래에서 뭘 하는 건데?"
-        }
-      ]
-    },
-    "Yada, yada, yada.": {
-      "src": "/api/audio-clip?id=yada-yada-yada",
-      "episode": "153 - The Yada Yada.avi",
-      "start": "00:00:57.529",
-      "end": "00:01:08.759",
-      "dialogue": [
-        {
-          "speaker": "George",
-          "text": "You yada yada'd over the best part.",
-          "translation": "제일 중요한 부분을 이러쿵저러쿵으로 넘겼잖아."
-        },
-        {
-          "speaker": "Elaine",
-          "text": "No, I mentioned the yada yada.",
-          "translation": "아니야, 이러쿵저러쿵은 말했다고."
-        }
-      ]
-    },
-    "Not that there's anything wrong with that.": {
-      "src": "/api/audio-clip?id=not-that-there-s-anything-wrong-with-that",
-      "episode": "057 - The Outing - [DVD].avi",
-      "start": "00:07:10.793",
-      "end": "00:07:21.624",
-      "dialogue": [
-        {
-          "speaker": "Jerry",
-          "text": "We're not gay.",
-          "translation": "우린 게이가 아니야."
-        },
-        {
-          "speaker": "Jerry",
-          "text": "Not that there's anything wrong with that.",
-          "translation": "그게 잘못됐다는 뜻은 아니고."
-        }
-      ]
-    },
-    "It's not you, it's me.": {
-      "src": "/api/audio-clip?id=it-s-not-you-it-s-me",
-      "episode": "070 - The Lip Reader - [DVD].avi",
-      "start": "00:09:27.171",
-      "end": "00:09:40.301",
-      "dialogue": [
-        {
-          "speaker": "George",
-          "text": "It's not you, it's me.",
-          "translation": "네 문제가 아니라 내 문제야."
-        },
-        {
-          "speaker": "George",
-          "text": "This is the best break-up line ever invented.",
-          "translation": "이건 역사상 최고의 이별 멘트야."
-        }
-      ]
-    },
-    "I'm out.": {
-      "src": "/api/audio-clip?id=i-m-out",
-      "episode": "051 - The Contest - [DVD].avi",
-      "start": "00:06:49.048",
-      "end": "00:07:00.778",
-      "dialogue": [
-        {
-          "speaker": "Jerry",
-          "text": "I'm out of the contest.",
-          "translation": "난 그 내기에서 빠질게."
-        },
-        {
-          "speaker": "George",
-          "text": "What do you mean, you're out?",
-          "translation": "빠지겠다는 게 무슨 뜻이야?"
-        }
-      ]
-    },
-    "Serenity now.": {
-      "src": "/api/audio-clip?id=serenity-now",
-      "episode": "159 - The Serenity Now.mpg",
-      "start": "00:00:19.290",
-      "end": "00:00:30.884",
-      "dialogue": [
-        {
-          "speaker": "Frank",
-          "text": "Serenity now! Serenity now!",
-          "translation": "평온이여, 지금! 평온이여, 지금!"
-        },
-        {
-          "speaker": "Frank",
-          "text": "Insanity later.",
-          "translation": "광기는 나중에."
-        }
-      ]
-    },
-    "That's a shame.": {
-      "src": "/api/audio-clip?id=that-s-a-shame",
-      "episode": "076 - The Stall - [DVD].avi",
-      "start": "00:17:23.747",
-      "end": "00:17:35.511",
-      "dialogue": [
-        {
-          "speaker": "Jerry",
-          "text": "What a shame.",
-          "translation": "참 안됐네."
-        },
-        {
-          "speaker": "George",
-          "text": "Yeah. What a shame.",
-          "translation": "그래. 참 안됐네."
-        }
-      ]
-    },
-    "Get out!": {
-      "src": "/api/audio-clip?id=get-out",
-      "episode": "010 - The Apartment - [DVD].avi",
-      "start": "00:04:24.240",
-      "end": "00:04:38.837",
-      "dialogue": [
-        {
-          "speaker": "Elaine",
-          "text": "Get out!",
-          "translation": "말도 안 돼!"
-        },
-        {
-          "speaker": "Jerry",
-          "text": "I'm serious.",
-          "translation": "진짜라니까."
-        }
-      ]
-    },
-    "We're living in a society.": {
-      "src": "/api/audio-clip?id=we-re-living-in-a-society",
-      "episode": "016 - The Chinese Restaurant - [DVD].avi",
-      "start": "00:07:44.480",
-      "end": "00:07:56.995",
-      "dialogue": [
-        {
-          "speaker": "George",
-          "text": "We're living in a society!",
-          "translation": "우리는 사회 속에서 살고 있다고!"
-        },
-        {
-          "speaker": "George",
-          "text": "We're supposed to act in a civilized way.",
-          "translation": "문명인답게 행동해야지."
-        }
-      ]
-    },
-    "Double-dip.": {
-      "src": "/api/audio-clip?id=double-dip",
-      "episode": "059 - The Implants - [DVD].avi",
-      "start": "00:16:31.568",
-      "end": "00:16:44.627",
-      "dialogue": [
-        {
-          "speaker": "Timmy",
-          "text": "Did you just double-dip that chip?",
-          "translation": "방금 그 칩을 소스에 두 번 찍은 거야?"
-        },
-        {
-          "speaker": "George",
-          "text": "What?",
-          "translation": "뭐?"
-        }
-      ]
-    },
     "These pretzels are making me thirsty.": {
       "src": "/api/audio-clip?id=these-pretzels-are-making-me-thirsty&v=7bcab9dcfde8",
+      "file": "these-pretzels-are-making-me-thirsty.mp3",
       "episode": "028 - The Alternate Side - [DVD].avi",
-      "start": "00:09:34.545",
-      "end": "00:09:46.810",
+      "season": 3,
       "dialogue": [
         {
           "speaker": "Kramer",
@@ -224,312 +16,380 @@
           "speaker": "George",
           "text": "Is that how you're gonna say it? That's no good.",
           "translation": "그렇게 말할 생각이야? 전혀 아니잖아."
+        },
+        {
+          "speaker": "Jerry",
+          "text": "You gotta put the emphasis on 'these': *These* pretzels are making me thirsty!",
+          "translation": "'These'에 강세를 줘야지: *이* 프레첼 때문에 목마르다고!"
+        },
+        {
+          "speaker": "Kramer",
+          "text": "No, I think I got it. *These pretzels* are making me thirsty!",
+          "translation": "아니야, 감 잡았어. *이 프레첼들* 때문에 목이 마르네!"
+        }
+      ]
+    },
+    "No soup for you.": {
+      "src": "/api/audio-clip?id=no-soup-for-you",
+      "file": "no-soup-for-you.mp3",
+      "episode": "116 - The Soup Nazi - [DVD].avi",
+      "season": 7,
+      "dialogue": [
+        {
+          "speaker": "George",
+          "text": "Excuse me, I think you forgot my bread.",
+          "translation": "저기요, 제 빵을 빼먹으신 것 같은데요."
+        },
+        {
+          "speaker": "Soup Nazi",
+          "text": "Bread — two dollars extra.",
+          "translation": "빵은 2달러 추가다."
+        },
+        {
+          "speaker": "George",
+          "text": "Two dollars? But everyone in front of me got free bread!",
+          "translation": "2달러요? 하지만 제 앞 사람들은 다 무료로 받았잖아요!"
+        },
+        {
+          "speaker": "Soup Nazi",
+          "text": "You want bread? Three dollars! No soup for you!",
+          "translation": "빵을 원해? 3달러! 당신에게 줄 수프는 없어!"
+        }
+      ]
+    },
+    "Serenity now.": {
+      "src": "/api/audio-clip?id=serenity-now",
+      "file": "serenity-now.mp3",
+      "episode": "159 - The Serenity Now.mpg",
+      "season": 9,
+      "dialogue": [
+        {
+          "speaker": "Frank",
+          "text": "Serenity now! Serenity now!",
+          "translation": "평온이여, 지금! 평온이여, 지금!"
+        },
+        {
+          "speaker": "George",
+          "text": "Pop, you're not supposed to yell it.",
+          "translation": "아버지, 소리 지르면서 외치는 게 아니에요."
+        },
+        {
+          "speaker": "Jerry",
+          "text": "The doctor said it calms the nervous system.",
+          "translation": "의사가 신경계를 정돈해 준다고 했대요."
+        },
+        {
+          "speaker": "George",
+          "text": "Yeah, serenity now, insanity later.",
+          "translation": "그래요, 지금은 평온, 나중엔 미치는 거죠."
+        }
+      ]
+    },
+    "Yada, yada, yada.": {
+      "src": "/api/audio-clip?id=yada-yada-yada",
+      "file": "yada-yada-yada.mp3",
+      "episode": "153 - The Yada Yada.avi",
+      "season": 8,
+      "dialogue": [
+        {
+          "speaker": "George",
+          "text": "You yada yada'd over the best part!",
+          "translation": "제일 중요한 부분을 이러쿵저러쿵으로 넘겼잖아!"
+        },
+        {
+          "speaker": "Elaine",
+          "text": "No, I mentioned the yada yada.",
+          "translation": "아니야, 이러쿵저러쿵은 말했다고."
+        },
+        {
+          "speaker": "Jerry",
+          "text": "Which yada yada did you mention?",
+          "translation": "어떤 이러쿵저러쿵을 말했는데?"
+        },
+        {
+          "speaker": "Elaine",
+          "text": "I yada yada'd the lobster bisque.",
+          "translation": "랍스터 비스크 스프 먹은 걸 이러쿵저러쿵으로 넘겼지."
+        }
+      ]
+    },
+    "Not that there's anything wrong with that.": {
+      "src": "/api/audio-clip?id=not-that-there-s-anything-wrong-with-that",
+      "file": "not-that-there-s-anything-wrong-with-that.mp3",
+      "episode": "057 - The Outing - [DVD].avi",
+      "season": 4,
+      "dialogue": [
+        {
+          "speaker": "Jerry",
+          "text": "We're not gay. Not that there's anything wrong with that.",
+          "translation": "우린 게이가 아니야. 그게 잘못됐다는 뜻은 아니고."
+        },
+        {
+          "speaker": "George",
+          "text": "No, no! Absolutely not! People can do whatever they want!",
+          "translation": "그럼, 당연히 아니지! 사람은 자기 원하는 대로 살 수 있는 거지!"
+        },
+        {
+          "speaker": "Jerry",
+          "text": "My father's gay, not that there's anything wrong with that.",
+          "translation": "우리 아버지도 게이야, 그게 잘못됐다는 뜻은 아니고."
+        },
+        {
+          "speaker": "George",
+          "text": "Not that there's anything wrong with that!",
+          "translation": "그게 잘못됐다는 뜻은 절대 아니지!"
+        }
+      ]
+    },
+    "It's not you, it's me.": {
+      "src": "/api/audio-clip?id=it-s-not-you-it-s-me",
+      "file": "it-s-not-you-it-s-me.mp3",
+      "episode": "070 - The Lip Reader - [DVD].avi",
+      "season": 5,
+      "dialogue": [
+        {
+          "speaker": "George",
+          "text": "It's not you, it's me.",
+          "translation": "네 문제가 아니라 내 문제야."
+        },
+        {
+          "speaker": "Gwen",
+          "text": "You're giving me the 'It's not you, it's me' routine?",
+          "translation": "지금 나한테 '네 탓이 아니라 내 탓' 핑계를 대는 거야?"
+        },
+        {
+          "speaker": "George",
+          "text": "Well, it *is* me! I invented 'It's not you, it's me'!",
+          "translation": "아니, 진짜 *내* 문제라니까! 그 멘트는 내가 개발한 거란 말이야!"
+        },
+        {
+          "speaker": "Gwen",
+          "text": "Nobody tells me it's not them, it's me. If it's anybody, it's me!",
+          "translation": "아무도 나한테 자기 탓이 아니래. 굳이 누구 탓이라면 내 탓이야!"
+        }
+      ]
+    },
+    "I'm out.": {
+      "src": "/api/audio-clip?id=i-m-out",
+      "file": "i-m-out.mp3",
+      "episode": "051 - The Contest - [DVD].avi",
+      "season": 4,
+      "dialogue": [
+        {
+          "speaker": "Kramer",
+          "text": "I'm out!",
+          "translation": "난 포기야!"
+        },
+        {
+          "speaker": "Jerry",
+          "text": "What do you mean, you're out? It's been two minutes!",
+          "translation": "포기한다니 무슨 소리야? 시작한 지 2분밖에 안 됐어!"
+        },
+        {
+          "speaker": "Kramer",
+          "text": "I can't do it, Jerry! That woman across the street is driving me crazy!",
+          "translation": "못 버티겠어, 제리! 길 건너 여자 때문에 미쳐버리겠다고!"
+        },
+        {
+          "speaker": "George",
+          "text": "That's gotta be a record.",
+          "translation": "이건 신기록임에 틀림없어."
         }
       ]
     },
     "Master of your domain.": {
       "src": "/api/audio-clip?id=master-of-your-domain",
+      "file": "master-of-your-domain.mp3",
       "episode": "051 - The Contest - [DVD].avi",
-      "start": "00:11:14.513",
-      "end": "00:11:25.344",
+      "season": 4,
       "dialogue": [
         {
           "speaker": "Jerry",
           "text": "Are you still master of your domain?",
-          "translation": "아직도 네 욕구의 주인이야?"
+          "translation": "아직도 네 영역의 주인(자제력)을 유지하고 있어?"
         },
         {
           "speaker": "George",
-          "text": "I'm king of the county.",
-          "translation": "난 그 지역의 왕이야."
-        }
-      ]
-    },
-    "You are so good-looking.": {
-      "src": "/api/audio-clip?id=you-are-so-good-looking",
-      "episode": "037 - The Good Samaritan - [DVD].avi",
-      "start": "00:18:57.572",
-      "end": "00:19:08.066",
-      "dialogue": [
-        {
-          "speaker": "Woman",
-          "text": "You are so good-looking.",
-          "translation": "정말 멋져 보여."
-        },
-        {
-          "speaker": "Jerry",
-          "text": "Thank you.",
-          "translation": "고마워."
-        }
-      ]
-    },
-    "A Festivus for the rest of us.": {
-      "src": "/api/audio-clip?id=a-festivus-for-the-rest-of-us",
-      "episode": "166 - The Strike.mpg",
-      "start": "00:09:36.614",
-      "end": "00:09:48.606",
-      "dialogue": [
-        {
-          "speaker": "Frank",
-          "text": "A Festivus for the rest of us!",
-          "translation": "우리 같은 사람들을 위한 페스티버스다!"
-        },
-        {
-          "speaker": "Frank",
-          "text": "Welcome, newcomers.",
-          "translation": "새로 온 사람들, 환영한다."
-        }
-      ]
-    },
-    "They're real, and they're spectacular.": {
-      "src": "/api/audio-clip?id=they-re-real-and-they-re-spectacular",
-      "episode": "059 - The Implants - [DVD].avi",
-      "start": "00:20:40.217",
-      "end": "00:20:54.484",
-      "dialogue": [
-        {
-          "speaker": "Jerry",
-          "text": "And they're real?",
-          "translation": "그리고 진짜야?"
-        },
-        {
-          "speaker": "Sidra",
-          "text": "They're real, and they're spectacular.",
-          "translation": "진짜고, 게다가 아주 훌륭해."
-        }
-      ]
-    },
-    "The jerk store called.": {
-      "src": "/api/audio-clip?id=the-jerk-store-called",
-      "episode": "147 - The Comeback.mpg",
-      "start": "00:00:50.789",
-      "end": "00:01:03.316",
-      "dialogue": [
-        {
-          "speaker": "George",
-          "text": "The jerk store called.",
-          "translation": "멍청이 가게에서 전화 왔어."
-        },
-        {
-          "speaker": "George",
-          "text": "They're running out of you.",
-          "translation": "네가 다 떨어졌대."
-        }
-      ]
-    },
-    "Maybe the dingo ate your baby.": {
-      "src": "/api/audio-clip?id=maybe-the-dingo-ate-your-baby",
-      "episode": "027 - The Stranded - [DVD].avi",
-      "start": "00:07:06.760",
-      "end": "00:07:17.751",
-      "dialogue": [
-        {
-          "speaker": "Kramer",
-          "text": "Maybe the dingo ate your baby.",
-          "translation": "딩고가 네 아기를 잡아먹었을지도 모르지."
-        },
-        {
-          "speaker": "Jerry",
-          "text": "What?",
-          "translation": "뭐?"
-        }
-      ]
-    },
-    "You're killing independent George!": {
-      "src": "/api/audio-clip?id=you-re-killing-independent-george",
-      "episode": "118 - The Pool Guy - [DVD].avi",
-      "start": "00:11:38.000",
-      "end": "00:11:51.198",
-      "dialogue": [
-        {
-          "speaker": "George",
-          "text": "You're killing independent George!",
-          "translation": "당신이 독립적인 조지를 죽이고 있어!"
-        },
-        {
-          "speaker": "Susan",
-          "text": "Who?",
-          "translation": "누구?"
-        }
-      ]
-    },
-    "I choose not to run.": {
-      "src": "/api/audio-clip?id=i-choose-not-to-run",
-      "episode": "096 - The Race - [DVD].avi",
-      "start": "00:04:02.914",
-      "end": "00:04:14.246",
-      "dialogue": [
-        {
-          "speaker": "George",
-          "text": "I choose not to run.",
-          "translation": "난 뛰지 않기로 선택했어."
-        },
-        {
-          "speaker": "Jerry",
-          "text": "You choose not to run?",
-          "translation": "뛰지 않기로 선택했다고?"
-        }
-      ]
-    },
-    "That's gold.": {
-      "src": "/api/audio-clip?id=that-s-gold",
-      "episode": "140 - The Fatigues.mpg",
-      "start": "00:18:27.644",
-      "end": "00:18:39.738",
-      "dialogue": [
-        {
-          "speaker": "Bania",
-          "text": "That's gold, Jerry! Gold!",
-          "translation": "그거 황금이야, 제리! 황금!"
-        },
-        {
-          "speaker": "Jerry",
-          "text": "Will you stop saying that?",
-          "translation": "그 말 좀 그만할래?"
-        }
-      ]
-    },
-    "They're all Twix!": {
-      "src": "/api/audio-clip?id=they-re-all-twix",
-      "episode": "167 - The Dealership.mpg",
-      "start": "00:19:31.241",
-      "end": "00:19:42.436",
-      "dialogue": [
-        {
-          "speaker": "Jerry",
-          "text": "They're all Twix!",
-          "translation": "전부 트윅스잖아!"
-        },
-        {
-          "speaker": "Jerry",
-          "text": "Left Twix, right Twix — it's the same candy!",
-          "translation": "왼쪽 트윅스, 오른쪽 트윅스 — 같은 사탕이라고!"
-        }
-      ]
-    },
-    "He's a close talker.": {
-      "src": "/api/audio-clip?id=he-s-a-close-talker",
-      "episode": "082, 083 - The Raincoats - [DVD].avi",
-      "start": "00:05:53.224",
-      "end": "00:06:04.784",
-      "dialogue": [
-        {
-          "speaker": "Jerry",
-          "text": "He's nice. A bit of a close talker.",
-          "translation": "착한 사람이야. 다만 좀 가까이 붙어서 말해."
+          "text": "Lord of the manor, Jerry! King of the county!",
+          "translation": "영주 급이지, 제리! 이 지역의 왕이다!"
         },
         {
           "speaker": "Elaine",
-          "text": "A little too close.",
-          "translation": "조금만 너무 가깝지."
-        }
-      ]
-    },
-    "It's sponge-worthy.": {
-      "src": "/api/audio-clip?id=it-s-sponge-worthy",
-      "episode": "119 - The Sponge - [DVD].avi",
-      "start": "00:14:29.560",
-      "end": "00:14:42.758",
-      "dialogue": [
-        {
-          "speaker": "Elaine",
-          "text": "Is he sponge-worthy?",
-          "translation": "그 사람은 스펀지 쓸 가치가 있어?"
+          "text": "I'm queen of the castle.",
+          "translation": "난 이 성의 여왕이야."
         },
         {
           "speaker": "Jerry",
-          "text": "He might be sponge-worthy.",
-          "translation": "스펀지 쓸 만할지도 모르지."
+          "text": "Good. As for me, I am master of my domain.",
+          "translation": "좋아. 나 역시 내 영역의 주인이다."
         }
       ]
     },
-    "You know how to take it; you just don't know how to hold it.": {
-      "src": "/api/audio-clip?id=you-know-how-to-take-it-you-just-don-t-know-how-to-hold-it",
-      "episode": "028 - The Alternate Side - [DVD].avi",
-      "start": "00:05:59.189",
-      "end": "00:06:11.045",
+    "We're living in a society.": {
+      "src": "/api/audio-clip?id=we-re-living-in-a-society",
+      "file": "we-re-living-in-a-society.mp3",
+      "episode": "016 - The Chinese Restaurant - [DVD].avi",
+      "season": 2,
       "dialogue": [
         {
-          "speaker": "Jerry",
-          "text": "You know how to take the reservation.",
-          "translation": "예약 받는 법은 아시잖아요."
+          "speaker": "George",
+          "text": "Excuse me, how much longer are you gonna be on that phone?",
+          "translation": "저기요, 전화 언제까지 쓰실 생각인가요?"
+        },
+        {
+          "speaker": "Man",
+          "text": "As long as I want!",
+          "translation": "내가 쓰고 싶은 만큼!"
+        },
+        {
+          "speaker": "George",
+          "text": "We're living in a society! We're supposed to act in a civilized way!",
+          "translation": "우리는 사회 속에서 살고 있잖아! 문명인답게 행동해야 할 거 아니야!"
         },
         {
           "speaker": "Jerry",
-          "text": "You just don't know how to hold the reservation.",
-          "translation": "예약을 지키는 법을 모를 뿐이죠."
+          "text": "George, calm down. The table is almost ready.",
+          "translation": "조지, 진정해. 테이블 곧 준비된대."
         }
       ]
     },
-    "Giddy up!": {
-      "src": "/api/audio-clip?id=giddy-up",
-      "episode": "015 - The Baby Shower - [DVD].avi",
-      "start": "00:13:23.040",
-      "end": "00:13:34.838",
+    "Double-dip.": {
+      "src": "/api/audio-clip?id=double-dip",
+      "file": "double-dip.mp3",
+      "episode": "059 - The Implant - [DVD].avi",
+      "season": 4,
       "dialogue": [
         {
-          "speaker": "Kramer",
-          "text": "Giddy up!",
-          "translation": "좋아, 가보자!"
+          "speaker": "Timmy",
+          "text": "Did you just double-dip that chip?",
+          "translation": "방금 그 칩 소스에 두 번 찍은 거야?"
         },
         {
-          "speaker": "Jerry",
-          "text": "All right, let's go.",
-          "translation": "좋아, 가자."
+          "speaker": "George",
+          "text": "What? What are you talking about?",
+          "translation": "뭐? 무슨 소릴 하는 거야?"
+        },
+        {
+          "speaker": "Timmy",
+          "text": "You dipped the chip, took a bite, and dipped again!",
+          "translation": "칩을 찍고 한 입 먹고 다시 찍었잖아!"
+        },
+        {
+          "speaker": "George",
+          "text": "That's like putting your whole mouth right in the dip!",
+          "translation": "그건 아예 소스 그릇에 입을 처박는 거나 마찬가지라고!"
         }
       ]
     },
     "I can't spare a square.": {
       "src": "/api/audio-clip?id=i-can-t-spare-a-square",
+      "file": "i-can-t-spare-a-square.mp3",
       "episode": "076 - The Stall - [DVD].avi",
-      "start": "00:01:09.607",
-      "end": "00:01:21.440",
+      "season": 5,
       "dialogue": [
         {
           "speaker": "Elaine",
-          "text": "Can you spare a square?",
-          "translation": "한 칸만 좀 나눠줄 수 있어?"
+          "text": "Excuse me, can you spare a square?",
+          "translation": "저기요, 휴지 한 칸만 나눠줄 수 있나요?"
         },
         {
           "speaker": "Jane",
-          "text": "I can't spare a square.",
-          "translation": "한 칸도 나눠줄 여유가 없어."
+          "text": "No, I'm sorry, I can't spare a square.",
+          "translation": "아뇨, 미안하지만 한 칸도 나눠줄 여유가 없네요."
+        },
+        {
+          "speaker": "Elaine",
+          "text": "Not even one ply? One little square?",
+          "translation": "한 겹도 안 돼요? 그 작은 한 칸도?"
+        },
+        {
+          "speaker": "Jane",
+          "text": "I don't have a square to spare!",
+          "translation": "나눠줄 휴지 한 칸도 없다니까요!"
         }
       ]
     },
-    "I was in the pool!": {
-      "src": "/api/audio-clip?id=i-was-in-the-pool",
-      "episode": "085 - The Hamptons - [DVD].avi",
-      "start": "00:12:40.731",
-      "end": "00:12:51.665",
+    "The jerk store called.": {
+      "src": "/api/audio-clip?id=the-jerk-store-called",
+      "file": "the-jerk-store-called.mp3",
+      "episode": "147 - The Comeback.mpg",
+      "season": 8,
       "dialogue": [
         {
           "speaker": "George",
-          "text": "I was in the pool!",
-          "translation": "나 수영장에 있었단 말이야!"
+          "text": "The jerk store called, and they're running out of you!",
+          "translation": "멍청이 가게에서 전화 왔는데, 너 재고가 다 떨어졌대!"
+        },
+        {
+          "speaker": "Reilly",
+          "text": "What's the difference? You're their all-time best seller!",
+          "translation": "뭐가 달라? 너야말로 그 집 역대 베스트셀러잖아!"
         },
         {
           "speaker": "George",
-          "text": "I was in the pool!",
-          "translation": "수영장에 있었다고!"
-        }
-      ]
-    },
-    "I don't wanna be a pirate.": {
-      "src": "/api/audio-clip?id=i-don-t-wanna-be-a-pirate",
-      "episode": "066 - The Puffy Shirt - [DVD].avi",
-      "start": "00:11:38.469",
-      "end": "00:11:49.903",
-      "dialogue": [
+          "text": "Oh yeah? Well, I had sex with your wife!",
+          "translation": "아 그래? 나 네 아내랑 잤거든!"
+        },
         {
           "speaker": "Jerry",
-          "text": "I don't wanna be a pirate.",
-          "translation": "난 해적이 되고 싶지 않아."
+          "text": "His wife is in a coma...",
+          "translation": "걔 아내 혼수상태인데..."
+        }
+      ]
+    },
+    "They're real, and they're spectacular.": {
+      "src": "/api/audio-clip?id=they-re-real-and-they-re-spectacular",
+      "file": "they-re-real-and-they-re-spectacular.mp3",
+      "episode": "059 - The Implant - [DVD].avi",
+      "season": 4,
+      "dialogue": [
+        {
+          "speaker": "Sidra",
+          "text": "You know, Jerry, I was really starting to like you.",
+          "translation": "있잖아 제리, 나 진짜 당신이 좋아지려고 했었어."
         },
         {
-          "speaker": "Kramer",
-          "text": "You look like a pirate.",
-          "translation": "너 해적처럼 보여."
+          "speaker": "Jerry",
+          "text": "Sidra, wait! It was all an accident!",
+          "translation": "시드라, 잠시만! 전부 실수였어!"
+        },
+        {
+          "speaker": "Sidra",
+          "text": "And by the way, they're real... and they're spectacular!",
+          "translation": "참고로 그거 진짜고... 게다가 아주 훌륭하다고!"
+        },
+        {
+          "speaker": "Elaine",
+          "text": "I told you they were real!",
+          "translation": "내가 진짜라고 말했잖아!"
+        }
+      ]
+    },
+    "The Summer of George!": {
+      "src": "/api/audio-clip?id=the-summer-of-george",
+      "file": "the-summer-of-george.mp3",
+      "episode": "156 - The Summer of George.mpg",
+      "season": 8,
+      "dialogue": [
+        {
+          "speaker": "George",
+          "text": "I'm getting three months' severance pay! Three months!",
+          "translation": "나 3개월 치 퇴직금 받는다고! 3개월씩이나!"
+        },
+        {
+          "speaker": "Jerry",
+          "text": "So what are you gonna do with yourself?",
+          "translation": "그래서 그동안 뭐 할 건데?"
+        },
+        {
+          "speaker": "George",
+          "text": "This is gonna be the Summer of George! I'm gonna read, bite into big cheese blocks!",
+          "translation": "이번 여름은 조지의 여름이 될 거야! 책도 읽고 거대한 치즈 덩어리도 베어 먹을 거라고!"
+        },
+        {
+          "speaker": "Jerry",
+          "text": "I give him two weeks.",
+          "translation": "난 2주일 건다."
         }
       ]
     }
