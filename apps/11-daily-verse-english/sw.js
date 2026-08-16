@@ -1,10 +1,10 @@
-const CACHE_NAME = "seinfeld-english:v35";
+const CACHE_NAME = "seinfeld-english:v36";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=0.35",
-  "./src/app.js?v=0.35",
-  "./src/expression-data.js?v=0.35",
+  "./styles.css?v=0.36",
+  "./src/app.js?v=0.36",
+  "./src/expression-data.js?v=0.36",
   "./manifest.json",
   "./icons/icon.svg",
 ];

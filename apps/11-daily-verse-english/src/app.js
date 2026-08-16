@@ -35,16 +35,18 @@ registerServiceWorker()
     if (elements.notificationButton) elements.notificationButton.disabled = true;
   });
 
-elements.playButton.addEventListener("click", toggleDialogueAudio);
-elements.notificationButton.addEventListener("click", toggleDailyNotification);
+if (elements.playButton) elements.playButton.addEventListener("click", toggleDialogueAudio);
+if (elements.notificationButton) elements.notificationButton.addEventListener("click", toggleDailyNotification);
 
 function render() {
-  elements.dateLabel.textContent = new Intl.DateTimeFormat("ko-KR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    weekday: "long",
-  }).format(today);
+  if (elements.dateLabel) {
+    elements.dateLabel.textContent = new Intl.DateTimeFormat("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    }).format(today);
+  }
 
   elements.expressionPhrase.textContent = expression.phrase;
   elements.expressionMeaning.textContent = expression.meaning;
