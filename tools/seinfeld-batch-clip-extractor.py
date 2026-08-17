@@ -158,10 +158,10 @@ CLIP_PLAN = [
         "season": 8,
         "episode": "The Summer of George",
         "queries": ["i'm getting three months' severance pay", "this is gonna be the summer of george", "bite into big cheese blocks"],
-        "fallback_start": "00:07:15.000",
-        "fallback_end": "00:07:48.000",
-        "before": 4.0,
-        "after": 18.0,
+        "fallback_start": "00:10:45.000",
+        "fallback_end": "00:11:20.000",
+        "before": 3.0,
+        "after": 15.0,
     },
 ]
 

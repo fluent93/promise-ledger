@@ -440,33 +440,38 @@
       "file": "the-summer-of-george.mp3",
       "episode": "156 - The Summer of George.mpg",
       "season": 8,
-      "start": "00:07:15.000",
-      "end": "00:07:48.000",
+      "start": "00:10:45.000",
+      "end": "00:11:20.000",
       "dialogue": [
         {
-          "speaker": "Jerry",
-          "text": "Why don't you just come over here?",
-          "translation": "그냥 이쪽으로 건너오지 그래?"
-        },
-        {
           "speaker": "George",
-          "text": "Why can't I do this on the phone?",
-          "translation": "왜 전화로 하면 안 되는 건데?"
+          "text": "I'm getting three months' severance pay! Three months!",
+          "translation": "나 3개월 치 퇴직금 받는다고! 3개월씩이나!"
         },
         {
           "speaker": "Jerry",
-          "text": "What's Kramer doing in there?",
-          "translation": "크레이머는 거기서 뭐 하는 거야?"
+          "text": "So what are you gonna do with yourself?",
+          "translation": "그래서 그동안 뭐 할 건데?"
         },
         {
           "speaker": "George",
-          "text": "He's looking in the refrigerator.",
-          "translation": "냉장고 뒤지고 있어."
+          "text": "This is gonna be the Summer of George! I'm gonna read, bite into big cheese blocks like apples!",
+          "translation": "이번 여름은 조지의 여름이 될 거야! 책도 읽고 사과처럼 거대한 치즈 덩어리도 베어 먹을 거라고!"
         },
         {
-          "speaker": "Kramer",
-          "text": "Anything good in there? Any popsicles?",
-          "translation": "거기 뭐 좋은 거 있나? 아이스크림은 없나?"
+          "speaker": "Jerry",
+          "text": "Are you gonna get up before noon?",
+          "translation": "정오 전에는 일어날 거냐?"
+        },
+        {
+          "speaker": "George",
+          "text": "Jerry, I may never put on pants again!",
+          "translation": "제리, 나 앞으로 다시는 바지를 안 입을지도 몰라!"
+        },
+        {
+          "speaker": "Jerry",
+          "text": "I give him two weeks.",
+          "translation": "난 2주일 건다."
         }
       ],
       "meaning": "",

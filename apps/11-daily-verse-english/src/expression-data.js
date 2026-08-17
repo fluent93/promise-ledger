@@ -161,6 +161,55 @@ export const advancedExpressions = [
     ]
   },
   {
+    phrase: "The Summer of George!",
+    meaning: "조지의 여름! (모든 일을 뒤로하고 완벽한 휴식과 자기만을 위한 시간을 보낼 때)",
+    nuance: "George가 3개월 치 퇴직금을 받고 일생일대의 완벽한 휴가를 선포하는 장면입니다.",
+    example: [
+      {
+        speaker: "George",
+        text: "I'm getting three months' severance pay! Three months!",
+        translation: "나 3개월 치 퇴직금 받는다고! 3개월씩이나!"
+      },
+      {
+        speaker: "Jerry",
+        text: "So what are you gonna do with yourself?",
+        translation: "그래서 그동안 뭐 할 건데?"
+      },
+      {
+        speaker: "George",
+        text: "This is gonna be the Summer of George! I'm gonna read, bite into big cheese blocks like apples!",
+        translation: "이번 여름은 조지의 여름이 될 거야! 책도 읽고 사과처럼 거대한 치즈 덩어리도 베어 먹을 거라고!"
+      },
+      {
+        speaker: "Jerry",
+        text: "Are you gonna get up before noon?",
+        translation: "정오 전에는 일어날 거냐?"
+      },
+      {
+        speaker: "George",
+        text: "Jerry, I may never put on pants again!",
+        translation: "제리, 나 앞으로 다시는 바지를 안 입을지도 몰라!"
+      },
+      {
+        speaker: "Jerry",
+        text: "I give him two weeks.",
+        translation: "난 2주일 건다."
+      }
+    ],
+    modernUsage: [
+      {
+        speaker: "Sam",
+        text: "I finally finished my thesis. This is going to be the Summer of Sam!",
+        translation: "드디어 논문 끝냈어. 이번 여름은 샘의 여름이 될 거야!"
+      },
+      {
+        speaker: "Leo",
+        text: "Enjoy it! You definitely earned a break from everything.",
+        translation: "즐겨! 모든 거에서 떠나 쉴 자격 충분해."
+      }
+    ]
+  },
+  {
     phrase: "Yada, yada, yada.",
     meaning: "이러쿵저러쿵해서, (미묘하거나 곤란한) 중간 과정은 생략하고.",
     nuance: "Elaine이 데이트 핵심 과정이나 랍스터 비스크 수프 먹은 상황을 'yada yada'로 뭉뚱그려 넘기려 하자 George와 Jerry가 어이없어하는 명장면 전체입니다.",
