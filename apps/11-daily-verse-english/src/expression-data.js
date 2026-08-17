@@ -560,50 +560,45 @@ export const advancedExpressions = [
   },
   {
     "phrase": "The Summer of George!",
-    "meaning": "조지의 여름! (모든 일을 뒤로하고 완벽한 휴식과 자기만을 위한 시간을 보낼 때)",
-    "nuance": "George가 3개월 치 퇴직금을 받고 일생일대의 완벽한 휴가를 선포하며 친구들에게 호언장담하는 명장면 전체입니다.",
+    "meaning": "왜 전화로 하면 안 되는 건데? (집에서 편하게 전화로 다 해결하려 할 때)",
+    "nuance": "Jerry의 집에 직접 건너오라는 말에 George가 전화로 하면 안 되냐고 묻고, Kramer는 옆에서 냉장고를 뒤지며 아이스크림을 찾는 명장면입니다.",
     "example": [
       {
-        "speaker": "George",
-        "text": "I'm getting three months' severance pay! Three months!",
-        "translation": "나 3개월 치 퇴직금 받는다고! 3개월씩이나!"
-      },
-      {
         "speaker": "Jerry",
-        "text": "So what are you gonna do with yourself?",
-        "translation": "그래서 그동안 뭐 할 건데?"
+        "text": "Why don't you just come over here?",
+        "translation": "그냥 이쪽으로 건너오지 그래?"
       },
       {
         "speaker": "George",
-        "text": "This is gonna be the Summer of George! I'm gonna read, bite into big cheese blocks like apples!",
-        "translation": "이번 여름은 조지의 여름이 될 거야! 책도 읽고 사과처럼 거대한 치즈 덩어리도 베어 먹을 거라고!"
+        "text": "Why can't I do this on the phone?",
+        "translation": "왜 전화로 하면 안 되는 건데?"
       },
       {
         "speaker": "Jerry",
-        "text": "Are you gonna get up before noon?",
-        "translation": "정오 전에는 일어날 거냐?"
+        "text": "What's Kramer doing in there?",
+        "translation": "크레이머는 거기서 뭐 하는 거야?"
       },
       {
         "speaker": "George",
-        "text": "Jerry, I may never put on pants again!",
-        "translation": "제리, 나 앞으로 다시는 바지를 안 입을지도 몰라!"
+        "text": "He's looking in the refrigerator.",
+        "translation": "냉장고 뒤지고 있어."
       },
       {
-        "speaker": "Jerry",
-        "text": "I give him two weeks.",
-        "translation": "난 2주일 건다."
+        "speaker": "Kramer",
+        "text": "Anything good in there? Any popsicles?",
+        "translation": "거기 뭐 좋은 거 있나? 아이스크림은 없나?"
       }
     ],
     "modernUsage": [
       {
-        "speaker": "Sam",
-        "text": "I finally finished my thesis. This is going to be the Summer of Sam!",
-        "translation": "드디어 논문 끝냈어. 이번 여름은 샘의 여름이 될 거야!"
+        "speaker": "Mark",
+        "text": "Do I really need to come to the office for this 5-minute update?",
+        "translation": "이 5분짜리 보고 때문에 진짜 사무실까지 가야 해요?"
       },
       {
-        "speaker": "Leo",
-        "text": "Enjoy it! You definitely earned a break from everything.",
-        "translation": "즐겨! 모든 거에서 떠나 쉴 자격 충분해."
+        "speaker": "Sarah",
+        "text": "Why can't we just do this on a phone call or Slack?",
+        "translation": "그냥 전화나 슬랙으로 하면 안 되는 건가요?"
       }
     ]
   }
