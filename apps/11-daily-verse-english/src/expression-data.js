@@ -1,689 +1,610 @@
 export const EXPRESSION_POLICY_VERSION = 5;
 
-const episodeSources = {
-  "These pretzels are making me thirsty.": { season: 3, episode: "The Alternate Side" },
-  "No soup for you.": { season: 7, episode: "The Soup Nazi" },
-  "Serenity now.": { season: 9, episode: "The Serenity Now" },
-  "Yada, yada, yada.": { season: 8, episode: "The Yada Yada" },
-  "Not that there's anything wrong with that.": { season: 4, episode: "The Outing" },
-  "It's not you, it's me.": { season: 5, episode: "The Lip Reader" },
-  "I'm out.": { season: 4, episode: "The Contest" },
-  "Master of your domain.": { season: 4, episode: "The Contest" },
-  "We're living in a society.": { season: 2, episode: "The Chinese Restaurant" },
-  "Double-dip.": { season: 4, episode: "The Implant" },
-  "I can't spare a square.": { season: 5, episode: "The Stall" },
-  "The jerk store called.": { season: 8, episode: "The Comeback" },
-  "They're real, and they're spectacular.": { season: 4, episode: "The Implant" },
-  "The Summer of George!": { season: 8, episode: "The Summer of George" },
-};
-
 export const advancedExpressions = [
   {
-    phrase: "These pretzels are making me thirsty.",
-    meaning: "이 프레첼을 먹으니 목이 마르네. (어조와 강세 연기 연습의 명대사)",
-    nuance: "Kramer가 우디 앨런 영화의 단역 대사를 얻어 친구들에게 여러 강세로 연기해 보이는 풀 씬입니다. 각자 어떤 단어를 강조하느냐에 따라 뉘앙스가 완전히 바뀌는 미국식 유머와 연기 연습의 정석입니다.",
-    example: [
+    "phrase": "These pretzels are making me thirsty.",
+    "meaning": "이 프레첼을 먹으니 목이 마르네. (강세와 톤 연기 연습의 명대사)",
+    "nuance": "Kramer가 우디 앨런 영화의 단역 대사를 받아 친구들에게 강조점을 다르게 하여 연기해 보이는 대표적 명장면 전체입니다.",
+    "example": [
       {
-        speaker: "Kramer",
-        text: "Woody Allen wants me to say: 'These pretzels are making me thirsty.'",
-        translation: "우디 앨런 감독이 나보고 말하래: '이 프레첼 때문에 목이 마르네.'"
+        "speaker": "Kramer",
+        "text": "Woody Allen wants me to say: 'These pretzels are making me thirsty.'",
+        "translation": "우디 앨런 감독이 나보고 말하래: '이 프레첼 때문에 목이 마르네.'"
       },
       {
-        speaker: "George",
-        text: "Is that how you're gonna say it? That's no good.",
-        translation: "그렇게 말할 생각이야? 전혀 아니잖아."
+        "speaker": "George",
+        "text": "Is that how you're gonna say it? That's no good.",
+        "translation": "그렇게 말할 생각이야? 전혀 아니잖아."
       },
       {
-        speaker: "Jerry",
-        text: "You gotta put the emphasis on 'these': *These* pretzels are making me thirsty!",
-        translation: "'These'에 강세를 줘야지: *이* 프레첼 때문에 목마르다고!"
+        "speaker": "Jerry",
+        "text": "You gotta put the emphasis on 'these': *These* pretzels are making me thirsty!",
+        "translation": "'These'에 강세를 줘야지: *이* 프레첼 때문에 목마르다고!"
       },
       {
-        speaker: "George",
-        text: "No, no: These pretzels are making me *thirsty*!",
-        translation: "아니지: 이 프레첼을 먹으니 *목이 마르네*!"
+        "speaker": "George",
+        "text": "No, no: These pretzels are making me *thirsty*!",
+        "translation": "아니지: 이 프레첼을 먹으니 *목이 마르네*!"
       },
       {
-        speaker: "Elaine",
-        text: "See, I'd say: These *pretzels* are making me thirsty.",
-        translation: "나 같으면: 이 *프레첼* 때문에 목이 마르네 하고 말하겠다."
+        "speaker": "Elaine",
+        "text": "See, I'd say: These *pretzels* are making me thirsty.",
+        "translation": "나 같으면: 이 *프레첼* 때문에 목이 마르네 하고 말하겠다."
       },
       {
-        speaker: "Kramer",
-        text: "No, I think I got it. *These pretzels* are making me thirsty!",
-        translation: "아니야, 감 잡았어. *이 프레첼들* 때문에 목이 마르네!"
+        "speaker": "Kramer",
+        "text": "No, I think I got it. *These pretzels* are making me thirsty!",
+        "translation": "아니야, 감 잡았어. *이 프레첼들* 때문에 목이 마르네!"
       }
     ],
-    modernUsage: [
+    "modernUsage": [
       {
-        speaker: "Jake",
-        text: "How should I deliver this pitch to the investors?",
-        translation: "투자자들에게 이 발표 멘트를 어떤 톤으로 전달해야 할까?"
+        "speaker": "Jake",
+        "text": "How should I deliver this pitch to the investors?",
+        "translation": "투자자들에게 이 발표 멘트를 어떤 톤으로 전달해야 할까?"
       },
       {
-        speaker: "Hannah",
-        text: "Just stress the key words clearly. Don't over-act like Kramer with his pretzels!",
-        translation: "핵심 단어에만 명확히 강세를 줘. 프레첼 연기하는 크레이머처럼 너무 과장하지만 말고!"
+        "speaker": "Hannah",
+        "text": "Just stress the key words clearly. Don't over-act like Kramer with his pretzels!",
+        "translation": "핵심 단어에만 명확히 강세를 줘. 프레첼 연기하는 크레이머처럼 너무 과장하지만 말고!"
       }
     ]
   },
   {
-    phrase: "No soup for you.",
-    meaning: "당신에게 줄 수프는 없어! (규칙 위반자에게 단호하고 유머러스하게 거절할 때)",
-    nuance: "전설적인 'Soup Nazi' 씬 전체입니다. 대기 줄에서 잡담을 하거나 정해진 절차를 어기면 수프 그릇을 뺏고 빵 값까지 3달러로 올려버린 뒤 쫓아내는 씬으로, 현대 미국 최고의 유머 거절 밈입니다.",
-    example: [
+    "phrase": "No soup for you.",
+    "meaning": "당신에게 줄 수프는 없어! (단호하고 유머러스하게 거절할 때)",
+    "nuance": "전설적인 'Soup Nazi' 씬입니다. 대기 줄에서 잡담을 하거나 정해진 규칙을 어기면 수프 그릇을 뺏고 쫓아내는 미국 문화 최고의 거절 밈입니다.",
+    "example": [
       {
-        speaker: "George",
-        text: "Excuse me, I think you forgot my bread.",
-        translation: "저기요, 제 빵을 빼먹으신 것 같은데요."
+        "speaker": "George",
+        "text": "Excuse me, I think you forgot my bread.",
+        "translation": "저기요, 제 빵을 빼먹으신 것 같은데요."
       },
       {
-        speaker: "Soup Nazi",
-        text: "Bread — two dollars extra.",
-        translation: "빵은 2달러 추가다."
+        "speaker": "Soup Nazi",
+        "text": "Bread — two dollars extra.",
+        "translation": "빵은 2달러 추가다."
       },
       {
-        speaker: "George",
-        text: "Two dollars? But everyone in front of me got free bread!",
-        translation: "2달러요? 하지만 제 앞 사람들은 다 무료로 받았잖아요!"
+        "speaker": "George",
+        "text": "Two dollars? But everyone in front of me got free bread!",
+        "translation": "2달러요? 하지만 제 앞 사람들은 다 무료로 받았잖아요!"
       },
       {
-        speaker: "Soup Nazi",
-        text: "You want bread? Three dollars! No soup for you!",
-        translation: "빵을 원해? 3달러! 당신에게 줄 수프는 없어!"
+        "speaker": "Soup Nazi",
+        "text": "You want bread? Three dollars! No soup for you!",
+        "translation": "빵을 원해? 3달러! 당신에게 줄 수프는 없어!"
       },
       {
-        speaker: "George",
-        text: "Wait, what about my soup?!",
-        translation: "잠깐만요, 제 수프는요?!"
+        "speaker": "George",
+        "text": "Wait, what about my soup?!",
+        "translation": "잠깐만요, 제 수프는요?!"
       },
       {
-        speaker: "Soup Nazi",
-        text: "Next!",
-        translation: "다음 분!"
+        "speaker": "Soup Nazi",
+        "text": "Next!",
+        "translation": "다음 분!"
       }
     ],
-    modernUsage: [
+    "modernUsage": [
       {
-        speaker: "Ben",
-        text: "Can I grab a slice of your pizza?",
-        translation: "네 피자 한 조각만 집어먹어도 돼?"
+        "speaker": "Ben",
+        "text": "Can I grab a slice of your pizza?",
+        "translation": "네 피자 한 조각만 집어먹어도 돼?"
       },
       {
-        speaker: "Chloe",
-        text: "You didn't help clean up the office today. No pizza for you!",
-        translation: "오늘 사무실 청소 안 도와줬잖아. 너한테 줄 피자는 없어!"
+        "speaker": "Chloe",
+        "text": "You didn't help clean up the office today. No pizza for you!",
+        "translation": "오늘 사무실 청소 안 도와줬잖아. 너한테 줄 피자는 없어!"
       }
     ]
   },
   {
-    phrase: "Serenity now.",
-    meaning: "평온이여, 지금 당장! (스트레스가 폭발하기 직전 스스로를 가라앉힐 때)",
-    nuance: "Frank Costanza가 분노 조절 테이프에서 배운 대사를 소리 지르며 외치자, George와 Jerry가 태클을 걸고 Lloyd Braun의 정신병원 에피소드까지 언급되는 명장면 전체입니다.",
-    example: [
+    "phrase": "Serenity now.",
+    "meaning": "평온이여, 지금 당장! (스트레스가 폭발하기 직전 가라앉힐 때)",
+    "nuance": "Frank Costanza가 분노 조절 테이프에서 배운 대사를 소리 지르며 외치자, George와 Jerry가 태클을 거는 명장면 전체입니다.",
+    "example": [
       {
-        speaker: "Frank",
-        text: "Serenity now! Serenity now!",
-        translation: "평온이여, 지금! 평온이여, 지금!"
+        "speaker": "Frank",
+        "text": "Serenity now! Serenity now!",
+        "translation": "평온이여, 지금! 평온이여, 지금!"
       },
       {
-        speaker: "George",
-        text: "Pop, you're not supposed to yell it. You're supposed to say it calmly.",
-        translation: "아버지, 소리 지르면서 외치는 게 아니라 차분하게 말해야죠."
+        "speaker": "George",
+        "text": "Pop, you're not supposed to yell it. You're supposed to say it calmly.",
+        "translation": "아버지, 소리 지르면서 외치는 게 아니라 차분하게 말해야죠."
       },
       {
-        speaker: "Frank",
-        text: "The tape said to yell it! Serenity now!",
-        translation: "테이프에서 소리 지르라 그랬어! 평온이여, 지금!"
+        "speaker": "Frank",
+        "text": "The tape said to yell it! Serenity now!",
+        "translation": "테이프에서 소리 지르라 그랬어! 평온이여, 지금!"
       },
       {
-        speaker: "Jerry",
-        text: "You know, Lloyd Braun used that phrase for years.",
-        translation: "있잖아, 로이드 브라운도 그 구절을 몇 년 동안 썼대."
+        "speaker": "Jerry",
+        "text": "You know, Lloyd Braun used that phrase for years.",
+        "translation": "있잖아, 로이드 브라운도 그 구절을 몇 년 동안 썼대."
       },
       {
-        speaker: "George",
-        text: "And where is Lloyd Braun now? In a mental institution! Serenity now, insanity later!",
-        translation: "그래서 지금 로이드 브라운이 어디 있는데? 정신병원에 있지! 지금은 평온, 나중엔 미치는 거라고요!"
+        "speaker": "George",
+        "text": "And where is Lloyd Braun now? In a mental institution! Serenity now, insanity later!",
+        "translation": "그래서 지금 로이드 브라운이 어디 있는데? 정신병원에 있지! 지금은 평온, 나중엔 미치는 거라고요!"
       }
     ],
-    modernUsage: [
+    "modernUsage": [
       {
-        speaker: "Chris",
-        text: "My code broke 5 minutes before demo time...",
-        translation: "데모 발표 5분 전에 내 코드가 터졌어..."
+        "speaker": "Chris",
+        "text": "My code broke 5 minutes before demo time...",
+        "translation": "데모 발표 5분 전에 내 코드가 터졌어..."
       },
       {
-        speaker: "Morgan",
-        text: "Serenity now! Take a deep breath and revert the last commit.",
-        translation: "지금 당장 평온을! 심호흡하고 마지막 커밋 복구해."
+        "speaker": "Morgan",
+        "text": "Serenity now! Take a deep breath and revert the last commit.",
+        "translation": "지금 당장 평온을! 심호흡하고 마지막 커밋 복구해."
       }
     ]
   },
   {
-    phrase: "The Summer of George!",
-    meaning: "조지의 여름! (모든 일을 뒤로하고 완벽한 휴식과 자기만을 위한 시간을 보낼 때)",
-    nuance: "George가 3개월 치 퇴직금을 받고 일생일대의 완벽한 휴가를 선포하는 장면입니다.",
-    example: [
+    "phrase": "Yada, yada, yada.",
+    "meaning": "이러쿵저러쿵해서, (중요하거나 미묘한) 중간 과정은 생략하고.",
+    "nuance": "Elaine이 데이트 핵심 과정이나 상황을 'yada yada'로 뭉뚱그려 넘기려 하자 George와 Jerry가 어이없어하는 명장면 전체입니다.",
+    "example": [
       {
-        speaker: "George",
-        text: "I'm getting three months' severance pay! Three months!",
-        translation: "나 3개월 치 퇴직금 받는다고! 3개월씩이나!"
+        "speaker": "Elaine",
+        "text": "I met this lawyer, we went out to dinner, had lobster bisque, yada yada yada, I never heard from him again.",
+        "translation": "변호사를 만나서 저녁 먹으러 가고 랍스터 비스크를 먹고 이러쿵저러쿵해서 그 뒤로 연락이 없었어."
       },
       {
-        speaker: "Jerry",
-        text: "So what are you gonna do with yourself?",
-        translation: "그래서 그동안 뭐 할 건데?"
+        "speaker": "George",
+        "text": "You yada yada'd over the best part!",
+        "translation": "제일 중요한 부분을 이러쿵저러쿵으로 넘겼잖아!"
       },
       {
-        speaker: "George",
-        text: "This is gonna be the Summer of George! I'm gonna read, bite into big cheese blocks like apples!",
-        translation: "이번 여름은 조지의 여름이 될 거야! 책도 읽고 사과처럼 거대한 치즈 덩어리도 베어 먹을 거라고!"
+        "speaker": "Elaine",
+        "text": "No, I mentioned the yada yada.",
+        "translation": "아니야, 이러쿵저러쿵은 말했다고."
       },
       {
-        speaker: "Jerry",
-        text: "Are you gonna get up before noon?",
-        translation: "정오 전에는 일어날 거냐?"
+        "speaker": "Jerry",
+        "text": "Which yada yada did you mention?",
+        "translation": "어떤 이러쿵저러쿵을 말했는데?"
       },
       {
-        speaker: "George",
-        text: "Jerry, I may never put on pants again!",
-        translation: "제리, 나 앞으로 다시는 바지를 안 입을지도 몰라!"
-      },
-      {
-        speaker: "Jerry",
-        text: "I give him two weeks.",
-        translation: "난 2주일 건다."
+        "speaker": "George",
+        "text": "You can't yada yada sex!",
+        "translation": "그런 중요한 상황을 이러쿵저러쿵으로 퉁칠 순 없다고!"
       }
     ],
-    modernUsage: [
+    "modernUsage": [
       {
-        speaker: "Sam",
-        text: "I finally finished my thesis. This is going to be the Summer of Sam!",
-        translation: "드디어 논문 끝냈어. 이번 여름은 샘의 여름이 될 거야!"
+        "speaker": "David",
+        "text": "We pitched the client, yada yada yada, we signed the contract!",
+        "translation": "고객사 발표하고, 이러쿵저러쿵해서 계약 체결했어!"
       },
       {
-        speaker: "Leo",
-        text: "Enjoy it! You definitely earned a break from everything.",
-        translation: "즐겨! 모든 거에서 떠나 쉴 자격 충분해."
+        "speaker": "Sarah",
+        "text": "Wait, don't yada yada the details! How did you convince them?",
+        "translation": "잠깐, 세부 조항을 구렁이 담 넘듯 넘기지 마! 어떻게 설득한 건데?"
       }
     ]
   },
   {
-    phrase: "Yada, yada, yada.",
-    meaning: "이러쿵저러쿵해서, (미묘하거나 곤란한) 중간 과정은 생략하고.",
-    nuance: "Elaine이 데이트 핵심 과정이나 랍스터 비스크 수프 먹은 상황을 'yada yada'로 뭉뚱그려 넘기려 하자 George와 Jerry가 어이없어하는 명장면 전체입니다.",
-    example: [
+    "phrase": "Not that there's anything wrong with that.",
+    "meaning": "그게 잘못됐다는 뜻은 절대 아니지만. (오해를 피하며 조심스럽게 언급할 때)",
+    "nuance": "Jerry와 George가 여기자에게 게이로 오해받자 다급하게 해명하며 덧붙이는 사인펠트 역사상 가장 유명한 유머 구절 중 하나입니다.",
+    "example": [
       {
-        speaker: "Elaine",
-        text: "I met this lawyer, we went out to dinner, had lobster bisque, yada yada yada, I never heard from him again.",
-        translation: "변호사를 만나서 저녁 먹으러 가고 랍스터 비스크 스프를 먹고 이러쿵저러쿵해서 그 뒤로 다시는 연락이 없었어."
+        "speaker": "Jerry",
+        "text": "There's been a big misunderstanding here.",
+        "translation": "여기 큰 오해가 있었어요."
       },
       {
-        speaker: "George",
-        text: "You yada yada'd over the best part!",
-        translation: "제일 중요한 부분을 이러쿵저러쿵으로 넘겼잖아!"
+        "speaker": "George",
+        "text": "We knew you were eavesdropping! All that was on purpose!",
+        "translation": "당신이 도청하는 걸 알고 일부러 연기한 거란 말이에요!"
       },
       {
-        speaker: "Elaine",
-        text: "No, I mentioned the yada yada.",
-        translation: "아니야, 이러쿵저러쿵은 말했다고."
+        "speaker": "Jerry",
+        "text": "We're not gay... not that there's anything wrong with that.",
+        "translation": "우린 게이가 아니에요... 그게 잘못됐다는 뜻은 절대 아니지만."
       },
       {
-        speaker: "Jerry",
-        text: "Which yada yada did you mention?",
-        translation: "어떤 이러쿵저러쿵을 말했는데?"
+        "speaker": "Journalist",
+        "text": "Oh, of course not. I mean, it's fine if that's who you are.",
+        "translation": "아, 당연히 아니죠. 당신들이 누구든 전 다 괜찮아요."
       },
       {
-        speaker: "George",
-        text: "You can't yada yada sex!",
-        translation: "그런 중요한 상황을 이러쿵저러쿵으로 퉁칠 순 없다고!"
+        "speaker": "George",
+        "text": "Absolutely! I mean, I have many gay friends. My father's gay!",
+        "translation": "그럼요! 게이 친구도 많고요, 우리 아버지도 게이에요!"
+      },
+      {
+        "speaker": "Jerry",
+        "text": "Not that there's anything wrong with that!",
+        "translation": "그게 잘못됐다는 뜻은 절대 아니죠!"
+      },
+      {
+        "speaker": "Jerry",
+        "text": "It was a joke! Do you want to have sex with me right now? Let's go!",
+        "translation": "농담이었다고요! 지금 나랑 잘래요? 나랑 잘 거냐고요? 갑시다!"
       }
     ],
-    modernUsage: [
+    "modernUsage": [
       {
-        speaker: "David",
-        text: "We pitched the client, yada yada yada, we signed the contract!",
-        translation: "고객사 발표하고, 이러쿵저러쿵해서 계약서 체결했어!"
+        "speaker": "Alex",
+        "text": "He enjoys playing video games for 10 hours on weekends.",
+        "translation": "걔는 주말마다 10시간씩 비디오 게임하는 걸 즐기더라."
       },
       {
-        speaker: "Sarah",
-        text: "Congrats! Don't yada yada the discount rate though!",
-        translation: "축하해! 그래도 할인율 부분은 이러쿵저러쿵 넘기지 마!"
+        "speaker": "Sam",
+        "text": "Hey, not that there's anything wrong with that! Everyone has their own hobby.",
+        "translation": "이봐, 그게 나쁘다는 건 절대 아니지! 사람마다 취향이 있는 법이야."
       }
     ]
   },
   {
-    phrase: "Not that there's anything wrong with that.",
-    meaning: "그게 잘못됐다는 뜻은 아니야. (오해나 편견을 다급히 해명할 때)",
-    nuance: "대학 신문 기자에게 오해받은 Jerry와 George가 동성애 차별처럼 들릴까 봐 다급히 'Not that there's anything wrong with that'을 연발하는 시트콤 최고의 클래식 해명 씬입니다.",
-    example: [
+    "phrase": "It's not you, it's me.",
+    "meaning": "네 문제가 아니라 내 문제야. (이별 시 핑계를 댈 때 쓰는 고전적 멘트)",
+    "nuance": "George가 이별 핑계로 'It's not you, it's me'를 시전하자 상대방이 역으로 자기가 쓴다고 해서 억울해하는 명장면입니다.",
+    "example": [
       {
-        speaker: "Jerry",
-        text: "There's been a big misunderstanding here.",
-        translation: "여기 큰 오해가 있었어요."
+        "speaker": "George",
+        "text": "It's not you, it's me.",
+        "translation": "네 문제가 아니라 내 문제야."
       },
       {
-        speaker: "George",
-        text: "We knew you were eavesdropping! All that was on purpose!",
-        translation: "당신이 도청하는 걸 알고 일부러 연기한 거란 말이에요!"
+        "speaker": "Gwen",
+        "text": "You're giving me the 'It's not you, it's me' routine?",
+        "translation": "지금 나한테 '네 탓이 아니라 내 탓' 핑계를 대는 거야?"
       },
       {
-        speaker: "Jerry",
-        text: "We're not gay... not that there's anything wrong with that.",
-        translation: "우린 게이가 아니에요... 그게 잘못됐다는 뜻은 절대 아니지만."
+        "speaker": "George",
+        "text": "I invented 'It's not you, it's me'!",
+        "translation": "그 멘트는 내가 개발한 거란 말이야!"
       },
       {
-        speaker: "Journalist",
-        text: "Oh, of course not. I mean, it's fine if that's who you are.",
-        translation: "아, 당연히 아니죠. 당신들이 누구든 전 다 괜찮아요."
+        "speaker": "Gwen",
+        "text": "Nobody tells me it's them, not me. If it's anybody, it's me!",
+        "translation": "아무도 나한테 자기 탓이 아니래. 굳이 누구 탓이라면 내 탓이야!"
       },
       {
-        speaker: "George",
-        text: "Absolutely! I mean, I have many gay friends. My father's gay!",
-        translation: "그럼요! 게이 친구도 많고요, 우리 아버지도 게이에요!"
-      },
-      {
-        speaker: "Jerry",
-        text: "Not that there's anything wrong with that!",
-        translation: "그게 잘못됐다는 뜻은 절대 아니죠!"
-      },
-      {
-        speaker: "Jerry",
-        text: "It was a joke! Do you want to have sex with me right now? Let's go!",
-        translation: "농담이었다고요! 지금 나랑 잘래요? 나랑 잘 거냐고요? 갑시다!"
+        "speaker": "George",
+        "text": "You're damn right it's me!",
+        "translation": "그럼, 존나 내 탓이지!"
       }
     ],
-    modernUsage: [
+    "modernUsage": [
       {
-        speaker: "Alex",
-        text: "He eats cereal for dinner every night. Not that there's anything wrong with that.",
-        translation: "걔는 매일 저녁으로 시리얼을 먹더라고. 그게 잘못됐다는 건 아니고."
+        "speaker": "Mark",
+        "text": "Did she give you the 'It's not you, it's me' speech?",
+        "translation": "그녀가 너한테 '네 탓이 아니라 내 탓'이라고 말했어?"
       },
       {
-        speaker: "Jordan",
-        text: "Hey, it saves time and dishes!",
-        translation: "에이, 시간도 아끼고 설거지도 줄이잖아!"
+        "speaker": "Paul",
+        "text": "Yeah, classic George Costanza move.",
+        "translation": "응, 전형적인 조지 코스탄자 식 이별 멘트였어."
       }
     ]
   },
   {
-    phrase: "It's not you, it's me.",
-    meaning: "네 문제가 아니라 내 문제야. (클래식 이별 핑계 멘트)",
-    nuance: "George가 자신의 전매특허 이별 멘트 'It's not you, it's me'를 날렸다가 오히려 상대방 Gwen이 자기가 멘트를 차지하겠다며 티키타카 싸움으로 번지는 명장면입니다.",
-    example: [
+    "phrase": "I'm out.",
+    "meaning": "난 빠질게/포기야! (더 이상 견디지 못하고 기권할 때)",
+    "nuance": "전설적인 'The Contest' 에피소드에서 Kramer가 길 건너 여성을 보고 3분 만에 주머니에서 돈을 툭 던지며 기권하는 명장면입니다.",
+    "example": [
       {
-        speaker: "George",
-        text: "It's not you, it's me.",
-        translation: "네 문제가 아니라 내 문제야."
+        "speaker": "Kramer",
+        "text": "I'm out! I'm out of the contest!",
+        "translation": "난 포기야! 내기에서 빠질게!"
       },
       {
-        speaker: "Gwen",
-        text: "You're giving me the 'It's not you, it's me' routine?",
-        translation: "지금 나한테 '네 탓이 아니라 내 탓' 핑계를 대는 거야?"
+        "speaker": "Jerry",
+        "text": "You're out? Wow. That was fast.",
+        "translation": "포기한다고? 와, 진짜 빠르네."
       },
       {
-        speaker: "George",
-        text: "Well, it *is* me! I invented 'It's not you, it's me'!",
-        translation: "아니, 진짜 *내* 문제라니까! 그 멘트는 내가 개발한 거란 말이야!"
+        "speaker": "Kramer",
+        "text": "Well, that woman across the street is driving me crazy!",
+        "translation": "길 건너 그 여자가 날 미치게 만든다고!"
       },
       {
-        speaker: "Gwen",
-        text: "Nobody tells me it's not them, it's me. If it's anybody, it's me!",
-        translation: "아무도 나한테 자기 탓이 아니래. 굳이 누구 탓이라면 내 탓이야!"
+        "speaker": "George",
+        "text": "That's gotta be a record.",
+        "translation": "방금 건 최고 기록일 거야."
       }
     ],
-    modernUsage: [
+    "modernUsage": [
       {
-        speaker: "Marcus",
-        text: "I'm canceling my gym membership. It's not you, gym, it's me.",
-        translation: "나 헬스장 등록 취소하려고. 헬스장 네 탓이 아니라 내 탓이야."
+        "speaker": "Leo",
+        "text": "Who wants to stay overtime tonight to clean up the code?",
+        "translation": "오늘 밤 야근하면서 코드 정리할 사람?"
       },
       {
-        speaker: "Elena",
-        text: "No, it's definitely your snooze button's fault.",
-        translation: "아니지, 그건 확실히 네 스누즈 버튼 탓이야."
+        "speaker": "Maya",
+        "text": "I'm out! I already worked 60 hours this week.",
+        "translation": "난 빠질게! 이번 주에 벌써 60시간이나 일했어."
       }
     ]
   },
   {
-    phrase: "I'm out.",
-    meaning: "난 포기야, 난 빠질게! (유혹이나 내기에서 즉시 손을 털 때)",
-    nuance: "Kramer가 참을성 내기가 시작되자마자 2분 만에 돈을 테이블에 턱 내던지며 포기하고 길 건너 여자 때문이라며 핑계를 대는 클래식 씬 전체입니다.",
-    example: [
+    "phrase": "Master of your domain.",
+    "meaning": "네 영역의 주인 (자제력과 자기 통제권을 완벽히 유지하는 상태)",
+    "nuance": "친구들이 서로 자제력을 잃지 않고 누가 가장 오래 참는지 내기할 때 사용하는 은유적 표현 전체입니다.",
+    "example": [
       {
-        speaker: "Kramer",
-        text: "I'm out!",
-        translation: "난 포기야!"
+        "speaker": "Jerry",
+        "text": "Are you still master of your domain?",
+        "translation": "아직도 네 영역의 주인(자제력)을 유지하고 있어?"
       },
       {
-        speaker: "Jerry",
-        text: "What do you mean, you're out? It's been two minutes!",
-        translation: "포기한다니 무슨 소리야? 시작한 지 2분밖에 안 됐어!"
+        "speaker": "George",
+        "text": "Lord of the manor, Jerry! King of the county!",
+        "translation": "영주 급이지, 제리! 이 지역의 왕이다!"
       },
       {
-        speaker: "Kramer",
-        text: "I can't do it, Jerry! That woman across the street is driving me crazy!",
-        translation: "못 버티겠어, 제리! 길 건너 여자 때문에 미쳐버리겠다고!"
+        "speaker": "Elaine",
+        "text": "I'm queen of the castle.",
+        "translation": "난 이 성의 여왕이야."
       },
       {
-        speaker: "George",
-        text: "That's gotta be a record.",
-        translation: "이건 신기록임에 틀림없어."
+        "speaker": "Jerry",
+        "text": "Good. As for me, I am master of my domain.",
+        "translation": "좋아. 나 역시 내 영역의 주인이다."
       }
     ],
-    modernUsage: [
+    "modernUsage": [
       {
-        speaker: "Liam",
-        text: "Who wants to do a sugar-free challenge this week?",
-        translation: "이번 주 무설탕 챌린지 할 사람?"
+        "speaker": "Kevin",
+        "text": "Are you sticking to your diet during the holidays?",
+        "translation": "연휴 동안 다이어트 잘 지키고 있어?"
       },
       {
-        speaker: "Emma",
-        text: "I'm out. I just ordered a bubble tea.",
-        translation: "난 포기야. 방금 버블티 주문했거든."
+        "speaker": "Rachel",
+        "text": "Still master of my domain! Haven't touched sugar in 3 weeks.",
+        "translation": "여전히 내 영역의 주인이란다! 3주 동안 설탕에 손도 안 댔어."
       }
     ]
   },
   {
-    phrase: "Master of your domain.",
-    meaning: "네 욕구와 자제력의 주인이 되다.",
-    nuance: "'The Contest' 에피소드에서 수위 높은 단어 대신 자제력을 고급스럽게 영주, 왕, 여왕으로 비유하며 주고받는 시트콤 역사상 가장 지적인 티키타카 씬입니다.",
-    example: [
+    "phrase": "We're living in a society.",
+    "meaning": "우린 엄연히 사회 속에서 살고 있잖아! (공공질서나 매너를 안 지키는 사람에게 울분을 토할 때)",
+    "nuance": "공중전화를 오래 독점하는 사람 앞에서 George가 분통을 터뜨리며 문명인답게 행동하라고 외치는 명장면 전체입니다.",
+    "example": [
       {
-        speaker: "Jerry",
-        text: "Are you still master of your domain?",
-        translation: "아직도 네 영역의 주인(자제력)을 유지하고 있어?"
+        "speaker": "George",
+        "text": "You know we're living in a society! We're supposed to act in a civilized way!",
+        "translation": "우리가 사회 속에서 살고 있다는 걸 알잖아! 문명인답게 행동해야지!"
       },
       {
-        speaker: "George",
-        text: "Lord of the manor, Jerry! King of the county!",
-        translation: "영주 급이지, 제리! 이 지역의 왕이다!"
-      },
-      {
-        speaker: "Elaine",
-        text: "I'm queen of the castle.",
-        translation: "난 이 성의 여왕이야."
-      },
-      {
-        speaker: "Jerry",
-        text: "Good. As for me, I am master of my domain.",
-        translation: "좋아. 나 역시 내 영역의 주인이다."
+        "speaker": "Man",
+        "text": "Does anyone ever display the slightest sensitivity?!",
+        "translation": "누가 타인의 문제에 아주 적은 세심함이라도 보여주기나 합니까?!"
       }
     ],
-    modernUsage: [
+    "modernUsage": [
       {
-        speaker: "Dan",
-        text: "How are you holding up on your 5 AM morning routine?",
-        translation: "새벽 5시 미라클 모닝 루틴 잘 유지하고 있어?"
+        "speaker": "Daniel",
+        "text": "Someone cut in line at the coffee shop and didn't even say sorry.",
+        "translation": "누가 커피숍 줄을 새치기하고 사과도 안 하더라."
       },
       {
-        speaker: "Rachel",
-        text: "Still master of my domain! Woke up at 4:55 today.",
-        translation: "여전히 내 루틴의 주인이지! 오늘 4시 55분에 일어났어."
+        "speaker": "Sophia",
+        "text": "We're living in a society! People need to follow basic etiquette.",
+        "translation": "우린 사회 속에서 살고 있잖아! 기본적인 예의는 지켜야지."
       }
     ]
   },
   {
-    phrase: "We're living in a society.",
-    meaning: "우리는 사회 속에서 살고 있잖아! (기본적인 매너나 질서를 지키라고 호소할 때)",
-    nuance: "공중전화를 묵비권 행사하며 안 내놓는 남자에게 George가 분통을 터뜨리며 '문명인답게 살자!'라고 외치는 폭소 명장면입니다.",
-    example: [
+    "phrase": "Double-dip.",
+    "meaning": "소스에 두 번 찍어 먹기 (위생 매너 위반 행위)",
+    "nuance": "파티장에서 George가 칩을 한 입 먹고 소스 그릇에 다시 찍자 Timmy가 기겁하며 대립하는 명장면 전체입니다.",
+    "example": [
       {
-        speaker: "George",
-        text: "Excuse me, how much longer are you gonna be on that phone?",
-        translation: "저기요, 전화 언제까지 쓰실 생각인가요?"
+        "speaker": "Timmy",
+        "text": "Did you just double-dip that chip?",
+        "translation": "방금 그 칩 소스에 두 번 찍은 거야?"
       },
       {
-        speaker: "Man",
-        text: "As long as I want!",
-        translation: "내가 쓰고 싶은 만큼!"
+        "speaker": "George",
+        "text": "Excuse me?",
+        "translation": "네?"
       },
       {
-        speaker: "George",
-        text: "We're living in a society! We're supposed to act in a civilized way!",
-        translation: "우리는 사회 속에서 살고 있잖아! 문명인답게 행동해야 할 거 아니야!"
+        "speaker": "Timmy",
+        "text": "You double-dipped the chip! You dipped the chip, took a bite, and you dipped again!",
+        "translation": "칩을 두 번 찍었잖아! 칩을 찍고 한 입 먹고 다시 찍었잖아!"
       },
       {
-        speaker: "Jerry",
-        text: "George, calm down. The table is almost ready.",
-        translation: "조지, 진정해. 테이블 곧 준비된대."
+        "speaker": "Timmy",
+        "text": "That's like putting your whole mouth right in the dip!",
+        "translation": "그건 아예 소스 그릇에 입을 처박는 거나 마찬가지라고!"
       }
     ],
-    modernUsage: [
+    "modernUsage": [
       {
-        speaker: "Noah",
-        text: "Someone played loud TikTok videos without headphones on the bus.",
-        translation: "누가 버스에서 이어폰도 안 끼고 틱톡 비디오를 크게 틀더라고."
+        "speaker": "James",
+        "text": "Hey, don't double-dip into the salsa bowl!",
+        "translation": "이봐, 살사 소스 그릇에 두 번 찍어 먹지 마!"
       },
       {
-        speaker: "Sophia",
-        text: "We're living in a society! Use headphones, people!",
-        translation: "우린 사회 속에서 살고 있다고! 이어폰 좀 씁시다!"
+        "speaker": "Lily",
+        "text": "Oops, sorry! I'll use a clean spoon next time.",
+        "translation": "앗 미안! 다음엔 깨끗한 스푼을 쓸게."
       }
     ]
   },
   {
-    phrase: "Double-dip.",
-    meaning: "한 번 입으로 문 칩을 소스에 다시 찍다. (위생 규범 위반)",
-    nuance: "Timmy가 George의 칩 두 번 찍기를 적발하고 '소스 그릇에 입을 집어넣는 거나 마찬가지'라고 추궁하는 장례식장 명장면 전체입니다.",
-    example: [
+    "phrase": "I can't spare a square.",
+    "meaning": "휴지 한 칸도 나눠줄 수 없어! (아주 인색하게 구는 상황을 비유할 때)",
+    "nuance": "화장실 칸에서 휴지가 떨어진 Elaine이 옆 칸 사람에게 휴지 몇 칸만 달라고 사정하지만 단칼에 거절당하는 명장면 전체입니다.",
+    "example": [
       {
-        speaker: "Timmy",
-        text: "Did you just double-dip that chip?",
-        translation: "방금 그 칩 소스에 두 번 찍은 거야?"
+        "speaker": "Elaine",
+        "text": "Just three squares will do it.",
+        "translation": "휴지 딱 세 칸만 주시면 돼요."
       },
       {
-        speaker: "George",
-        text: "What? What are you talking about?",
-        translation: "뭐? 무슨 소릴 하는 거야?"
+        "speaker": "Jane",
+        "text": "I'm sorry, I don't have three squares.",
+        "translation": "미안하지만 세 칸은 안 돼요."
       },
       {
-        speaker: "Timmy",
-        text: "You dipped the chip, took a bite, and dipped again!",
-        translation: "칩을 찍고 한 입 먹고 다시 찍었잖아!"
+        "speaker": "Elaine",
+        "text": "Three squares? You can't spare three squares?",
+        "translation": "세 칸이요? 휴지 세 칸도 못 나눠줘요?"
       },
       {
-        speaker: "George",
-        text: "That's like putting your whole mouth right in the dip!",
-        translation: "그건 아예 소스 그릇에 입을 처박는 거나 마찬가지라고!"
+        "speaker": "Jane",
+        "text": "No, I don't have a square to spare! I can't spare a square!",
+        "translation": "나눠줄 휴지 한 칸도 없다니까요! 못 나눠줘요!"
       }
     ],
-    modernUsage: [
+    "modernUsage": [
       {
-        speaker: "Kevin",
-        text: "Hey, take a fresh chip if you want more salsa!",
-        translation: "이봐, 살사 소스 더 먹고 싶으면 새 칩으로 집어!"
+        "speaker": "Tom",
+        "text": "Can I borrow a sheet of paper for the meeting?",
+        "translation": "회의 때 쓸 종이 한 장만 빌릴 수 있을까?"
       },
       {
-        speaker: "Justin",
-        text: "Don't worry, I know the golden rule: No double-dipping!",
-        translation: "걱정 마, 황금률은 잘 알고 있어. 두 번 찍기 금지!"
+        "speaker": "Anna",
+        "text": "Sorry, I can't spare a square! It's my last notepad.",
+        "translation": "미안, 한 장도 나눠줄 수 없어! 내 마지막 메모장이거든."
       }
     ]
   },
   {
-    phrase: "I can't spare a square.",
-    meaning: "휴지 한 칸도 나눠줄 여유가 없어.",
-    nuance: "화장실 옆 칸의 Jane에게 Elaine이 한 겹, 한 칸이라도 구걸하지만 단칼에 '나눠줄 휴지 한 칸도 없다'며 거절당하는 레전드 씬입니다.",
-    example: [
+    "phrase": "The jerk store called.",
+    "meaning": "멍청이 가게에서 전화 왔는데, 너 재고가 다 떨어졌대! (말싸움 통쾌한 반격 멘트)",
+    "nuance": "George가 자신을 놀린 동료에게 뒤늦게 완벽한 반격 멘트를 생각해내서 외치는 명장면 전체입니다.",
+    "example": [
       {
-        speaker: "Elaine",
-        text: "Excuse me, can you spare a square?",
-        translation: "저기요, 휴지 한 칸만 나눠줄 수 있나요?"
+        "speaker": "George",
+        "text": "The jerk store called, and they're running out of you!",
+        "translation": "멍청이 가게에서 전화 왔는데, 너 재고가 다 떨어졌대!"
       },
       {
-        speaker: "Jane",
-        text: "No, I'm sorry, I can't spare a square.",
-        translation: "아뇨, 미안하지만 한 칸도 나눠줄 여유가 없네요."
+        "speaker": "Reilly",
+        "text": "What's the difference? You're their all-time best seller!",
+        "translation": "뭐가 달라? 너야말로 그 집 역대 베스트셀러잖아!"
       },
       {
-        speaker: "Elaine",
-        text: "Not even one ply? One little square?",
-        translation: "한 겹도 안 돼요? 그 작은 한 칸도?"
+        "speaker": "George",
+        "text": "Oh yeah? Well, I had sex with your wife!",
+        "translation": "아 그래? 나 네 아내랑 잤거든!"
       },
       {
-        speaker: "Jane",
-        text: "I don't have a square to spare!",
-        translation: "나눠줄 휴지 한 칸도 없다니까요!"
+        "speaker": "Jerry",
+        "text": "His wife is in a coma...",
+        "translation": "걔 아내 혼수상태인데..."
       }
     ],
-    modernUsage: [
+    "modernUsage": [
       {
-        speaker: "Olivia",
-        text: "Can I borrow one sheet of sticker paper?",
-        translation: "스티커 용지 한 장만 빌려줄 수 있어?"
+        "speaker": "Eric",
+        "text": "That was a terrible comeback to the manager.",
+        "translation": "매니저한테 한 거 치고는 진짜 별로인 반격이었어."
       },
       {
-        speaker: "Ava",
-        text: "I can't spare a square! I have exactly five left for my project.",
-        translation: "한 장도 여유가 없어! 제안서 제출용으로 딱 5장 남아있거든."
+        "speaker": "Lisa",
+        "text": "Yeah, he sounded just like George with his jerk store line!",
+        "translation": "맞아, 멍청이 가게 멘트 치는 조지 같았어!"
       }
     ]
   },
   {
-    phrase: "The jerk store called.",
-    meaning: "멍청이 가게에서 전화 왔는데 너 다 떨어졌대.",
-    nuance: "George가 하루 종일 머리를 쥐어짜며 겨우 날린 반박 멘트에 Reilly가 역으로 받아치고, 멘붕 온 George가 아내 드립을 쳤다가 썰렁해지는 웃픈 씬 전체입니다.",
-    example: [
+    "phrase": "They're real, and they're spectacular.",
+    "meaning": "진짜고, 게다가 아주 훌륭하지.",
+    "nuance": "Sidra가 Jerry와 헤어지며 문을 열고 나가며 명대사 'And by the way, they're real... and they're spectacular!'를 날리는 명장면 전체입니다.",
+    "example": [
       {
-        speaker: "George",
-        text: "The jerk store called, and they're running out of you!",
-        translation: "멍청이 가게에서 전화 왔는데, 너 재고가 다 떨어졌대!"
+        "speaker": "Jerry",
+        "text": "So, where were we?",
+        "translation": "그럼 우린 어디까지 얘기했었지?"
       },
       {
-        speaker: "Reilly",
-        text: "What's the difference? You're their all-time best seller!",
-        translation: "뭐가 달라? 너야말로 그 집 역대 베스트셀러잖아!"
+        "speaker": "Sidra",
+        "text": "I was just leaving.",
+        "translation": "전 이제 나가려던 참이었어요."
       },
       {
-        speaker: "George",
-        text: "Oh yeah? Well, I had sex with your wife!",
-        translation: "아 그래? 나 네 아내랑 잤거든!"
+        "speaker": "Jerry",
+        "text": "Right, you were leaving.",
+        "translation": "맞아, 떠나려던 참이었지."
       },
       {
-        speaker: "Jerry",
-        text: "His wife is in a coma...",
-        translation: "걔 아내 혼수상태인데..."
+        "speaker": "Sidra",
+        "text": "I can't believe you sent a woman into the sauna! I think you're both mentally ill!",
+        "translation": "나를 조사하겠다고 사우나에 여자를 들여보내다니! 두 사람 다 제정신이 아니에요!"
       },
       {
-        speaker: "George",
-        text: "Well, the life support machine called!",
-        translation: "그럼 인공호흡기 유지 장치에서 전화 왔대!"
+        "speaker": "Sidra",
+        "text": "And by the way, they're real... and they're spectacular!",
+        "translation": "참고로 그거 진짜고... 게다가 아주 훌륭하다고!"
+      },
+      {
+        "speaker": "Elaine",
+        "text": "Get out! Get out!",
+        "translation": "나가! 나가!"
       }
     ],
-    modernUsage: [
+    "modernUsage": [
       {
-        speaker: "Ethan",
-        text: "Why did you think of that witty comeback 3 hours after the meeting?",
-        translation: "왜 그 재치 있는 반박을 회의 끝나고 3시간 뒤에야 떠올린 거야?"
+        "speaker": "Jack",
+        "text": "Are those vintage mechanical keyboards actually good?",
+        "translation": "저 빈티지 기계식 키보드가 실제로 좋아?"
       },
       {
-        speaker: "Mason",
-        text: "Classic George Costanza syndrome. The jerk store called!",
-        translation: "전형적인 조지 코스탄자 증후군이지. 멍청이 가게에서 전화 왔어!"
+        "speaker": "Grace",
+        "text": "They're real, and they're spectacular. Typing on them is a dream.",
+        "translation": "진짜고, 게다가 완벽해. 타건감이 예술이라니까."
       }
     ]
   },
   {
-    phrase: "They're real, and they're spectacular.",
-    meaning: "진짜고, 게다가 아주 훌륭해.",
-    nuance: "Sidra가 Jerry와 헤어지며 문을 열고 나가며 명대사 'And by the way, they're real... and they're spectacular!'를 날리고, Elaine이 뒤에서 맞장구치는 명장면 전체입니다.",
-    example: [
+    "phrase": "The Summer of George!",
+    "meaning": "조지의 여름! (모든 일을 뒤로하고 완벽한 휴식과 자기만을 위한 시간을 보낼 때)",
+    "nuance": "George가 3개월 치 퇴직금을 받고 일생일대의 완벽한 휴가를 선포하며 친구들에게 호언장담하는 명장면 전체입니다.",
+    "example": [
       {
-        speaker: "Jerry",
-        text: "So, where were we?",
-        translation: "그럼 우린 어디까지 얘기했었지?"
+        "speaker": "George",
+        "text": "I'm getting three months' severance pay! Three months!",
+        "translation": "나 3개월 치 퇴직금 받는다고! 3개월씩이나!"
       },
       {
-        speaker: "Sidra",
-        text: "I was just leaving.",
-        translation: "전 이제 나가려던 참이었어요."
+        "speaker": "Jerry",
+        "text": "So what are you gonna do with yourself?",
+        "translation": "그래서 그동안 뭐 할 건데?"
       },
       {
-        speaker: "Jerry",
-        text: "Right, you were leaving.",
-        translation: "맞아, 떠나려던 참이었지."
+        "speaker": "George",
+        "text": "This is gonna be the Summer of George! I'm gonna read, bite into big cheese blocks like apples!",
+        "translation": "이번 여름은 조지의 여름이 될 거야! 책도 읽고 사과처럼 거대한 치즈 덩어리도 베어 먹을 거라고!"
       },
       {
-        speaker: "Sidra",
-        text: "I can't believe you sent a woman into the sauna! I think you're both mentally ill!",
-        translation: "나를 조사하겠다고 사우나에 여자를 들여보내다니! 두 사람 다 제정신이 아니에요!"
+        "speaker": "Jerry",
+        "text": "Are you gonna get up before noon?",
+        "translation": "정오 전에는 일어날 거냐?"
       },
       {
-        speaker: "Sidra",
-        text: "And by the way, they're real... and they're spectacular!",
-        translation: "참고로 그거 진짜고... 게다가 아주 훌륭하다고!"
+        "speaker": "George",
+        "text": "Jerry, I may never put on pants again!",
+        "translation": "제리, 나 앞으로 다시는 바지를 안 입을지도 몰라!"
       },
       {
-        speaker: "Elaine",
-        text: "Get out! Get out!",
-        translation: "나가! 나가!"
+        "speaker": "Jerry",
+        "text": "I give him two weeks.",
+        "translation": "난 2주일 건다."
       }
     ],
-    modernUsage: [
+    "modernUsage": [
       {
-        speaker: "Jack",
-        text: "Are those vintage mechanical keyboards actually good?",
-        translation: "저 빈티지 기계식 키보드가 실제로 좋아?"
+        "speaker": "Sam",
+        "text": "I finally finished my thesis. This is going to be the Summer of Sam!",
+        "translation": "드디어 논문 끝냈어. 이번 여름은 샘의 여름이 될 거야!"
       },
       {
-        speaker: "Grace",
-        text: "They're real, and they're spectacular. Typing on them is a dream.",
-        translation: "진짜고, 게다가 완벽해. 타건감이 예술이라니까."
-      }
-    ]
-  },
-  {
-    phrase: "The Summer of George!",
-    meaning: "나만의 최고의 전성기/휴식기를 선언할 때!",
-    nuance: "3개월 치 퇴직금을 받은 George가 바지도 입지 않고 거대한 치즈를 베어 먹으며 최고의 여름을 보내겠다고 호언장담하자 Jerry가 2주일 건다고 비꼬는 폭소 씬 전체입니다.",
-    example: [
-      {
-        speaker: "George",
-        text: "I'm getting three months' severance pay! Three months!",
-        translation: "나 3개월 치 퇴직금 받는다고! 3개월씩이나!"
-      },
-      {
-        speaker: "Jerry",
-        text: "So what are you gonna do with yourself?",
-        translation: "그래서 그동안 뭐 할 건데?"
-      },
-      {
-        speaker: "George",
-        text: "This is gonna be the Summer of George! I'm gonna read, bite into big cheese blocks like apples!",
-        translation: "이번 여름은 조지의 여름이 될 거야! 책도 읽고 사과처럼 거대한 치즈 덩어리도 베어 먹을 거라고!"
-      },
-      {
-        speaker: "Jerry",
-        text: "Are you gonna get up before noon?",
-        translation: "정오 전에는 일어날 거냐?"
-      },
-      {
-        speaker: "George",
-        text: "Jerry, I may never put on pants again!",
-        translation: "제리, 나 앞으로 다시는 바지를 안 입을지도 몰라!"
-      },
-      {
-        speaker: "Jerry",
-        text: "I give him two weeks.",
-        translation: "난 2주일 건다."
-      }
-    ],
-    modernUsage: [
-      {
-        speaker: "Mia",
-        text: "I'm taking a 2-week sabbatical from work next month!",
-        translation: "나 다음 달에 2주일 안식휴가 떠나!"
-      },
-      {
-        speaker: "Charlotte",
-        text: "Yes! Get ready for the Summer of Mia!",
-        translation: "나이스! 미아의 여름(전성기)을 즐길 준비나 해!"
+        "speaker": "Leo",
+        "text": "Enjoy it! You definitely earned a break from everything.",
+        "translation": "즐겨! 모든 거에서 떠나 쉴 자격 충분해."
       }
     ]
   }
-].map((expression) => ({
-  ...expression,
-  source: episodeSources[expression.phrase],
-}));
+];
